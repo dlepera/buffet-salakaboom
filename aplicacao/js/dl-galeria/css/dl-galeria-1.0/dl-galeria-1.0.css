@@ -1,0 +1,179 @@
+    /* ================================================================================ //
+     * 	AUTOR       : Diego Lepera
+     * 	DATA DE CRIAÇÃO: 19/04/2013
+     * 	PROJETO     : DL-GALERIA
+     * 	VERSÃO      : 1.0
+     * 	DESCRIÇÃO   : Estilo da Galeria de Fotos e Vídeos em jQuery
+     * ================================================================================ */
+    
+    /* =========================================================================
+     *  DIV PRINCIPAL DA GALERIA
+     * ====================================================================== */
+        #dl-galeria-album{
+            /* Tamanho */
+            width 	: 100%;
+            height 	: 500px;
+            
+            /* Margens e espaçamento */
+            margin-top 		: 35px;
+            margin-bottom 	: 310px;
+        }
+        
+    /* =========================================================================
+     *  DIV COM O TÍTULO DO ITEM
+     * ====================================================================== */
+        #dl-galeria-titulo{
+            /* Tamanho */
+            height: 25px;
+            
+            /* Formatação do texto */
+            font-size: 20px;
+            font-weight: bold;
+            font-style: italic;
+            
+            /* Margens e espaçamentos */ 
+            position: absolute;
+            top: -35px;
+        }
+        
+    /* =========================================================================
+     *  DIV COM A DESCRIÇÃO DO ITEM
+     * ====================================================================== */
+        #dl-galeria-descr{
+            /* Aparência */
+            background: #FFF;
+            
+            /* Posicionamento */
+            position: absolute;
+            bottom  : 0;
+            z-index : 1000;
+            
+            /* Margens e espaçamentos */
+            margin  : 0;
+            padding : 5px 30px;
+            
+            /* Formatação da fonte */
+            color: #069;
+        }
+    
+    /* =========================================================================
+     *  DIV COM O MENU DE NAVEGAÇÃO
+     * ====================================================================== */
+       #dl-galeria-navegacao a{
+            /* Posicionamento */
+            z-index: 999;
+            
+            /* Formatação da fonte */
+            font-weight     : bold;
+            color           : #FFF;
+            vertical-align  : middle;
+        }
+        
+        /* Esconder os botões Primeiro e Último */
+        #dl-galeria-navegacao a:nth-child(1),
+        #dl-galeria-navegacao a:nth-child(4){
+            /* Aparência */
+            display: none;
+        }
+        
+        #dl-galeria-navegacao a:nth-child(2), /* Botão Anterior */
+        #dl-galeria-navegacao a:nth-child(3){ /* Botão Próximo */
+            
+            /* Tamanho */
+            width   : 90px;
+            height  : 100%;
+                        
+            /* Posicionamento */
+            position: absolute;
+            top     : 0;
+            
+            /* Formatação do texto */
+            text-align: center;
+        }
+        
+        #dl-galeria-navegacao a:nth-child(2){ /* Botão Anterior */    
+            /* Posicionamento */
+            left: 0;
+            
+            /* Aparência */
+            background: url('../../css/salakaboom/seta_esquerda.png') center no-repeat;
+        }
+        
+        #dl-galeria-navegacao a:nth-child(3){ /* Botão Próximo */            
+            /* Posicionamento */
+            right: 0;
+            
+            /* Aparência */
+            background: url('../../css/salakaboom/seta_direita.png') center no-repeat;
+        }
+        
+    /* =========================================================================
+     *  DIV COM OS ITENS DA GALERIA
+     * ====================================================================== */
+        .dl-galeria-itens{
+            /* Tamanho */
+            width   : 100%;
+            height  : 80%;
+            
+            /* Posicionamento */
+            position: absolute;
+            z-index : 0;
+            
+            /* Formatação do texto */
+            text-align: center;
+        }
+            
+            .dl-galeria-itens .dl-galeria-item{
+                /* Tamanho */
+                width       : auto;
+                max-height  : 94.9%;
+            }
+            
+            .dl-galeria-itens .dl-galeria-item:not(:first-child){
+            	/* Aparência */
+            	display: none !important;
+            }
+            
+            /* Configuração para imagens */
+            .dl-galeria-itens img.dl-galeria-item{
+                /* Margens e espaçamentos */
+                padding: 1%;
+                
+                /* Aparência */
+                background  : #FFF;
+                border      : 1px solid #DDD;
+            }
+            
+    /* =========================================================================
+     *  DIV COM AS MINIATURAS
+     * ====================================================================== */
+        #dl-galeria-minis{
+            /* Tamanho */
+            width       : 100%;
+            max-height  : 290px;
+            height      : 290px;
+            
+            /* Aparência */
+            overflow-y: auto;
+            
+            /* Posicionamento */
+            position: absolute;
+            bottom  : -300px;
+        }
+        
+            #dl-galeria-minis > .dl-galeria-item{
+                /* Tamanho */
+                width   : auto;
+                height  : 100px;
+                
+                /* Margens e espaçamentos */
+                margin  : 5px;
+                padding : 3px;
+                
+                /* Aparência */
+                background  : #FFF;
+                border      : 1px solid #DDD;
+                
+                /* Posicionamento */
+                float: left;
+            }

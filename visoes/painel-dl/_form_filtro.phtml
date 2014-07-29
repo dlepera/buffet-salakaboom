@@ -1,0 +1,32 @@
+<?php
+
+/**
+ * @Autor	: Diego Lepera
+ * @E-mail	: d_lepera@hotmail.com
+ * @Projeto	: FrameworkDL
+ * @Data	: 29/05/2014 14:20:01
+ */
+
+?>
+
+<form name="filtro" method="get">
+    <label for="t"><?= TXT_LABEL_BUSCAR; ?></label>
+    <input type="text" name="t" id="termo" value= "<?= $params['_get_t']; ?>" />
+    
+    <label for="c"><?= TXT_LABEL_EM; ?></label>
+    <select name="c" id="c">
+    <?php foreach( $params['campos'] as $c ): ?>
+    <option value="<?= $c['nome']; ?>"<?= $params['_get_c'] == $c['nome'] ? ' SELECTED' : ''; ?>>
+        <?= $c['label']; ?>
+    </option>
+    <?php endforeach; ?>
+    </select>
+    
+    <?php if( !empty($params['_get_t']) ): ?>
+    <a href="<?= filter_input(INPUT_SERVER, 'REDIRECT_URL', FILTER_DEFAULT); ?>" class="limpar-filtro">
+        <?= TXT_LINK_LIMPAR_FILTRO; ?>
+    </a>
+    <?php endif; ?>
+    
+    <button type="submit"><?= TXT_BOTAO_SUBMIT_FILTRAR; ?></button>
+</form>

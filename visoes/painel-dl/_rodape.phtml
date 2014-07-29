@@ -1,0 +1,29 @@
+<footer class="dl">
+    <?= DL::$ap_nome; ?> &COPY; <?= date('Y') .' '. \DL::$conf_versao; ?>
+</footer>
+
+<!-- Java Scripts -->
+<script src="<?= \DL::$dir_raiz . \DL::$dir_js; ?>jquery-<?= \DL::$conf_jquery_versao; ?>-min.js"></script>
+<script src="<?= \DL::$dir_raiz . \DL::$dir_js; ?>dl-framework.js"></script>
+<script src="<?= \DL::$dir_raiz . \DL::$dir_js; ?>dl-formulario/dl-formulario-2.0.plugin.js"></script>
+<script src="<?= \DL::$dir_raiz . \DL::$dir_js; ?>dl-paginacao/dl-paginacao-2.0.plugin.js"></script>
+
+<script>
+    //<![CDATA[
+    function Sair(){
+        $.ajax({
+            url     : "<?= \DL::$dir_raiz; ?>/usuario/fazerlogout",
+            success : function(json){
+                var resp = TratarResposta(json);
+                
+                $("body")._dlmostrarmsg({
+                    mensagem    : resp.msg,
+                    tipo        : ["alerta", resp.ret],
+                    aparencia   : { tema: "<?= \DL::$plugin_formulario_tema; ?>", estilo: "mensagem" },
+                    botao       : { texto: "x", funcao: function(){ window.location.reload(); } }
+                });
+            }
+        });
+    } // Fim function Sair()
+    //]]>
+</script>

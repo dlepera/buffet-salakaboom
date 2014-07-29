@@ -1,0 +1,49 @@
+<?php
+
+/**
+ * @Autor	: Diego Lepera
+ * @E-mail	: d_lepera@hotmail.com
+ * @Projeto	: FrameworkDL
+ * @Data	: 26/06/2014 09:08:11
+ */
+
+$mod    = $params['modelo'];
+$mod_st = $params['status']; 
+
+?>
+
+<div class="dl">
+    <h1><?= TXT_TITULO_DETALHES_DO_CONTATO; ?></h1>
+    
+    <h2 class="sub-h2">
+    <?php
+        printf(
+            MSG_ENVIADO_EM, 
+            $mod->contato_site_nome, 
+            \Funcoes::_formatardatahora($params['dt_criacao'], $_SESSION['data_hora_formato_completo'])
+        );
+    ?>
+    </h2>
+    
+    <p class="status-email">
+        <em><?= TXT_LABEL_STATUS_ENVIO; ?>:</em> <?= $mod_st->log_email_status; ?>
+        
+        <?php if( $mod_st->log_email_status == 'F' ): ?>
+            <br />
+            <em><?= TXT_LABEL_ERRO_ENCONTRADO; ?>:</em> <?= nl2br($mod_st->log_email_mensagem); ?>
+        <?php endif; ?>
+    </p>
+    
+    <p>
+        <a href="<?= \DL::$dir_raiz; ?>/email/contatosite/mostrarhtml/<?= $mod->contato_site_id; ?>" class="email" target="_blank">
+            <?= TXT_LINK_VISUALIZAR_EMAIL_COMO_HTML; ?>
+        </a>
+    </p>
+    <br />
+    
+    <p>
+        <em><?= TXT_LABEL_EMAIL; ?></em>: <?= $mod->contato_site_email; ?><br />
+        <em><?= TXT_LABEL_TELEFONE; ?></em>: <?= $mod->contato_site_telefone; ?><br />
+        <em><?= TXT_LABEL_MENSAGEM; ?></em>:<br /><?= nl2br($mod->contato_site_mensagem); ?>
+    </p>
+</div>

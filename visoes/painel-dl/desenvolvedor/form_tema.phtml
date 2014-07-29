@@ -1,0 +1,101 @@
+<?php
+
+/**
+ * @Autor	: Diego Lepera
+ * @E-mail	: d_lepera@hotmail.com
+ * @Projeto	: FrameworkDL
+ * @Data	: 18/06/2014 08:46:23
+ */
+
+// if( !isset($params) )
+//    $params = $this->_obterparams();
+
+$mod = $params['modelo'];
+
+# Verificar se o registro está sendo editado
+$editando = !is_null($mod->tema_id);
+
+# Definir qual título deve ser inserido na TAG H1
+$titulo_h1 = !$editando ? TXT_TITULO_FORMULARIO_NOVO_TEMA : TXT_TITULO_FORMULARIO_ALTERAR_TEMA;
+
+?>
+
+<div class="dl">
+    <h1><?= $titulo_h1; ?></h1>
+    
+    <?php include_once './visoes/painel-dl/_titulo-h2.phtml'; ?>
+    
+    <form name="tema" method="post" action="<?= \DL::$dir_raiz; ?>">
+        <?php if( $editando ): ?>
+        <!-- ID do registro atual -->
+        <input type="hidden" name="id" value="<?= $mod->tema_id; ?>" />
+        <?php endif; ?>
+        
+        <fieldset>
+            <legend><?= TXT_LEGENDA_DADOS_TEMA; ?></legend>
+            
+            <label for="descr"><?= TXT_LABEL_DESCRICAO; ?>:</label><br />
+            <input type="text" name="descr" id="descr" value="<?= $mod->tema_descr; ?>" title="<?= TXT_LABEL_DESCRICAO; ?>" />
+            <br /><br />
+            
+            <label for="diretorio"><?= TXT_LABEL_DIRETORIO; ?>:</label><br />
+            <input type="text" name="diretorio" id="diretorio" value="<?= $mod->tema_diretorio; ?>" title="<?= TXT_LABEL_DIRETORIO; ?>" />
+            <br /><br />
+            
+            <label><?= TXT_LABEL_PADRAO; ?></label>
+            <label>
+                <input type="radio" name="padrao" value="1"<?= $mod->tema_padrao == 1 ? ' CHECKED' : ''; ?> />
+                <?= TXT_OPCAO_SIM; ?>
+            </label>
+            
+            <label>
+                <input type="radio" name="padrao" value="0"<?= $mod->tema_padrao == 0 || !$editando ? ' CHECKED' : ''; ?> />
+                <?= TXT_OPCAO_NAO; ?>
+            </label>
+            <br /><br />
+            
+            <label><?= TXT_LABEL_PUBLICAR; ?></label>
+            <label>
+                <input type="radio" name="publicar" value="1"<?= $mod->tema_publicar == 1 || !$editando ? ' CHECKED' : ''; ?> />
+                <?= TXT_OPCAO_SIM; ?>
+            </label>
+            
+            <label>
+                <input type="radio" name="publicar" value="0"<?= $mod->tema_publicar == 0 ? ' CHECKED' : ''; ?> />
+                <?= TXT_OPCAO_NAO; ?>
+            </label>
+        </fieldset>
+        
+        <button type="submit"><?= TXT_BOTAO_SUBMIT_SALVAR; ?></button>
+        <button type="reset"><?= TXT_BOTAO_RESET_CANCELAR; ?></button>
+    </form>
+</div>
+
+<script>
+    //<![CDATA[
+    window.onload = function(){
+        $("form[name='tema']")._dlformulario({
+            <?php if( !$editando ): ?>
+            depois: function(){
+                window.location = "<?= \DL::$dir_raiz; ?>/painel-dl/desenvolvedor/temas/lista";
+            },
+            <?php endif; ?>
+            controle: "tema/salvar",
+            campos  : {
+                "descr"     : { obr: true },
+                "diretorio" : { obr: true },
+                "padrao"    : { obr: true, marcarobr: false, validacao: /^[0-1]{1}$/ },
+                "publicar"  : { obr: true, marcarobr: false, validacao: /^[0-1]{1}$/ }
+            },
+            aparencia: { tema: "<?= \DL::$plugin_formulario_tema; ?>", estilo: "formulario" }
+        });
+        
+        $("#pai").bind("change", function(){
+            if( $(this).val() == "" )
+                $("#permissoes").fadeOut("fast");
+            else
+                $("#permissoes").fadeIn("fast");
+        });
+    };
+    //]]>
+</script>

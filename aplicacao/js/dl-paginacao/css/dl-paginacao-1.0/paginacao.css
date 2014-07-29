@@ -1,0 +1,112 @@
+@CHARSET "ISO-8859-1";
+
+/*
+ * DL-Sites @ 2013
+ * Projeto  : Framework MVC
+ * Programador e idealizador: Diego Lepera
+ * Descrição: Framework para facilitar o trabalho de criar sites e sistemas web
+ *              armazenando ações comuns para todos os sites
+ * Plugin   : Plugin para criar botões de navegação de paginação
+ */
+
+
+/* =========================================================================
+ * ESTILO DA BARRA DE NAVEGAÇÃO
+ * ====================================================================== */
+#dl-paginacao{
+    /* Tamanho */
+    width: 25%;
+
+    /* Margens e espaçamentos */
+    padding: 3px 0;
+
+    /* Formatação do texto */
+    text-align: right;
+
+    /* Posicionamento */
+    position: absolute;
+    right   : 0;
+}
+
+/* =========================================================================
+ *	ESTILO DOS BOTÕES DE NAVEGAÇÃO
+ * ====================================================================== */
+#dl-paginacao a{
+    /* Tamanho */
+    line-height: 20px;
+
+    /* Margens e espeçamentos */
+    padding: 0 10px;
+    margin : 0 5px;
+
+    /* Formatação do texto */
+    text-decoration	: none;
+    color 			: #069;
+}
+
+#dl-paginacao a:hover,
+#dl-paginacao a.atual{
+    /* Formatação do texto */
+    color: #FFF;
+
+    /* Aparência */
+    background: #069;
+}
+
+/*
+ * Botões não numéricos terão uma imagem de fundo
+ * representando para a página que ele levará
+ */
+#dl-paginacao a#dl-paginacao-btnprimeira,
+#dl-paginacao a#dl-paginacao-btnultima,
+#dl-paginacao a#dl-paginacao-btnanterior,
+#dl-paginacao a#dl-paginacao-btnproxima{    	
+    /* Aparência */
+    border: none;
+
+    /* Formatação da fonte */
+    color: transparent;
+
+    /* Margens e espaçamentos */
+    padding: 0;
+
+    /* Tamanho */
+    width : 20px;
+    height: 20px;
+}
+
+/*
+ * Botão que leva à página anterior
+ */
+#dl-paginacao a#dl-paginacao-btnanterior{
+    /* Aparência */		
+    background      : url('imagens/anterior_32x32.png') no-repeat center;
+    background-size : 20px 20px;
+}
+
+/*
+* Botão que leva à próxima página 
+*/
+#dl-paginacao a#dl-paginacao-btnproxima{
+    /* Aparência */		
+    background      : url('imagens/proximo_32x32.png') no-repeat center;
+    background-size : 20px 20px;
+}
+
+/*
+ * Botão que leva à primeira página
+ */
+#dl-paginacao a#dl-paginacao-btnprimeira{
+    /* Aparência */		
+    background      : url('imagens/primeiro_32x32.png') no-repeat center;
+    background-size : 20px 20px;
+}
+
+/*
+ * Botão que leva à última página
+ */
+#dl-paginacao a#dl-paginacao-btnultima{
+    /* Aparência */
+    background      : url('imagens/ultimo_32x32.png') no-repeat center;
+    background-size : 20px 20px;
+}

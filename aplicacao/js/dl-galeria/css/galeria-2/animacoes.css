@@ -1,0 +1,117 @@
+/**
+ * @Autor	: Diego Lepera
+ * @E-mail	: d_lepera@hotmail.com
+ * @Projeto	: FrameworkDL
+ * @Data	: Jul 29, 2014 10:24:51 AM
+ */
+
+@charset 'ISO-8859-1';
+
+/* --------------------------------------------------------------------------------------------------------------------
+ * Fade In
+ * ----------------------------------------------------------------------------------------------------------------- */
+@-webkit-keyframes fade{
+    from{
+        /* Aparência */
+        opacity: 0;
+        display: block;
+    }
+    
+    to{
+        /* Aparência */
+        opacity: 1;
+        display: block;
+    }
+}
+
+/* --------------------------------------------------------------------------------------------------------------------
+ * Slide Esquerda : Slide a partir do lado esquerdo e deslocando para a direita
+ * ----------------------------------------------------------------------------------------------------------------- */
+@-webkit-keyframes slide-esquerda{
+    0%{
+        /* Posicionamento */
+        left    : -100%;
+        opacity : 0;
+    }
+    
+    50%{
+        /* Posicionamento */
+        left    : 5%;
+        opacity : 1;
+    }
+    
+    100%{
+        /* Posicionemento */
+        left    : 0;
+        opacity : 1;
+    }
+}
+
+/* --------------------------------------------------------------------------------------------------------------------
+ * Slide Direita : Slide a partir do lado direito e deslocando para a esquerda
+ * ----------------------------------------------------------------------------------------------------------------- */
+@-webkit-keyframes slide-direita{
+    0%{
+        /* Posicionamento */
+        left    : 40%;
+        opacity : 0;
+    }
+    
+    50%{
+        /* Posicionamento */
+        left    : -5%;
+        opacity : 1;
+    }
+    
+    100%{
+        /* Posicionemento */
+        left    : 0;
+        opacity : 1;
+    }
+}
+
+/* --------------------------------------------------------------------------------------------------------------------
+ * Slide Direita : Slide a partir do lado direito e deslocando para a esquerda
+ * ----------------------------------------------------------------------------------------------------------------- */
+@-webkit-keyframes slide-baixo{
+    0%{
+        /* Posicionamento */
+        margin-top  : -10%;
+        opacity     : 0;
+    }
+    
+    50%{
+        /* Posicionamento */
+        margin-top  : 2%;
+        opacity     : 1;
+    }
+    
+    100%{
+        /* Posicionemento */
+        margin-top  : 0;
+        opacity     : 1;
+    }
+}
+
+/* --------------------------------------------------------------------------------------------------------------------
+ * Slide Direita : Slide a partir do lado direito e deslocando para a esquerda
+ * ----------------------------------------------------------------------------------------------------------------- */
+@-webkit-keyframes slide-cima{
+    0%{
+        /* Posicionamento */
+        margin-top  : 10%;
+        opacity     : 0;
+    }
+    
+    50%{
+        /* Posicionamento */
+        margin-top  : -2%;
+        opacity     : 1;
+    }
+    
+    100%{
+        /* Posicionemento */
+        margin-top  : 0;
+        opacity     : 1;
+    }
+}

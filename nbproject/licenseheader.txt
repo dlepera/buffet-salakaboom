@@ -1,0 +1,6 @@
+/**
+ * @Autor	: Diego Lepera
+ * @E-mail	: d_lepera@hotmail.com
+ * @Projeto	: FrameworkDL
+ * @Data	: ${date} ${time}
+ */

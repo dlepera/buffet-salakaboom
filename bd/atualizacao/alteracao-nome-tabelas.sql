@@ -1,0 +1,13 @@
+-- Alterar os nomes das tabelas
+RENAME TABLE dl_gerenc_email_config TO dl_painel_email_config;
+RENAME TABLE dl_gerenc_email_logs TO dl_painel_email_logs;
+RENAME TABLE dl_gerenc_formatos_data TO dl_painel_formatos_data;
+RENAME TABLE dl_gerenc_grupos_permissoes TO dl_painel_grupos_permissoes;
+RENAME TABLE dl_gerenc_grupos_usuarios TO dl_painel_grupos_usuarios;
+RENAME TABLE dl_gerenc_idiomas TO dl_painel_idiomas;
+RENAME TABLE dl_gerenc_modulos TO dl_painel_modulos;
+RENAME TABLE dl_gerenc_registros_logs TO dl_painel_registros_logs;
+RENAME TABLE dl_gerenc_temas TO dl_painel_temas;
+RENAME TABLE dl_gerenc_usuarios TO dl_painel_usuarios;
+RENAME TABLE dl_gerenc_usuarios_permissoes TO dl_painel_usuarios_permissoes;
+RENAME TABLE dl_gerenc_usuarios_recuperacoes TO dl_painel_usuarios_recuperacoes;

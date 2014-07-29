@@ -1,0 +1,113 @@
+        
+/* --------------------------------------------------------------------------------------------------------------------
+ * Elementos HTML
+ * ----------------------------------------------------------------------------------------------------------------- */
+body{
+    /* Tamanho */
+    width: 1024px;
+
+    /* Formatação do texto */
+    font-family : Tahoma,Verdana;
+    font-size   : 13px;
+    
+    /* Margens e espaçamentos */
+    margin: 1% 3%;
+}
+
+h1{
+    /* Formatação da fonte */
+    font-weight : normal;
+    font-style  : italic;
+    text-align  : left;
+    line-height : 70px;
+    color       : #666;  
+
+    /* Posicionamento */
+    position: relative;
+
+    /* Margens e espaçamentos */
+    padding-right: 10px; 
+    margin       : 20px 0;
+}
+
+a{
+    /* Formatação do texto */
+    color           : orange;
+    text-decoration : none;
+}
+
+a:hover{
+    /* Formatação do texto */
+    text-decoration: underline;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------
+ * Cabeçalho da página
+ * ----------------------------------------------------------------------------------------------------------------- */
+header.dl{
+    /* Aparência */
+    display: table;
+    
+    /* Tamanho */
+    width   : 100%;
+    height  : 100px;
+    
+    /* Posicionamento */
+    position: relative;
+}
+
+header.dl .logotipo{
+    /* Formatação do texto */
+    color: transparent;
+    
+    /* Posicionamento */
+    float: left;
+    
+    /* Tamanho */
+    width   : 120px;
+    height  : 100px;
+    
+    /* Aparência */
+    background-repeat   : no-repeat;
+    background-size     : contain;
+}
+
+header.dl .slogan{
+    /* Formatação do texto */
+    font-variant: small-caps;
+    color       : #069;
+    font-size   : 150%;
+    
+    /* Posicionamento */
+    float: right;
+    
+    /* Margens e espaçamentos */
+    margin-top: 3%;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------
+ * Corpo da página
+ * ----------------------------------------------------------------------------------------------------------------- */
+div.dl{
+    /* Tamanho */
+    width: 96%;
+
+    /* Aparência */
+    background: #FFF;
+
+    /* Margens e espaçamentos */
+    padding : 1%;
+    margin  : 1% 1% 70px 1%;
+
+    /* Formatação do texto */
+    text-align  : left;
+    color       : #000;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------
+ * Rodapé da página
+ * ----------------------------------------------------------------------------------------------------------------- */
+footer.dl{
+    
+}
+

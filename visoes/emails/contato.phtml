@@ -1,0 +1,66 @@
+<?php
+
+/**
+ * @Autor	: Diego Lepera
+ * @E-mail	: d_lepera@hotmail.com
+ * @Projeto	: Framework MVC / Site
+ * @Data	: 09/12/2013
+ */
+
+# Obter os parâmetros que serão usados nesse template
+$params = $this->_obterparams();
+$mod_cs	= $params['modelo'];
+$mod_ac	= $params['assunto'];
+
+$http_host = filter_input(INPUT_SERVER, 'HTTP_HOST');
+    
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>    
+    <!-- ESTILOS DA PÁGINA -->    
+    <style type="text/css">
+        <?= include_once '.'. \DL::$dir_css .'todos/dl-emails.css'; ?>
+    </style>
+</head>
+<body>
+    
+    <p style="text-align: center;">
+    	<?= MSG_EMAIL_CASO_NAO_ESTEJA_CONSEGUINDO_VISUALIZAR; ?><br />
+    	
+    	<a href="http://<?= $http_host . \DL::$dir_raiz; ?>/email/contatosite/mostrarhtml/<?= $mod_cs->contato_site_id; ?>">
+    		<?= TXT_LINK_VISUALIZAR_EMAIL_COMO_HTML; ?>
+    	</a>
+    </p>
+    
+    <!-- Cabeçalho do e-mail -->
+    <header class="dl">
+        <h1>
+            <a href="http://<?= $http_host . \DL::$dir_raiz; ?>" class="logotipo" target="_blank" style="background-image: url('http://<?= $http_host . \DL::$dir_raiz . \DL::$dir_css; ?>todos/imagens/logotipo.png');">
+                <?= \DL::$ap_nome; ?>
+            </a>
+        </h1>
+        
+        <div class="slogan">Contato do site</div>
+    </header>
+    
+    <div class="dl">
+        <p>
+            Olá!<br /><br />        
+            Em <?= \Funcoes::_formatardatahora($mod_cs->contato_site_data_criacao, \DL::$dh_formato_completo); ?> foi enviado um contato através do site
+            <a href="http://<?= $http_host; ?>/"><?= $http_host; ?></a>:        
+        </p>
+        
+        <p>
+            <strong><?= TXT_LABEL_NOME_COMPLETO; ?>:</strong> <?= $mod_cs->contato_site_nome; ?><br />
+            <strong><?= TXT_LABEL_TELEFONE; ?>:</strong> <?= $mod_cs->contato_site_telefone; ?><br />
+            <strong><?= TXT_LABEL_EMAIL; ?>:</strong> <?= $mod_cs->contato_site_email; ?><br />
+            <strong><?= TXT_LABEL_ASSUNTO; ?>:</strong> <?= $mod_ac->assunto_contato_descr; ?><br />
+            <strong><?= TXT_LABEL_MENSAGEM; ?>:</strong><br />
+            <?= nl2br($mod_cs->contato_site_mensagem); ?>
+        </p>
+    </div>
+    
+    <?php include './visoes/emails/_rodape.php'; ?>
+</body>
+</html>

@@ -1,0 +1,90 @@
+/**
+ * @Autor	: Diego Lepera
+ * @E-mail	: d_lepera@hotmail.com
+ * @Projeto	: FrameworkDL
+ * @Data	: 01/07/2014 09:58:21
+ */
+
+/* --------------------------------------------------------------------------------------------------------------------
+ * Formulário de login e alteração de senha
+ * ----------------------------------------------------------------------------------------------------------------- */
+form[name="login"]{
+    /* posicionamento */
+    position: absolute;
+    left    : 32.4%;
+    top     : 20%;
+    
+    /* Tamanho */
+    width: 30%;
+    
+    /* Aparência */
+    background-color: #FFF;
+    border          : 1px solid #AAA;
+    box-shadow      : 2px 2px 8px #AAA;
+    
+    /* Margens e espaçamentos */
+    padding: 2.5%;
+}
+
+form[name="login"] .campos{
+    /* Posicionamento */
+    position: relative;
+    left    : 20%;
+    clear   : both;
+    
+    /* Tamanho */
+    width: 60%;
+    
+    /* Margens e espaçamentos */
+    margin-bottom: 5%;
+}
+
+form[name="login"] .campos input{
+    /* Tamanho */
+    width: 85%;
+}
+
+form[name="login"] .com-imagem{
+    /* Posicionamento */
+    float: left;
+    
+    /* Tamanho */
+    width   : 30px;
+    height  : 30px;
+    
+    /* Aparência */
+    background-image    : url('icones/sprite-login.png');
+    background-repeat   : no-repeat;
+    
+    /* Formatação do texto */
+    color: transparent;
+}
+
+form[name="login"] .com-imagem.login{
+    /* Aparência */
+    background-position: top -5px left -5px;
+}
+
+form[name="login"] .com-imagem.senha{
+    /* Aparência */
+    background-position: top -45px left -5px;
+}
+
+form[name="login"] .com-imagem.senha-nova{
+    /* Aparência */
+    background-position: top -85px left -5px;
+}
+
+form[name="login"] .com-imagem.senha-nova-conf{
+    /* Aparência */
+    background-position: top -125px left -5px;
+}
+
+form[name="login"] .recuado{
+    /* Margens e espaçamentos */
+    margin-left : -30px;
+    padding-left: 30px;
+    
+    /* Aparência */
+    background-color: transparent;
+}

@@ -1,0 +1,206 @@
+/**
+ * @Autor	: Diego Lepera
+ * @E-mail	: d_lepera@hotmail.com
+ * @Projeto	: FrameworkDL
+ * @Data	: 29/06/2014 11:19:58
+ */
+
+/* --------------------------------------------------------------------------------------------------------------------
+ * Tabelas que recebem as listas de registros
+ * ----------------------------------------------------------------------------------------------------------------- */
+table.lista{
+    /* Tamanho */
+    width: 100%;
+    
+    /* Aparência */
+    border-spacing  : 0;
+    border-collapse : collapse;
+    
+    /* Posicionamento */
+    clear: both;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------
+ * Linhas da tabela
+ * ----------------------------------------------------------------------------------------------------------------- */
+table.lista tr{
+    /* Tamanho */
+    height: 30px;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------
+ * Alternar as cores das linhas para facilitar a leitura
+ * ----------------------------------------------------------------------------------------------------------------- */
+table.lista tr:nth-child(odd){
+    /* Aparência */
+    background-color: #EFEFEF;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------
+ * A primeira linha representa o cabeçalho da tabela
+ * ----------------------------------------------------------------------------------------------------------------- */
+table.lista tr:first-child{
+    /* Aparência */
+    background-color: #069;
+    
+    /* Formatação do texto */
+    line-height: 30px;
+}
+
+table.lista th{
+    /* Formatação do texto */
+    text-align  : left;
+    color       : #FFF;
+    font-weight : normal;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------
+ * Linha que terá as opções para fazer ações com os itens marcados
+ * ----------------------------------------------------------------------------------------------------------------- */
+table.lista .com-marcados{
+    /* Aparência */
+    background-color    : #FFF !important;
+    background-image    : url('icones/sprite-lista.png');
+    background-repeat   : no-repeat;
+    background-position : left 0 top -169px; 
+    border-top          : 1.5px solid #CCC;
+        
+    /* Formatação do texto */
+    line-height: 30px;
+}
+
+table.lista .com-marcados > td{
+    /* Margens e espaçamentos */
+    padding-left: 35px;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------
+ * Campos específicos
+ * ----------------------------------------------------------------------------------------------------------------- */
+table.lista .td-id{
+    /* Tamanho */
+    width: 30px;
+    
+    /* Formatação do texto */
+    text-align: center;
+}
+
+table.lista .td-opcoes{
+    /* Tamanho */
+    width: 13%;
+    
+    /* Posicionamento */
+    position: relative;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------
+ * Links de manipulação de registros
+ * ----------------------------------------------------------------------------------------------------------------- */
+a.lista{
+    /* Formatação do texto */
+    color: transparent !important;
+    
+    /* Tamanho */
+    width: 20px;
+    
+    /* Margens e espaçamentos */
+    padding     : 0 !important;
+    margin-right: 7%;
+}
+
+a.inserir{
+    /* Posicionamento */
+    float: left;
+    
+    /* Aparência */
+    background-image    : url('icones/sprite-lista.png');
+    background-repeat   : no-repeat;
+    background-position : -10px -10px;
+    
+    /* Formatação do texto */
+    line-height     : 20px;
+    text-decoration : none;
+    color           : green;
+    
+    /* Margens e espaçamentos */
+    padding-left: 25px;
+}
+
+a.remover{
+    /* Posicionamento */
+    float: left;
+    
+    /* Aparência */
+    background-image    : url('icones/sprite-lista.png');
+    background-repeat   : no-repeat;
+    background-position : -10px -50px;
+    
+    /* Formatação do texto */
+    line-height     : 20px;
+    text-decoration : none;
+    color           : red;
+    
+    /* Margens e espaçamentos */
+    padding-left: 25px;
+}
+
+a.editar{
+    /* Posicionamento */
+    float: left;
+    
+    /* Aparência */
+    background-image    : url('icones/sprite-lista.png');
+    background-repeat   : no-repeat;
+    background-position : -10px -90px;
+    
+    /* Formatação do texto */
+    line-height     : 20px;
+    text-decoration : none;
+    color           : orange;
+    
+    /* Margens e espaçamentos */
+    padding-left: 25px;
+}
+
+a.email{
+    /* Posicionamento */
+    float: left;
+    
+    /* Aparência */
+    background-image    : url('icones/sprite-lista.png');
+    background-repeat   : no-repeat;
+    background-position : -10px -130px;
+    
+    /* Formatação do texto */
+    line-height     : 20px;
+    text-decoration : none;
+    color           : blue;
+    
+    /* Margens e espaçamentos */
+    padding-left: 25px;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------
+ * Status dos e-mails
+ * ----------------------------------------------------------------------------------------------------------------- */
+[headers="status-envio"]{
+    /* Aparência */
+    background-image    : url('icones/sprite-lista.png');
+    background-repeat   : no-repeat;
+    
+    /* Tamanho */
+    width: 30px;
+    
+    /* Formatação do texto */
+    color: transparent;
+}
+
+[headers="status-envio"].status-e{
+    /* Aparência */
+    background-position: top -245px left -5px;
+}
+
+[headers="status-envio"].status-f{
+    /* Aparência */
+    background-position: top -285px left -5px;
+}

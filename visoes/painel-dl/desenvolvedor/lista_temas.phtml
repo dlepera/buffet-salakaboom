@@ -1,0 +1,104 @@
+<?php
+
+/**
+ * @Autor	: Diego Lepera
+ * @E-mail	: d_lepera@hotmail.com
+ * @Projeto	: FrameworkDL
+ * @Data	: 24/07/2014 14:18:27
+ */
+
+$perm = $params['perm'];
+
+# Verificar se  usuário é o root
+$e_root = $_SESSION['usuario_id'] === 0;
+
+?>
+
+<div class="dl">
+    <h1><?= TXT_TITULO_TEMAS; ?></h1>
+    
+    <div class="mais-opcoes">
+        <?php if( $e_root ): ?>
+        <a href="<?= \DL::$dir_raiz; ?>/painel-dl/desenvolvedor/temas/novo" class="inserir">
+            <?= TXT_LINK_NOVO_TEMA; ?>
+        </a>
+        <?php endif;
+        
+        include_once './visoes/painel-dl/_form_filtro.phtml'; ?>
+    </div>
+    
+    <form name="editar-lista" method="post" action="<?= \DL::$dir_raiz; ?>">
+        <table class="lista">
+            <tr>
+                <th id="id" class="td-id"><input type="checkbox" /></th>
+                <th id="descr"><?= TXT_TABELA_TITULO_DESCRICAO; ?></th>
+                <th id="diretorio"><?= TXT_TABELA_TITULO_DIRETORIO; ?></th>
+                <th id="padrao"><?= TXT_TABELA_TITULO_PADRAO; ?></th>
+                <th id="publicado"><?= TXT_TABELA_TITULO_PUBLICADO; ?></th>
+                <th id="opcoes" class="td-opcoes"><?= TXT_TABELA_TITULO_OPCOES; ?></th>
+            </tr>
+
+            <?php 
+            if( !count($params['lista']) )
+                echo '<tr><td colspan="6">', MSG_PADRAO_NENHUM_REGISTRO_ENCONTRADO, '</td></tr>';
+            
+            foreach( $params['lista'] as $l ): ?>
+            <tr>
+                <td headers="id" class="td-id">
+                    <input type="checkbox" name="id[]" value="<?= $l['tema_id']; ?>" />
+                </td>
+                <td headers="descr"><?= $l['tema_descr']; ?></td>
+                <td headers="diretorio"><?= $l['tema_diretorio']; ?></td>
+                <td headers="padrao"><?= $l['PADRAO']; ?></td>
+                <td headers="publicado"><?= $l['PUBLICADO']; ?></td>
+                <td headers="opcoes" class="td-opcoes">
+                    <?php if( $e_root ): ?>
+                    <a href="<?= \DL::$dir_raiz; ?>/painel-dl/desenvolvedor/temas/alterar/<?= $l['tema_id']; ?>" class="lista editar" title="<?= TXT_LINK_TITLE_EDITAR_REGISTRO; ?>">
+                        <?= TXT_LINK_EDITAR; ?>
+                    </a>
+                    
+                    <a href="javascript:;" class="lista remover" title="<?= TXT_LINK_TITLE_REMOVER_REGISTRO; ?>" onclick="if( SelecionarLinha(this) ) RemoverRegistro('<?= MSG_PADRAO_DESEJA_REALMENTE_REMOVER_ESSE_REGISTRO; ?>');">
+                        <?= TXT_LINK_REMOVER; ?>
+                    </a>
+                    <?php endif; ?>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+            
+            <tr class="com-marcados">
+                <td colspan="6">
+                    <?php if( $e_root ): ?>
+                    <a href="javascript:;" class="remover" title="<?= TXT_LINK_TITLE_REMOVER_REGISTROS_SELECIONADOS; ?>" onclick="RemoverRegistro('<?= MSG_PADRAO_DESEJA_REALMENTE_REMOVER_REGISTROS_SELECIONADOS; ?>');">
+                        <?= TXT_LINK_REMOVER; ?>
+                    </a>
+                    <?php endif; ?>
+                </td>
+            </tr>
+        </table>
+        
+        <div id="paginacao"></div>
+    </form>
+</div>
+
+<script>
+    //<![CDATA[
+    window.onload = function(){
+        <?php if( $e_root ): ?>
+        $editar_lista = $("form[name='editar-lista']")._dlformulario({
+            controle    : "tema/remover",
+            depois      : function(){
+                $(".lista :checkbox:checked").parents("tr").remove();
+            },
+            cktodos     : [true, "tr:first-child :checkbox:first-child", ":checkbox[name='id[]']"],
+            aparencia   : { tema: "<?= \DL::$plugin_formulario_tema; ?>", estilo: "formulario" }
+        });
+        <?php endif; ?>
+        
+        $("#paginacao")._dlpaginacao({
+            pgtotal     : <?= $params['qtde_pg']; ?>,
+            mostrar     : 5,
+            aparencia   : { tema: "<?= \FrameworkDL::$plugin_paginacao_tema; ?>", estilo: "paginacao" }
+        });
+    };
+    //]]>
+</script>

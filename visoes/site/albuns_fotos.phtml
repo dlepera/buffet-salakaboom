@@ -1,0 +1,37 @@
+<?php
+
+/**
+ * @Autor	: Diego Lepera
+ * @E-mail	: d_lepera@hotmail.com
+ * @Projeto	: FrameworkDL
+ * @Data	: Jul 28, 2014 12:43:44 PM
+ */
+
+?>
+
+<div class="dl">
+    <h1><?= TXT_TITULO_ALBUNS_DE_FOTOS; ?></h1>
+    
+    <div id="lista-albuns"></div>
+    
+    <div id="paginacao"></div>
+</div>
+
+<script>
+    //<![CDATA[
+    window.onload = function(){
+        $("#lista-albuns")._dlgaleria({
+            fotos       : [
+                <?php foreach( $params['albuns'] as $a ): ?>
+                { 
+                    src     : "<?= $a['foto_album_imagem']; ?>", 
+                    titulo  : "<?= $a['album_nome']; ?>", 
+                    ir      : "<?= \DL::$dir_raiz; ?>/album-de-fotos/<?= str_replace(' ', '-', strtolower(\Funcoes::_removeracentuacao($a['album_nome']))); ?>/<?= $a['album_id']; ?>"
+                },
+                <?php endforeach; ?>
+            ],
+            aparencia   : { tema: "<?= \DL::$plugin_galeria_tema; ?>", estilo: "lista-albuns" }
+        });
+    };
+    //]]>
+</script>

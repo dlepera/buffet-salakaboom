@@ -1,0 +1,348 @@
+/**
+ * @Autor	: Diego Lepera
+ * @E-mail	: d_lepera@hotmail.com
+ * @Projeto	: FrameworkDL
+ * @Data	: 20/05/2014 11:45:00
+ */
+
+/* --------------------------------------------------------------------------------------------------------------------
+ * Fontes diferenciadas
+ * ----------------------------------------------------------------------------------------------------------------- */
+@font-face{
+    font-family	: TrebuchetMS;
+    src		: url('fontes/trebuchet-ms.ttf');
+}
+
+/* --------------------------------------------------------------------------------------------------------------------
+ * Elementos HTML
+ * ----------------------------------------------------------------------------------------------------------------- */
+body{
+    /* Formatação da fonte */
+    font-size   : 13px;
+    font-family : TrebuchetMS, Tahoma, Verdana;
+    
+    /* Aparência */
+    background-color: #EFEFEF;
+    background-image: url('imagens/plano-de-fundo.jpg');
+}
+
+h1{
+    /* Formatação do texto */
+    font-variant: small-caps;
+    font-weight : normal;
+    color       : #069;
+    
+    /* Margens e espaçamentos */
+    margin  : 0 0 1% 0;
+    padding : 0;
+}
+
+.sub-h2{
+    /* Formatação do texto */
+    color       : #999;
+    font-variant: small-caps;
+    font-weight : normal;
+    font-size   : 110%;
+    
+    /* Margens e espaçamentos */
+    margin  : -1% 0 1% 0;
+    padding : 0;
+}
+
+a{
+    /* Posicionamento */
+    position: relative;
+    
+    /* Formatação do texto */
+    color: orange;
+}
+
+a[title]:hover:after{
+    /* Incluir o texto do atributo */
+    content: attr(title);
+    
+    /* Tamanho */
+    width: 150px;
+    
+    /* Aparência */
+    border-radius   : 3px;
+    box-shadow      : 2px 2px 8px #AAA;
+    
+    /* Criar fundo degradê usando o CSS */
+    background-image: -moz-linear-gradient(top, #000, #333333);
+    background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #000),color-stop(1, #333333));
+    background-image: -webkit-linear-gradient(top, #000, #333333);
+    background-image: -moz-linear-gradient(top, #000, #333333);
+    background-image: -ms-linear-gradient(top, #000, #333333);
+    background-image: -o-linear-gradient(top, #000, #333333);
+    
+    /* Formatação do texto */
+    color       : #FFF;
+    line-height : 15px;
+    text-align  : left;
+    
+    /* Margens e espaçamentos */
+    padding: 2% 5%;
+    
+    /* Posicionamento */
+    position: absolute;
+    right   : 0;
+    top     : 100%;
+    z-index : 2; 
+}
+
+header.dl, nav.dl,
+div.dl, footer.dl{
+    /* Posicionamento */
+    position: relative;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------
+ * Cabeçalho da página
+ * ----------------------------------------------------------------------------------------------------------------- */
+header.dl{
+    /* Tamanho */
+    width   : 90%;
+    height  : 80px;
+    
+    /* Posicionamento */
+    left: 5%;
+    
+    /* Margens e espaçamentos */
+    margin: 1% 0 2% 0;
+}
+
+.slogan{
+    /* Formatação do texto */
+    color       : #069;
+    font-style  : italic;
+    text-align  : right;
+    
+    /* Tamanho */
+    width: 30%;
+    
+    /* Posicionamento */
+    float: right;
+}
+
+.logotipo{
+    /* Posicionamento */
+    float: left;
+    
+    /* Tamanho */
+    width   : 100px;
+    height  : 100px;
+    
+    /* Formatação do texto */
+    color: transparent;
+    
+    /* Aparência */
+    background      : url('imagens/logotipo.png') no-repeat top center;
+    background-size : contain;
+    
+    /* Margens e espaçamentos */
+    margin-right: 2%;
+}
+
+.links-usuario > a{
+    /* Aparência */
+    background-image    : url('icones/sprite-login.png');
+    background-repeat   : no-repeat;
+    
+    /* Margens e espaçamentos */
+    padding-left: 30px;
+    
+    /* Formatação do texto */
+    line-height: 30px;
+    
+    /* Posicionamento */
+    float: right;
+}
+
+.links-usuario > a:first-child{
+    /* Aparência */
+    background-position: top -45px left -5px;
+}
+
+.links-usuario > a:last-child{
+    /* Aparência */
+    background-position: top -5px left -5px;    
+    
+    /* Margens e espaçamentos */
+    margin-right: 5%;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------
+ * Menu da página
+ * ----------------------------------------------------------------------------------------------------------------- */
+nav.dl{
+    /* Tamanho */
+    width   : 85%;
+    height  : 30px;
+    
+    /* Posicionamento */
+    left: 5%;
+    
+    /* Formatação do texto */
+    line-height: 30px;
+    
+    /* Aparência */
+    background-color    : #069;
+    background-image    : url('icones/menu-24x24.png');
+    background-repeat   : no-repeat;
+    background-position : left 8px center;
+    box-shadow          : 2px 2px 8px #AAA;
+    
+    /* Margens e espaçamentos */
+    padding: 0 2% 0 40px;
+}
+
+.menu-horizontal,
+.sub-menu{
+    /* Aparência */
+    list-style  : none;
+    
+    /* Margens e espaçamentos */
+    padding : 0;
+    margin  : 0;
+}
+
+.menu-horizontal{
+    /* Posicionamento */
+    position: absolute;
+    z-index : 1;
+    
+    /* tamanho */
+    width   : 96%;
+    height  : 30px;
+}
+
+.menu-horizontal > li{
+    /* Posicionamento */
+    float: left;
+    
+    /* Tamanho */
+    width: 15%;
+    
+    /* Aparência */
+    border          : 1px solid transparent;
+    border-radius   : 2px;
+}
+
+.menu-horizontal > li:hover:not(:last-child){
+    /* Aparência */
+    background-color: #FFF;
+    background-image: url('icones/seta-baixo.png');
+    background-position: top 3px right 8px;
+    background-repeat: no-repeat;
+    /* box-shadow      : 2px 2px 2px #AAA; */
+    border-color    : #EEE;
+    
+    /* Margens e espaçamentos */
+    padding     : 0.3% 0;
+    margin-top  : -0.3%;
+}
+
+.menu-horizontal > li:hover .sub-menu{
+    /* Aparência */
+    display: block;
+}
+
+.menu-horizontal > li:hover:not(:last-child) > a{
+    /* Formatação do texto */
+    color: orange;
+}
+
+.menu-horizontal > li a{
+    /* Posicionamento */
+    float: left;
+    
+    /* Formatação do texto */
+    color           : #FFF;
+    text-decoration : none;
+    line-height     : 30px;
+    text-align      : center;
+    
+    /* Tamanho */
+    width: 100%;
+}
+
+.sub-menu{
+    /* Aparência */
+    display: none;
+    
+    /* Margens e espaçamentos */
+    padding: 2%;
+}
+
+.sub-menu > li:hover a{
+    /* Aparência */
+    background-color: #EFEFEF;
+}
+
+.sub-menu a{
+    /* Formatação do texto */
+    text-align      : left !important;
+    color           : #666 !important;
+}
+
+.menu-horizontal > li:last-child{
+    /* Posicionamento */
+    position: absolute;
+    right   : 0;
+    
+    /* Margens e espaçamentos */
+    margin-right: 0;
+    padding     : 0 0 0 23px;
+    
+    /* Tamanho */
+    width: 10%;
+    
+    /* Aparência */
+    background-image    : url('icones/sair-branco-20x20.png');
+    background-repeat   : no-repeat;
+    background-position : left center; 
+}
+
+.menu-horizontal > li:last-child a{
+    /* Tamanho */
+    width: auto;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------
+ * Corpo da página
+ * ----------------------------------------------------------------------------------------------------------------- */
+div.dl{
+    /* Tamanho */
+    width: 86%;
+    
+    /* Posicionamento */
+    left: 5%;
+    
+    /* Aparência */
+    background-color: #FFF;
+    box-shadow      : 2px 2px 8px #AAA;
+    
+    /* Margens e espaçamentos */
+    padding : 2%;
+    margin  : 2% 0;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------
+ * Rodapé da página
+ * ----------------------------------------------------------------------------------------------------------------- */
+footer.dl{
+    /* Tamanho */
+    width: 90%;
+    
+    /* Posicionamento */
+    left: 5%;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------
+ * Versão do sistema
+ * ----------------------------------------------------------------------------------------------------------------- */
+.dl-versao{
+    /* Formatação do texto */
+    color: #900;
+}

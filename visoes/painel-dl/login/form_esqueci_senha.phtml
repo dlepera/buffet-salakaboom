@@ -1,0 +1,40 @@
+<?php require_once '_topo.phtml'; ?>
+    
+    <form id="login" name="login" method="post" action="<?= \DL::$dir_raiz; ?>">
+        <a href="<?= \DL::$dir_raiz; ?>" class="logotipo">
+            <?= \DL::$ap_nome; ?>
+        </a>
+        
+        <span class="slogan"><?= \DL::$ap_slogan; ?></span>
+        <br /><br />
+        
+        <div class="campos">
+            <label for="login"><?= TXT_LABEL_ESQUECI_MINHA_SENHA; ?>:</label><br />
+            <input type="text" name="login" id="login" title="<?= TXT_LABEL_LOGIN; ?>" />
+        </div>
+        
+        <center>
+            <button type="submit"><?= TXT_BOTAO_SUBMIT_ENVIAR; ?></button>
+            
+            <a href="javascript:;" onclick="history.back();">
+                <?= TXT_LINK_VOLTAR; ?>
+            </a>
+        </center>
+    </form>
+    
+    <?php require_once '_rodape.phtml'; ?>
+    
+    <script>
+        //<![CDATA[
+        $("form[name='login']")._dlformulario({
+            controle: "usuario/esquecisenha",
+            campos  : {
+                "login": { obr: true, marcarobr: false }
+            },
+            depois  : function(){
+                history.back();
+            },
+            aparencia: { tema: "<?= \DL::$plugin_formulario_tema; ?>", estilo: "formulario" }      
+        });
+        //]]>
+    </script>

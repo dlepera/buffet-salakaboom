@@ -1,0 +1,103 @@
+/**
+ * @Autor	: Diego Lepera
+ * @E-mail	: d_lepera@hotmail.com
+ * @Projeto	: FrameworkDL
+ * @Data	: 30/06/2014 09:16:35
+ */
+
+/* --------------------------------------------------------------------------------------------------------------------
+ * DIV acima do conteúdo
+ * ----------------------------------------------------------------------------------------------------------------- */
+.sobre-tela{
+    /* Posicionamento */
+    position: fixed;
+    top     : 0;
+    left    : 0;
+    z-index : 10;
+    
+    /* Tamanho */
+    width   : 100%;
+    height  : 100%;
+    
+    /* Aparência */
+    background-image: url('imagens/back-transp-preto.png');
+}
+
+.sobre-tela > div.dl{
+    /* Tamanho */
+    max-height: 70%;
+    
+    /* Aparência */
+    overflow-y: auto;
+}
+
+/* ---------------------------------------------------------------------------------------------------------
+ * Carregando
+ * ------------------------------------------------------------------------------------------------------ */
+.carregando{
+    /* Aparência */
+    background-color    : #FFF;
+    background-image    : url('imagens/loadbar.gif');
+    background-repeat   : no-repeat;
+    background-position : bottom 2px center;
+    border-radius       : 10px;
+    
+    /* Margens e espaçamentos */
+    margin-top      : 15%;
+    margin-left     : calc(50% - 172px);
+    padding-left    : 3px;
+    padding-right   : 3px;
+    padding-bottom  : 25px;
+    
+    /* Tamanho */
+    width       : 345px;
+    min-height  : 22px;
+    
+    /* Formatação do texto */
+    line-height : 25px;
+    font-style  : italic;
+    color       : #069;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------
+ * Lista descritiva dos sub-módulos
+ * ----------------------------------------------------------------------------------------------------------------- */
+.modulo-subs{
+    /* Tamanho */
+    width: 100%;
+    
+    /* Margens e espaçamentos */
+    margin  : 0;
+    padding : 0;
+    
+    /* Aparência */
+    list-style  : none;
+    display     : table;
+}
+
+.sub-modulo{
+    /* Posicionamento */
+    float: left;
+    
+    /* Tamanho */
+    width: 48%;
+    
+    /* Margens e espaçamentos */
+    margin-bottom: 4%;
+}
+
+.sub-modulo:nth-child(odd){
+    /* Margens e espaçamentos */
+    margin-right: 4%;
+}
+
+.sub-modulo a{
+    /* Formatação do texto */
+    font-weight : normal;
+    font-variant: small-caps;
+}
+
+.sub-modulo-descr{
+    /* Formatação do texto */
+    color: #999;
+}

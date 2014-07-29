@@ -1,0 +1,36 @@
+<?php
+
+/**
+ * @Autor	: Diego Lepera
+ * @E-mail	: d_lepera@hotmail.com
+ * @Projeto	: FrameworkDL
+ * @Data	: 27/06/2014 08:32:29
+ */
+
+$params = $this->_obterparams();
+
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Meta TAGs -->
+    <meta charset="<?= \DL::$ap_encoding; ?>">
+    <meta name="author" content="Diego Lepera @DL" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    
+    <!-- Configurar a versão do IE suportada -->
+    <meta http-equiv="X-UA-Compatible" content="IE=<?= \DL::$browser_versao_ie; ?>" />
+    
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="<?= \DL::$dir_raiz . \DL::$dir_imgs; ?>favicon-painel.ico" />
+    
+    <!-- Estilos da página -->
+    <link rel="stylesheet" media="all" href="<?= \DL::$dir_raiz . \DL::$dir_css; ?>todos/dl-layout.css" />
+    <link rel="stylesheet" media="all" href="<?= \DL::$dir_raiz . \DL::$dir_css; ?>todos/dl-painel.css" />
+    <link rel="stylesheet" media="all" href="<?= \DL::$dir_raiz . \DL::$dir_css; ?>todos/formulario.css" />
+    <link rel="stylesheet" media="all" href="<?= \DL::$dir_raiz . \DL::$dir_css; ?>todos/login.css" />
+
+    <title><?= \DL::$ap_nome; ?></title>
+</head>
+<body>

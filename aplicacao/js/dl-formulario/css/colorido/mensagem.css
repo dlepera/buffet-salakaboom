@@ -1,0 +1,177 @@
+/**
+ *  @Autor  : Diego Lepera
+ *  @E-mail : d_lepera@hotmail.com
+ *  @Projeto: Framework MVC / Site
+ *  @Data   : 26/03/2014
+ */
+
+/* --------------------------------------------------------------------------------------------------------------------------
+ * DIV principal da mensagem de campo
+ * ----------------------------------------------------------------------------------------------------------------------- */
+div.dl-formulario-mensagem.colorido.campo{
+    /* Tamanho */
+    width: auto;
+    
+    /* Posicionamento */
+    position: relative;
+    
+    /* Aparência */
+    border-radius: -50px;
+    border       : 1px solid;
+    box-shadow   : 3px 3px 6px #CCC;
+    
+    /* Margens e espaçamentos */
+    margin-top: 1%;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------
+ * Parágrafo da mensagem de campo
+ * ----------------------------------------------------------------------------------------------------------------------- */
+div.dl-formulario-mensagem.colorido.campo p{
+    /* Margens e espaçamentos */
+    padding: 2%;
+    margin : 0;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------
+ * DIV principal da mensagem de alerta
+ * ----------------------------------------------------------------------------------------------------------------------- */
+div.dl-formulario-mensagem.colorido.alerta{
+    /* Margens e espaçamentos */
+    padding : 0 2%;
+    margin  : auto;
+    
+    /* Tamanho */
+    max-width: 96%;
+    
+    /* Posicionamento */
+    position: absolute;
+    position: fixed;
+    top     : 1%;
+    left    : 25%;
+    right   : 25%;
+    z-index : 1000;
+    
+    /* Formatação do texto */
+    text-align: center;
+    
+    /* Aparência */
+    border-radius: 8px;
+    border       : 1px solid;
+    box-shadow   : 3px 3px 6px #CCC;
+}
+
+div.dl-formulario-mensagem.colorido.alerta.sucesso,
+div.dl-formulario-mensagem.colorido.campo.sucesso{
+    /* Formatação do texto */
+    color: green;
+    
+    /* Aparência */
+    border-color    : green;
+    background-color: #d2ffd4; 
+}
+
+div.dl-formulario-mensagem.colorido.alerta.atencao,
+div.dl-formulario-mensagem.colorido.campo.atencao{
+    /* Formatação do texto */
+    color: #069;
+    
+    /* Aparência */
+    border-color    : #069;
+    background-color: #d5e1f3; 
+}
+
+div.dl-formulario-mensagem.colorido.alerta.erro,
+div.dl-formulario-mensagem.colorido.campo.erro{
+    /* Formatação do texto */
+    color: #900;
+    
+    /* Aparência */
+    border-color    : #900;
+    background-color: #ffdfe6; 
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------
+ * Parágrafo da mensagem de alerta
+ * ----------------------------------------------------------------------------------------------------------------------- */
+div.dl-formulario-mensagem.colorido.alerta p{
+    /* Margens e espaçamentos */
+    padding: 1%;
+    margin : 0;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------
+ * Botão da mensagem de alerta
+ * ----------------------------------------------------------------------------------------------------------------------- */
+div.dl-formulario-mensagem.colorido.alerta button,
+div.dl-formulario-mensagem.colorido.campo button{
+    /* Aparência */
+    border          : none;
+    background      : none;
+    border-radius   : 50%;
+    
+    /* Posicionamento */
+    position: absolute;
+    right   : 1%;
+    top     : 25%;
+    
+    /* Tamanho */
+    width   : 17px;
+    height  : 17px;
+    line-height: 100%;
+    
+    /* Transições */
+    transition          : background-color 0.7s, color 0.7s;
+    -o-transition       : background-color 0.7s, color 0.7s;
+    -moz-transition     : background-color 0.7s, color 0.7s;
+    -webkit-transition  : background-color 0.7s, color 0.7s;
+    
+    /* Formatação do texto */
+    text-indent : 0;
+    text-align  : center;
+}
+
+div.dl-formulario-mensagem.colorido.alerta.sucesso button,
+div.dl-formulario-mensagem.colorido.campo.sucesso button{
+    /* Formatação do texto */
+    color: green;
+}
+
+div.dl-formulario-mensagem.colorido.alerta.sucesso button:hover,
+div.dl-formulario-mensagem.colorido.campo.sucesso button:hover{
+    /* Aparência */
+    background-color: green;
+    
+    /* Formatação do texto */
+    color: #FFF;
+}
+
+div.dl-formulario-mensagem.colorido.alerta.atencao button,
+div.dl-formulario-mensagem.colorido.campo.atencao button{
+    /* Formatação do texto */
+    color: #069;
+}
+
+div.dl-formulario-mensagem.colorido.alerta.atencao button:hover,
+div.dl-formulario-mensagem.colorido.campo.atencao button:hover{
+    /* Aparência */
+    background-color: #069;
+    
+    /* Formatação do texto */
+    color: #FFF;
+}
+
+div.dl-formulario-mensagem.colorido.alerta.erro button,
+div.dl-formulario-mensagem.colorido.campo.erro button{
+    /* Formatação do texto */
+    color: #900;
+}
+
+div.dl-formulario-mensagem.colorido.alerta.erro button:hover,
+div.dl-formulario-mensagem.colorido.campo.erro button:hover{
+    /* Aparência */
+    background-color: #900;
+    
+    /* Formatação do texto */
+    color: #FFF;
+}

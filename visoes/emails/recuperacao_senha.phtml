@@ -1,0 +1,64 @@
+<?php
+
+/**
+ * @Autor	: Diego Lepera
+ * @E-mail	: d_lepera@hotmail.com
+ * @Projeto	: Framework MVC / Site
+ * @Data	: 09/12/2013
+ */
+
+# Obter os parâmetros que serão usados nesse template
+$params = $this->_obterparams();
+$mod_u	= $params['modelo'];
+$mod_r	= $params['recuperacao'];
+
+$http_host = filter_input(INPUT_SERVER, 'HTTP_HOST');
+    
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>    
+    <!-- ESTILOS DA PÁGINA -->    
+    <style type="text/css">
+        <?= include_once '.'. \DL::$dir_css .'todos/dl-emails.css'; ?>
+    </style>
+</head>
+<body>
+    
+    <p style="text-align: center;">
+    	<?= MSG_EMAIL_CASO_NAO_ESTEJA_CONSEGUINDO_VISUALIZAR; ?><br />
+    	
+    	<a href="http://<?= $http_host . \DL::$dir_raiz; ?>/email/contatosite/mostrarhtml/<?= $mod_cs->contato_site_id; ?>">
+    		<?= TXT_LINK_VISUALIZAR_EMAIL_COMO_HTML; ?>
+    	</a>
+    </p>
+    
+    <!-- Cabeçalho do e-mail -->
+    <header class="dl">
+        <h1>
+            <a href="http://<?= $http_host . \DL::$dir_raiz; ?>" class="logotipo" target="_blank" style="background-image: url('http://<?= $http_host . \DL::$dir_raiz . \DL::$dir_css; ?>todos/imagens/logotipo.png');">
+                <?= \DL::$ap_nome; ?>
+            </a>
+        </h1>
+        
+        <div class="slogan">Recuperação de senha</div>
+    </header>
+    
+    <div class="dl">
+        <p>Olá, <?= $mod_u->usuario_info_nome; ?>!</p>
+        
+        <p>
+            Foi solicitada a recuperação da senha de acesso à sua conta. Caso você <em>não</em> tenha feito essa solicitação, por favor desconsidere esse e-mail.<br />
+            Caso contrário, por favor clique no link abaixo para iniciar o processo de recuperação da sua senha:
+        </p>
+        
+        <p>
+            <a href="http://<?= $http_host . \DL::$dir_raiz; ?>/gerenc/usuario/recuperar-senha/<?= $mod_r->recuperacao_hash ;?>">
+                http://<?= $http_host . \DL::$dir_raiz; ?>/gerenc/usuario/recuperar-senha/<?= $mod_r->recuperacao_hash ;?>
+            </a>
+        </p>
+    </div>
+    
+    <?php include './visoes/emails/_rodape.php'; ?>
+</body>
+</html>

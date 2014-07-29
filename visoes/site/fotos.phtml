@@ -1,0 +1,40 @@
+<?php
+
+/**
+ * @Autor	: Diego Lepera
+ * @E-mail	: d_lepera@hotmail.com
+ * @Projeto	: FrameworkDL
+ * @Data	: Jul 28, 2014 5:12:35 PM
+ */
+
+$mod = $params['album'];
+
+?>
+
+<div class="dl">
+    <h1><?= $mod->album_nome; ?></h1>
+    <div id="fotos"></div>
+</div>
+
+<script>
+    //<![CDATA[
+    window.onload = function(){
+        $("#fotos")._dlgaleria({
+            minis    :  true,
+            naveg    :  true,
+            indicador:  true,
+            transicao:  { nome: "slide-esquerda", tempo: "1s" },
+            fotos    :  [
+                <?php foreach( $params['fotos'] as $f ): ?>
+                { 
+                    src     : "<?= \DL::$dir_raiz ."/{$f['foto_album_imagem']}"; ?>",
+                    titulo  : "<?= $f['foto_album_titulo']; ?>",
+                    descr   : "<?= $f['foto_album_descr']; ?>"
+                },
+                <?php endforeach; ?>
+            ],
+            aparencia: { tema: "<?= \DL::$plugin_galeria_tema; ?>", estilo: "galeria" }
+        });
+    };
+    //]]>
+</script>

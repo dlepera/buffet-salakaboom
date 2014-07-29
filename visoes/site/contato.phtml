@@ -1,0 +1,64 @@
+<?php
+
+/**
+ * @Autor	: Diego Lepera
+ * @E-mail	: d_lepera@hotmail.com
+ * @Projeto	: FrameworkDL
+ * @Data	: 20/05/2014 11:58:12
+ */
+
+?>
+
+<div class="dl fale-conosco">
+    <h1><?= TXT_TITULO_FALE_CONOSCO; ?></h1>
+    
+    <form name="fale-conosco" method="post" action="<?= \DL::$dir_raiz; ?>">
+        <label for="nome"><?= TXT_LABEL_NOME_COMPLETO; ?>:</label><br />
+        <input type="text" name="nome" id="nome" title="<?= TXT_LABEL_NOME_COMPLETO; ?>" />
+        <br /><br />
+        
+        <label for="email"><?= TXT_LABEL_EMAIL; ?>:</label><br />
+        <input type="text" name="email" id="email" title="<?= TXT_LABEL_EMAIL; ?>" />
+        <br /><br />
+        
+        <label for="telefone"><?= TXT_LABEL_TELEFONE; ?>:</label><br />
+        <input type="text" name="telefone" id="telefone" title="<?= TXT_LABEL_TELEFONE; ?>" />
+        <br /><br />
+        
+        <label for="assunto"><?= TXT_LABEL_ASSUNTO; ?>:</label><br />
+        <select name="assunto" id="assunto" title="<?= TXT_LABEL_ASSUNTO; ?>">
+            <option value=""><?= TXT_OPCAO_SELECIONE_UMA_OPCAO; ?></option>
+            
+            <?php foreach( $params['assuntos'] as $ac ): ?>
+                <option value="<?= $ac['assunto_contato_id']; ?>"><?= $ac['assunto_contato_descr']; ?></option>
+            <?php endforeach; ?>
+        </select>
+        <br /><br />
+        
+        <label for="mensagem"><?= TXT_LABEL_MENSAGEM; ?>:</label><br />
+        <textarea name="mensagem" id="mensagem" title="<?= TXT_LABEL_MENSAGEM; ?>"></textarea>
+        <br /><br />
+        
+        <button type="submit"><?= TXT_BOTAO_SUBMIT_ENVIAR; ?></button>
+        <button type="reset"><?= TXT_BOTAO_RESET_CANCELAR; ?></button>
+    </form>
+</div>
+
+<script>
+    //<![CDATA[
+    window.onload = function(){
+        $("form[name='fale-conosco']")._dlformulario({
+            reset   : true,
+            controle: "contatosite/enviar",
+            campos  : {
+                "nome"      : { obr: true },
+                "email"     : { obr: true, validacao: EXPR_EMAIL },
+                "telefone"  : { mascara: MASK_CELULAR_9 },
+                "assunto"   : { obr: true },
+                "mensagem"  : { obr: true }
+            },
+            aparencia: { tema: "<?= \DL::$plugin_formulario_tema; ?>", estilo: "formulario" }
+        });
+    };
+    //]]>
+</script>

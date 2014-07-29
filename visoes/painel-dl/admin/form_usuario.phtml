@@ -1,0 +1,363 @@
+<?php
+
+/**
+ * @Autor	: Diego Lepera
+ * @E-mail	: d_lepera@hotmail.com
+ * @Projeto	: FrameworkDL
+ * @Data	: 28/05/2014 16:44:53
+ */
+
+$mod = $params['modelo'];
+
+# Verificar se o usuário que está sendo editado é o mesmo que está logado
+$usr_logado = $_SESSION['usuario_id'] === $mod->usuario_id;
+
+# Verificar se o registro está sendo editado
+$editando = !is_null($mod->usuario_id);
+
+# Definir qual título deve ser inserido na TAG H1
+$titulo_h1 = !$editando ? TXT_TITULO_FORMULARIO_NOVO_USUARIO : TXT_TITULO_FORMULARIO_ALTERAR_USUARIO;
+
+$perms = $params['lis_pu'];
+
+?>
+
+<div class="dl">
+    <h1><?= $titulo_h1; ?></h1>
+    
+    <?php include_once './visoes/painel-dl/_titulo.h2.phtml'; ?>
+    
+    <form name="usuario" method="post" action="<?= \DL::$dir_raiz; ?>">
+        <?php if( $editando ): ?>
+        <!-- ID do registro atual -->
+        <input type="hidden" name="id" value="<?= $mod->usuario_id; ?>" />
+        <?php endif; ?>
+        
+        <fieldset>
+            <legend><?= TXT_LEGENDA_INFORMACOES_PESSOAIS; ?></legend>
+            
+            <label for="info_nome"><?= TXT_LABEL_NOME_COMPLETO; ?>:</label><br />
+            <input type="text" name="info_nome" id="info_nome" value="<?= $mod->usuario_info_nome; ?>" title="<?= TXT_LABEL_NOME_COMPLETO; ?>" />
+            <br /><br />
+
+            <label for="info_email"><?= TXT_LABEL_EMAIL; ?>:</label><br />
+            <input type="text" name="info_email" id="info_email" value="<?= $mod->usuario_info_email; ?>" title="<?= TXT_LABEL_EMAIL; ?>" />
+            <br /><br />
+
+            <label for="info_telefone"><?= TXT_LABEL_TELEFONE; ?>:</label><br />
+            <input type="text" name="info_telefone" id="info_telefone" value="<?= $mod->usuario_info_telefone; ?>" title="<?= TXT_LABEL_TELEFONE; ?>" />
+            <br /><br />
+
+            <label><?= TXT_LABEL_SEXO; ?>:</label><br />
+            <label>
+                <input type="radio" name="info_sexo" value="M" title="<?= TXT_LABEL_SEXO; ?>"<?= $mod->usuario_info_sexo == 'M' ? ' CHECKED' : ''; ?> />
+                <?= TXT_OPCAO_MASCULINO; ?>
+            </label>
+
+            <label>
+                <input type="radio" name="info_sexo" value="F" title="<?= TXT_LABEL_SEXO; ?>"<?= $mod->usuario_info_sexo == 'F' ? ' CHECKED' : ''; ?> />
+                <?= TXT_OPCAO_FEMININO; ?>
+            </label>
+        </fieldset>
+        
+        <fieldset>
+            <legend><?= TXT_LEGENDA_PREFERENCIAS; ?></legend>
+            
+            <label for="pref_idioma"><?= TXT_LABEL_IDIOMA; ?>:</label><br />
+            <select name="pref_idioma" id="pref_idioma" title="<?= TXT_LABEL_IDIOMA; ?>">
+                <option value=""><?= TXT_OPCAO_SELECIONE_UMA_OPCAO; ?></option>
+
+                <?php foreach( $params['idiomas'] as $i ): ?>
+                <option value="<?= $i['idioma_id']; ?>"<?= $mod->usuario_pref_idioma == $i['idioma_id'] ? ' SELECTED' : ''; ?>>
+                    <?= $i['idioma_descr']; ?>
+                </option>
+                <?php endforeach; ?>
+            </select>
+            <br /><br />
+            
+            <label for="pref_tema"><?= TXT_LABEL_TEMA; ?>:</label><br />
+            <select name="pref_tema" id="pref_tema" title="<?= TXT_LABEL_TEMA; ?>">
+                <option value=""><?= TXT_OPCAO_SELECIONE_UMA_OPCAO; ?></option>
+
+                <?php foreach( $params['temas'] as $t ): ?>
+                <option value="<?= $t['tema_id']; ?>"<?= $mod->usuario_pref_tema == $t['tema_id'] ? ' SELECTED' : ''; ?>>
+                    <?= $t['tema_descr']; ?>
+                </option>
+                <?php endforeach; ?>
+            </select>
+            <br /><br />
+            
+            <label for="pref_formato_data"><?= TXT_LABEL_FORMATO_DATA; ?>:</label><br />
+            <select name="pref_formato_data" id="pref_formato_data" title="<?= TXT_LABEL_FORMATO_DATA; ?>">
+                <option value=""><?= TXT_OPCAO_SELECIONE_UMA_OPCAO; ?></option>
+
+                <?php foreach( $params['formatos_data'] as $fd ): ?>
+                <option value="<?= $fd['formato_data_id']; ?>"<?= $mod->usuario_pref_formato_data == $fd['formato_data_id'] ? ' SELECTED' : ''; ?>>
+                    <?= $fd['formato_data_descr']; ?>
+                </option>
+                <?php endforeach; ?>
+            </select>
+            <br /><br />
+            
+            <label for="pref_num_registros"><?= TXT_LABEL_QTDE_REGISTROS; ?>:</label><br />
+            <input type="text" name="pref_num_registros" id="pref_num_registros" value="<?= $mod->usuario_pref_num_registros; ?>" title="<?= TXT_LABEL_QTDE_REGISTROS; ?>" />
+        </fieldset>
+        
+        <fieldset>
+            <legend><?= TXT_LEGENDA_DADOS_DE_ACESSO_AO_SISTEMA; ?></legend>
+            
+            <?php if( !$usr_logado ): ?>
+            <label for="info_grupo"><?= TXT_LABEL_GRUPO; ?>:</label><br />
+            <select name="info_grupo" id="info_grupo" title="<?= TXT_LABEL_GRUPO; ?>">
+                <option value=""><?= TXT_OPCAO_SELECIONE_UMA_OPCAO; ?></option>
+
+                <?php foreach( $params['grupos'] as $g ): ?>
+                <option value="<?= $g['grupo_usuario_id']; ?>"<?= $mod->usuario_info_grupo == $g['grupo_usuario_id'] ? ' SELECTED' : ''; ?>>
+                    <?= $g['grupo_usuario_descr']; ?>
+                </option>
+                <?php endforeach; ?>
+                
+            </select>
+            
+            <?php if( $_SESSION['permissoes']['modulo_4']['inserir'] ): ?>
+            <p>
+                <a href="javascript:;" class="inserir" onclick="AbrirForm('<?= \FrameworkDL::$dir_raiz; ?>/painel-dl/admin/grupos-de-usuarios/novo/str');">
+                    <?= TXT_LINK_NOVO_GRUPO_USUARIO; ?>
+                </a>
+            </p>
+            <?php endif;
+            else: ?>
+            <input type="hidden" name="info_grupo" value="<?= $mod->usuario_info_grupo; ?>" />
+            <?php endif; ?>
+            <br /><br />
+
+            <label for="info_login"><?= TXT_LABEL_LOGIN; ?>:</label><br />
+            <input type="text" name="info_login" id="info_login" value="<?= $mod->usuario_info_login; ?>" title="<?= TXT_LABEL_LOGIN; ?>"<?= $editando ? ' READONLY' : ''; ?> />
+            <br /><br />
+            
+            <?php if( !$editando ): ?>
+            <label for="info_senha"><?= TXT_LABEL_SENHA; ?>:</label><br />
+            <input type="password" name="info_senha" id="info_senha" title="<?= TXT_LABEL_SENHA; ?>" />
+            <br /><br />
+
+            <label for="info_senha_confirm"><?= TXT_LABEL_CONFIRME_A_SENHA; ?>:</label><br />
+            <input type="password" name="info_senha_confirm" id="info_senha_confirm" title="<?= TXT_LABEL_CONFIRME_A_SENHA; ?>" />
+            <br /><br />
+            <?php endif; ?>
+                
+            <label>
+                <input type="checkbox" name="conf_reset" title="<?= TXT_LABEL_ALTERAR_SENHA_NO_PROXIMO_LOGIN; ?>" value="1"<?= $mod->usuario_conf_reset == 1 || !$editando ? ' CHECKED' : ''; ?> />
+                <?= TXT_LABEL_ALTERAR_SENHA_NO_PROXIMO_LOGIN; ?>
+            </label>
+        </fieldset>
+        
+        <?php if( !$usr_logado ): ?>
+        <fieldset>
+            <legend><?= TXT_LEGENDA_PERMISSIONAMENTO; ?></legend>
+
+            <?php foreach( $params['modulos'] as $m ):
+                $subs = array();
+
+                foreach( $params['sub-modulos'] as $sm ):
+                    if( $sm['modulo_pai'] == $m['modulo_id'] )
+                        $subs[] = $sm;
+                endforeach;
+                ?>
+
+                <table class="lista">
+                    <tr>
+                        <th id="modulo_<?= $m['modulo_id']; ?>" style="width: 30%;"><?= $m['modulo_nome']; ?></th>
+                        <th id="ver_<?= $m['modulo_id']; ?>" style="width: 14%; text-align: center;"><?= TXT_TABELA_TITULO_VER; ?></th>
+                        <th id="inserir_<?= $m['modulo_id']; ?>" style="width: 14%; text-align: center;"><?= TXT_TABELA_TITULO_INSERIR; ?></th>
+                        <th id="editar_<?= $m['modulo_id']; ?>" style="width: 14%; text-align: center;"><?= TXT_TABELA_TITULO_EDITAR; ?></th>
+                        <th id="remover_<?= $m['modulo_id']; ?>" style="width: 14%; text-align: center;"><?= TXT_TABELA_TITULO_REMOVER; ?></th>
+                        <th id="total_<?= $m['modulo_id']; ?>" style="width: 14%; text-align: center;"><?= TXT_TABELA_TITULO_TOTAL; ?></th>
+                    </tr>
+
+                <?php if( count($subs) > 0 ): 
+                    foreach( $subs as $sm ):
+                        # Verificar se esse módulo já está cadastrado
+                        $padrao = "~^{$sm['modulo_id']}$~";
+                        $modulo = array_filter($perms, function($v, $k) use($padrao){
+                            return preg_grep($padrao, $v);
+                        });
+
+                        # Obter a chave do registro
+                        $chave = end(array_keys($modulo));
+                        ?>
+
+                        <tr>
+                            <td headers="modulo_<?= $m['modulo_id']; ?>">
+                                <!-- ID do módulo -->
+                                <input type="hidden" name="modulo[]" value="<?= $sm['modulo_id']; ?>" />
+                                <?= $sm['modulo_nome']; ?>
+                            </td>
+                            <td headers="ver_<?= $m['modulo_id']; ?>" style="text-align: center;">
+                                <input type="checkbox" name="ver_<?= $sm['modulo_id']; ?>" id="ver_<?= $sm['modulo_id']; ?>" value="1"<?= $modulo[$chave]['permissao_ver'] === '1' ? ' CHECKED': ''; ?> />
+                            </td>
+                            <td headers="inserir_<?= $m['modulo_id']; ?>" style="text-align: center;">
+                                <input type="checkbox" name="inserir_<?= $sm['modulo_id']; ?>" id="inserir_<?= $sm['modulo_id']; ?>" value="1"<?= $modulo[$chave]['permissao_inserir'] === '1' ? ' CHECKED': ''; ?> />
+                            </td>
+                            <td headers="editar_<?= $m['modulo_id']; ?>" style="text-align: center;">
+                                <input type="checkbox" name="editar_<?= $sm['modulo_id']; ?>" id="editar_<?= $sm['modulo_id']; ?>" value="1"<?= $modulo[$chave]['permissao_editar'] === '1' ? ' CHECKED': ''; ?> />
+                            </td>
+                            <td headers="remover_<?= $m['modulo_id']; ?>" style="text-align: center;">
+                                <input type="checkbox" name="remover_<?= $sm['modulo_id']; ?>" id="remover_<?= $sm['modulo_id']; ?>" value="1"<?= $modulo[$chave]['permissao_remover'] === '1' ? ' CHECKED': ''; ?> />
+                            </td>
+                            <td headers="total_<?= $m['modulo_id']; ?>" style="text-align: center;">
+                                <input type="checkbox" name="total_<?= $sm['modulo_id']; ?>" id="total_<?= $sm['modulo_id']; ?>" value="1"<?= $modulo[$chave]['permissao_total'] === '1' ? ' CHECKED': ''; ?> />
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </table>
+        <?php endforeach; ?>
+        </fieldset>
+        <?php endif; ?>
+        
+        <button type="submit"><?= TXT_BOTAO_SUBMIT_SALVAR; ?></button>
+        <button type="reset"><?= TXT_BOTAO_RESET_CANCELAR; ?></button>
+    </form>
+</div>
+
+<script>
+    //<![CDATA[
+    window.onload = function(){
+        $("form[name='usuario']")._dlformulario({
+            <?php if( !$editando ): ?>
+            depois: function(){
+                window.location = "<?= \DL::$dir_raiz; ?>/painel-dl/admin/usuarios/lista";
+            },
+
+            antes: function(){
+                // Verificar as senhas
+                if( $("#info_senha").val() !== $("#info_senha_confirm").val() ){
+                    $("body")._dlmostrarmsg({
+                        mensagem    : "<?= ERRO_USUARIO_ALTERARSENHA_SENHAS_NAO_CONFEREM; ?>",
+                        tipo        : ["erro", "alerta"],
+                        botao       : { texto: "x" },
+                        aparencia   : { tema: "<?= \DL::$plugin_formulario_tema; ?>", estilo: "mensagem" }
+                    });
+
+                    return false;
+                } // Fim if( $("#info_senha").val() !== $("#info_senha_confirm") )
+
+                return true;
+            },
+            <?php endif; ?>
+            controle: "usuario/salvar",
+            campos  : {
+                "info_nome"         : { obr: true },
+                "info_email"        : { obr: true, validacao: EXPR_EMAIL },
+                "info_telefone"     : { mascara: MASK_CELULAR_9, validacao: EXPR_CELULAR_9 },
+                "info_sexo"         : { obr: true, validacao: /^[MF]{1}$/, marcarobr: false },
+                "pref_idioma"       : { obr: true },
+                "pref_tema"         : { obr: true },
+                "pref_formato_data" : { obr: true },
+                "pref_num_registros": { obr: true },
+                "info_grupo"        : { obr: true<?= $usr_logado ? ', marcarobr: false': ''; ?> },
+                "info_login"        : { obr: true }
+
+                <?php if( !$editando ): ?>
+                , "info_senha"      : { obr: true },
+                "info_senha_confirm": { obr: true }
+                <?php endif; ?>
+            },
+            aparencia   : { tema: "<?= \DL::$plugin_formulario_tema; ?>", estilo: "formulario" }
+        });
+        
+        <?php if( !$editando ): ?>
+        // Verificar disponibilidade do nome de usuário
+        $("#info_login").bind("change", function(){
+            var $this = $(this);
+            var valor = $this.val();
+
+            if( valor !== "" ){
+                $.ajax({
+                    url     : "<?= \DL::$dir_raiz; ?>/painel-dl/admin/usuarios/verificarlogin/"+ valor,
+                    dataType: "json",
+                    success : function(json){
+                        $this._dlmostrarmsg({
+                            mensagem    : json.mensagem,
+                            tipo        : ["campo", json.tipo],
+                            botao       : { texto: "x" },
+                            aparencia   : { tema: "<?= \DL::$plugin_formulario_tema; ?>", estilo: "mensagem" },
+                            animacao    : { mostrar: "fadein", ocultar: "fadeout", tempo: "1s" }
+                        });
+                    }
+                });
+            } // Fim if( valor !== "" )
+        });
+        <?php endif; ?>
+
+        // Verificar disponibilidade do nome de usuário
+        $("#info_email").bind("change", function(){
+            var $this = $(this);
+            var valor = $this.val();
+
+            if( valor != "" ){
+                $.ajax({
+                    url     : "<?= \DL::$dir_raiz; ?>/painel-dl/admin/usuarios/verificaremail/"+ valor,
+                    dataType: "json",
+                    success : function(json){
+                        $this._dlmostrarmsg({
+                            mensagem    : json.mensagem,
+                            tipo        : ["campo", json.tipo],
+                            botao       : { texto: "x" },
+                            aparencia   : { tema: "<?= \DL::$plugin_formulario_tema; ?>", estilo: "mensagem" },
+                            animacao    : { mostrar: "fadein", ocultar: "fadeout", tempo: "1s" }
+                        });
+                    }
+                });
+            } // Fim if( valor !== "" )
+        });
+        
+        <?php if( !$usr_logado ): ?>
+        // Preencher o permissionamento padrão do grupo
+        $("#info_grupo").bind("change", function(){
+            var valor = $(this).val();
+
+            if( valor != "" ){
+                $.ajax({
+                    url     : "<?= \DL::$dir_raiz; ?>/permissoesgrupo/filtrarporgrupo",
+                    dataType: "json",
+                    type    : "post",
+                    data    : "grupo="+ valor,
+                    success : function(json){
+                        var qtde = json.length;
+                        var pgru;
+
+                        if( qtde > 0 ){
+                            for(i=0; i<qtde; i++){
+                                pgru = json[i];
+
+                                // Alterar a marcação de cada campo
+                                $(":checkbox[name='ver_"+ pgru.permissao_modulo +"']").each(function(){
+                                    this.checked = pgru.permissao_ver == 1 ? true : false
+                                });
+
+                                $(":checkbox[name='inserir_"+ pgru.permissao_modulo +"']").each(function(){
+                                    this.checked = pgru.permissao_inserir == 1 ? true : false
+                                });
+
+                                $(":checkbox[name='editar_"+ pgru.permissao_modulo +"']").each(function(){
+                                    this.checked = pgru.permissao_editar == 1 ? true : false
+                                });
+
+                                $(":checkbox[name='remover_"+ pgru.permissao_modulo +"']").each(function(){
+                                    this.checked = pgru.permissao_remover == 1 ? true : false
+                                });
+
+                                $(":checkbox[name='total_"+ pgru.permissao_modulo +"']").each(function(){
+                                    this.checked = pgru.permissao_total == 1 ? true : false
+                                });
+                            } // Fim for(i)
+                        } // Fim if( json.length > 0 )
+                    }
+                });
+            } // Fim if( valor !== "" )
+        });
+        <?php endif; ?>
+    };
+    //]]>
+</script>

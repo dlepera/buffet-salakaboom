@@ -1,0 +1,57 @@
+<?php
+
+/**
+* @Autor	: Diego Lepera
+* @E-mail	: d_lepera@hotmail.com
+* @Projeto	: FrameworkDL
+* @Data	: 19/05/2014 18:22:01
+*/
+
+header('Content-type: text/html; charset='. \DL::$ap_encoding, true);
+
+$params = $this->_obterparams();
+
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Meta TAGs -->
+    <meta charset="<?= \DL::$ap_encoding; ?>">
+    <meta name="author" content="Diego Lepera @DL" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    
+    <!-- Configurar a versão do IE suportada -->
+    <meta http-equiv="X-UA-Compatible" content="IE=<?= \DL::$browser_versao_ie; ?>" />
+    
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="<?= \DL::$dir_raiz . \DL::$dir_imgs; ?>favicon.ico" />
+    
+    <!-- Estilos da página -->
+    <link rel="stylesheet" media="all" href="<?= \DL::$dir_raiz . \DL::$dir_css; ?>todos/dl-layout.css" />
+
+    <title><?= \DL::$ap_nome; ?></title>
+</head>
+<body>
+        
+    <header class="dl">
+        <a href="<?= \DL::$dir_raiz; ?>" class="logotipo" title="<?= \DL::$ap_nome; ?>"><?= \DL::$ap_nome; ?></a>
+        
+        <div class="slogan"><?= \DL::$ap_slogan; ?></div>
+    </header>
+    
+    <nav class="dl">
+        <ul>
+            <li>
+                <a href="<?= \DL::$dir_raiz; ?>/institucional"><?= TXT_LINK_INSTITUCIONAL; ?></a>
+            </li>
+            
+            <li>
+                <a href="<?= \DL::$dir_raiz; ?>/albuns-de-fotos"><?= TXT_LINK_ALBUNS_DE_FOTOS; ?></a>
+            </li>
+            
+            <li>
+                <a href="<?= \DL::$dir_raiz; ?>/fale-conosco"><?= TXT_LINK_FALE_CONOSCO; ?></a>
+            </li>
+        </ul>
+    </nav>

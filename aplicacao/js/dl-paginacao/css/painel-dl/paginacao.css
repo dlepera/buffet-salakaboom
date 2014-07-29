@@ -1,0 +1,121 @@
+@CHARSET "ISO-8859-1";
+
+/*
+ * DL-Sites @ 2013
+ * Projeto  : Framework MVC
+ * Programador e idealizador: Diego Lepera
+ * Descrição: Framework para facilitar o trabalho de criar sites e sistemas web
+ *              armazenando ações comuns para todos os sites
+ * Plugin   : Plugin para criar botões de navegação de paginação
+ */
+
+
+/* =========================================================================
+ * ESTILO DA BARRA DE NAVEGAÇÃO
+ * ====================================================================== */
+.painel-dl.paginacao{
+    /* Tamanho */
+    width   : auto;
+    height  : 20px;
+        
+    /* Formatação do texto */
+    text-align: center;
+
+    /* Posicionamento */
+    position: relative;
+    
+    /* Aparência */
+    display: table;
+    
+    /* Margens e espaçamentos */
+    padding: 0 calc(50% - 90px);
+}
+
+/* =========================================================================
+ *	ESTILO DOS BOTÕES DE NAVEGAÇÃO
+ * ====================================================================== */
+.painel-dl.paginacao > a{
+    /* Tamanho */
+    width   : 20px;
+    height  : 20px;
+
+    /* Margens e espeçamentos */
+    padding: 0;
+    margin : 0 5px;
+
+    /* Formatação do texto */
+    text-decoration : none;
+    color           : #069;
+    line-height     : 20px;
+    
+    /* Aparência */
+    float: left;
+}
+
+.painel-dl.paginacao > a:hover,
+.painel-dl.paginacao > a.pg-atual{
+    /* Formatação do texto */
+    color: #FFF;
+
+    /* Aparência */
+    background: #069;
+}
+
+/*
+ * Botões não numéricos terão uma imagem de fundo
+ * representando para a página que ele levará
+ */
+.painel-dl.paginacao > a.btn-primeira,
+.painel-dl.paginacao > a.btn-ultima,
+.painel-dl.paginacao > a.btn-anterior,
+.painel-dl.paginacao > a.btn-proxima{    	
+    /* Aparência */
+    border              : none;
+    background-repeat   : no-repeat;
+    
+    /* Formatação da fonte */
+    color: transparent;
+
+    /* Margens e espaçamentos */
+    padding: 0;
+}
+
+/*
+ * Botão que leva à página anterior
+ */
+.painel-dl.paginacao a.btn-anterior{
+    /* Aparência */
+    background-color    : #FFF;
+    background-image    : url('imagens/sprite-botoes.png');
+    background-position : top -50px left -10px;
+}
+
+/*
+* Botão que leva à próxima página 
+*/
+.painel-dl.paginacao a.btn-proxima{
+    /* Aparência */
+    background-color    : #FFF;
+    background-image    : url('imagens/sprite-botoes.png');
+    background-position : top -90px left -10px;
+}
+
+/*
+ * Botão que leva à primeira página
+ */
+.painel-dl.paginacao a.btn-primeira{
+    /* Aparência */
+    background-color    : #FFF;
+    background-image    : url('imagens/sprite-botoes.png');
+    background-position : top -10px left -10px;
+}
+
+/*
+ * Botão que leva à última página
+ */
+.painel-dl.paginacao a.btn-ultima{
+    /* Aparência */
+    background-color    : #FFF;
+    background-image    : url('imagens/sprite-botoes.png');
+    background-position : top -130px left -10px;
+}

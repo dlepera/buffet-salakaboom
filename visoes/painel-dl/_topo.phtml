@@ -1,0 +1,124 @@
+<?php
+
+/**
+* @Autor	: Diego Lepera
+* @E-mail	: d_lepera@hotmail.com
+* @Projeto	: FrameworkDL
+* @Data	: 19/05/2014 18:22:01
+*/
+
+header('Content-type: text/html; charset='. \DL::$ap_encoding, true);
+
+$params = $this->_obterparams();
+
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Meta TAGs -->
+    <meta charset="<?= \DL::$ap_encoding; ?>">
+    <meta name="author" content="Diego Lepera @DL" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    
+    <!-- Configurar a versão do IE suportada -->
+    <meta http-equiv="X-UA-Compatible" content="IE=<?= \DL::$browser_versao_ie; ?>" />
+    
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="<?= \DL::$dir_raiz . \DL::$dir_imgs; ?>favicon-painel.ico" />
+    
+    <!-- Estilos da página -->
+    <link rel="stylesheet" media="all" href="<?= \DL::$dir_raiz . \DL::$dir_css; ?>todos/dl-layout.css" />
+    <link rel="stylesheet" media="all" href="<?= \DL::$dir_raiz . \DL::$dir_css; ?>todos/dl-painel.css" />
+    <link rel="stylesheet" media="all" href="<?= \DL::$dir_raiz . \DL::$dir_css; ?>todos/formulario.css" />
+    <link rel="stylesheet" media="all" href="<?= \DL::$dir_raiz . \DL::$dir_css; ?>todos/lista.css" />
+
+    <title><?= \DL::$ap_nome; ?></title>
+</head>
+<body>
+        
+    <header class="dl">
+        <a href="<?= \DL::$dir_raiz; ?>/painel-dl/home" class="logotipo" title="<?= \DL::$ap_nome; ?>"><?= \DL::$ap_nome; ?></a>
+        
+        <div class="slogan">
+            <?= \DL::$ap_slogan; ?>
+            
+            <p class="dados-usuario">
+                <?= $_SESSION['usuario_info_nome']; ?><br />
+                <?= $_SESSION['grupo_usuario_descr']; ?>
+            </p>
+            
+            <?php if( $_SESSION['usuario_id'] > 0 ): ?>
+            <nav class="links-usuario">
+                <a href="<?= \DL::$dir_raiz; ?>/painel-dl/admin/usuarios/alterar-minha-senha" title="<?= TXT_LINK_TITLE_ALTERAR_MINHA_SENHA; ?>">
+                    <?= TXT_LINK_ALTERAR_MINHA_SENHA; ?>
+                </a>
+                
+                <span class="separador">&nbsp;</span>
+                
+                <a href="<?= \DL::$dir_raiz; ?>/painel-dl/admin/usuarios/alterar/<?= $_SESSION['usuario_id']; ?>" title="<?= TXT_LINK_TITLE_MINHA_CONTA; ?>">
+                    <?= TXT_LINK_MINHA_CONTA; ?>
+                </a>
+            </nav>
+            <?php endif; ?>
+        </div>
+    </header>
+    
+    <nav class="dl">
+        <ul class="menu-horizontal">
+            <?php foreach( $params['modulos'] as $m ):
+                $subs = array();
+
+                foreach( $params['sub-modulos'] as $sm ):
+                    if( $sm['modulo_pai'] == $m['modulo_id'] && $_SESSION['permissoes']['modulo_'. $sm['modulo_id']]['ver'] )
+                        $subs[] = $sm;
+                endforeach; 
+                
+                if( count($subs) > 0 ): ?>
+                <li>
+                    <a href="<?= \DL::$dir_raiz ."/painel-dl/modulo/{$m['modulo_link']}/{$m['modulo_id']}"; ?>">
+                        <?= $m['modulo_nome']; ?>
+                    </a>
+
+                    <ul class="sub-menu">
+                        <?php foreach( $subs as $sm ): ?>
+                        <li>
+                            <a href="<?= \DL::$dir_raiz ."/painel-dl/{$sm['modulo_link']}"; ?>">
+                                <?= $sm['modulo_nome']; ?>
+                            </a>
+                        </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </li>
+                <?php endif;
+            endforeach;
+            
+            if( $_SESSION['usuario_id'] === 0 ): ?>
+            <li>
+                <a href="javascript:;">
+                    <?= TXT_LINK_DESENVOLVEDOR; ?>
+                </a>
+                
+                <ul class="sub-menu">
+                    <li>
+                        <a href="<?= \DL::$dir_raiz ."/painel-dl/desenvolvedor/modulos/lista"; ?>">
+                            <?= TXT_LINK_MODULOS; ?>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="<?= \DL::$dir_raiz ."/painel-dl/desenvolvedor/temas/lista"; ?>">
+                            <?= TXT_LINK_TEMAS; ?>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <?php endif; ?>
+            
+            <li>
+                <a href="javascript:;" onclick="Sair();" title="<?= TXT_LINK_TITLE_SAIR_DO_SISTEMA; ?>">
+                    <?= TXT_LINK_SAIR_DO_SISTEMA; ?>
+                </a>
+            </li>
+        </ul>
+    </nav>

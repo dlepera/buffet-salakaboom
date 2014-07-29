@@ -1,0 +1,18 @@
+# Configurar URLs amigáveis
+RewriteEngine On
+RewriteBase /framework
+
+# Condições
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteCond %{SCRIPT_FILENAME} !-f
+
+# Regra para levar o usuário ao gerenciador de conteúdo
+RewriteRule ^painel-dl/(.*)$ index.php?dl-uri=painel-dl/$1&dl-config=painel&dl-ambiente=dev [QSA,L]
+
+# Condições
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteCond %{SCRIPT_FILENAME} !-f [OR]
+RewriteCond %{SCRIPT_FILENAME} index.php$
+
+# Regra para levar o usuário ao conteúdo do site
+RewriteRule ^(.*)$ index.php?dl-uri=$1&dl-config=website&dl-ambiente=dev [QSA]

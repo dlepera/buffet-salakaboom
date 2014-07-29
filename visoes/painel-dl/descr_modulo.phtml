@@ -1,0 +1,32 @@
+<?php
+
+/**
+ * @Autor	: Diego Lepera
+ * @E-mail	: d_lepera@hotmail.com
+ * @Projeto	: FrameworkDL
+ * @Data	: 11/07/2014 11:20:00
+ */
+
+$mod = $params['modelo'];
+
+?>
+
+<div class="dl">
+    <h1><?php printf(TXT_TITULO_MODULO_X, $mod->modulo_nome); ?></h1>
+    
+    <p class="modulo-descr"><?= nl2br($mod->modulo_descr); ?></p>
+    
+    <ul class="modulo-subs">
+        <?php foreach( $params['sub-modulos-2'] as $sm ): ?>
+        <li class="sub-modulo">
+            <h2>
+                <a href="<?= \DL::$dir_raiz; ?>/painel-dl/<?= $sm['modulo_link']; ?>">
+                    <?= $sm['modulo_nome']; ?>
+                </a>
+            </h2>
+            
+            <p class="sub-modulo-descr"><?= nl2br($sm['modulo_descr']); ?></p>
+        </li>
+        <?php endforeach; ?>
+    </ul>
+</div>
