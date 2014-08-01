@@ -1,6 +1,6 @@
 # Configurar URLs amigáveis
 RewriteEngine On
-RewriteBase /framework
+RewriteBase /buffet-salakaboom
 
 # Condições
 RewriteCond %{SCRIPT_FILENAME} !-d

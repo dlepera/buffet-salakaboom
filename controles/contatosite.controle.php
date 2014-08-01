@@ -76,7 +76,7 @@ class ContatoSite extends Principal{
     /**
      * Obter o HTML do corpo do e-mail
      * 
-     * @param int $id: ID do contato enviado
+     * @param int $id - ID do contato enviado
      */
     public function _emailhtml($id){
         # Preparar a visão
@@ -99,7 +99,7 @@ class ContatoSite extends Principal{
     /**
      * Mostrar o HTML obtido pelométodo _emailhtml
      * 
-     * @param int $id: ID do contato enviado
+     * @param int $id - ID do contato enviado
      */
     public function _mostrarhtml($id){
         echo $this->_emailhtml((int)$id);

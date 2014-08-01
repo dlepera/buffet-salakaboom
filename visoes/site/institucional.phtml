@@ -11,4 +11,46 @@
 
 <div class="dl institucional">
     <h1><?= TXT_TITULO_INSTITUCIONAL; ?></h1>
+    
+    <div id="inst-linha-tempo">
+        <?php
+            # Idade do buffet salakaboom
+            $idade = date('Y') - 2006;
+            
+            for($i=0; $i<=$idade; $i++): ?>
+            <div class="ano">
+                <strong><?= $i+2006; ?></strong>
+            </div>
+        <?php endfor; ?>                    
+    </div>
+    
+    <div id="inst-fotos"></div>
 </div>
+
+<script>
+    //<![CDATA[
+    window.onload = function(){
+        /**
+         * Definir o tamanho dos elementos da linha do tempo
+         */
+        var $anos = $("#inst-linha-tempo .ano");
+            $anos.css({
+                width: (100/$anos.length) +"%"
+            });
+            
+        /**
+         * Iniciar a galeria de imagens
+         */
+        $("#inst-fotos")._dlgaleria({
+            fotos       : [
+                <?php foreach( $params['fotos'] as $f ): ?>
+                {
+                    src: "<?= $f['foto_album_imagem']; ?>"
+                },
+                <?php endforeach; ?>
+            ],
+            aparencia   : { tema: "<?= \DL::$plugin_galeria_tema; ?>", estilo: "linha-tempo" }
+        });
+    };
+    //]]>
+</script>

@@ -1,0 +1,122 @@
+<?php
+
+/**
+ * @Autor	: Diego Lepera
+ * @E-mail	: d_lepera@hotmail.com
+ * @Projeto	: FrameworkDL
+ * @Data	: 29/06/2014 18:09:20
+ */
+
+$mod = $params['modelo'];
+
+# Verificar se o registro está sendo editado
+$editando = !is_null($mod->parceiro_id);
+
+# Verificar se há um registro da imagem
+$tem_imagem = $mod->parceiro_imagem != '';
+
+# Definir qual título deve ser inserido na TAG H1
+$nome_h1 = !$editando ? TXT_TITULO_FORMULARIO_NOVO_PARCEIRO : TXT_TITULO_FORMULARIO_ALTERAR_PARCEIRO;
+
+?>
+
+<div class="dl">
+    <h1><?= $nome_h1; ?></h1>
+    
+    <?php include_once './visoes/painel-dl/_nome-h2.phtml'; ?>
+    
+    <form name="parceiro" method="post" action="<?= \DL::$dir_raiz; ?>" enctype="multipart/form-data">
+        <?php if( $editando ): ?>
+        <!-- ID do registro atual -->
+        <input type="hidden" name="id" value="<?= $mod->parceiro_id; ?>" />
+        <?php endif; ?>
+        
+        <fieldset>
+            <legend><?= TXT_LEGENDA_INFORMACOES_DO_PARCEIRO; ?></legend>
+            
+            <label for="tipo"><?= TXT_LABEL_TIPO; ?>:</label><br />
+            <select name="tipo" id="tipo" title="<?= TXT_LABEL_TIPO; ?>">
+                <option value=""><?= TXT_OPCAO_SELECIONE_UMA_OPCAO; ?></option>
+                
+                <?php foreach( $params['tipos'] as $t ): ?>
+                <option value="<?= $t['tipo_parceiro_id']; ?>"<?= $t['tipo_parceiro_id'] == $mod->parceiro_tipo ? ' SELECTED' : '' ?>>
+                    <?= $t['tipo_parceiro_descr']; ?>
+                </option>
+                <?php endforeach; ?>
+            </select>
+            <br /><br />
+            
+            <label for="nome"><?= TXT_LABEL_NOME; ?>:</label><br />
+            <input type="text" name="nome" id="nome" value="<?= $mod->parceiro_nome; ?>" title="<?= TXT_LABEL_NOME; ?>" />
+            <br /><br />
+
+            <label for="descr"><?= TXT_LABEL_DESCRICAO; ?>:</label><br />
+            <textarea name="descr" id="descr" title="<?= TXT_LABEL_DESCRICAO; ?>"><?= $mod->parceiro_descr; ?></textarea>
+            <br /><br />
+            
+            <!-- Inserir umlogotipo para o cliente -->
+            <div class="img-visual">
+                <label for="imagem"><?= TXT_LABEL_LOGOTIPO; ?>:</label><br />
+                <input type="file" name="imagem" id="imagem" title="<?= TXT_LABEL_LOGOTIPO; ?>" />
+
+                <?php if( $tem_imagem ): ?>
+                <br />
+                <img src="<?= \DL::$dir_raiz; ?>/<?= $mod->parceiro_imagem; ?>" alt="" />
+                <?php endif; ?>
+            </div>
+        </fieldset>
+        
+        <fieldset>
+            <legend><?= TXT_LEGENDA_DADOS_PARA_DIVULGACAO_E_CONTATO; ?></legend>
+            
+            <label for="email"><?= TXT_LABEL_EMAIL; ?>:</label><br />
+            <input type="text" name="email" id="email" value="<?= $mod->parceiro_email; ?>" title="<?= TXT_LABEL_EMAIL; ?>" />
+            <br /><br />
+            
+            <label for="telefone"><?= TXT_LABEL_TELEFONE; ?>:</label><br />
+            <input type="text" name="telefone" id="telefone" value="<?= $mod->parceiro_telefone; ?>" title="<?= TXT_LABEL_TELEFONE; ?>" />
+            <br /><br />
+            
+            <label for="site"><?= TXT_LABEL_SITE; ?>:</label><br />
+            <input type="url" name="site" id="site" value="<?= $mod->parceiro_site; ?>" title="<?= TXT_LABEL_SITE; ?>" />
+        </fieldset>
+        
+        <label><?= TXT_LABEL_PUBLICAR; ?></label>
+        <label>
+            <input type="radio" name="publicar" value="1"<?= $mod->parceiro_publicar == 1 || !$editando ? ' CHECKED' : ''; ?> />
+            <?= TXT_OPCAO_SIM; ?>
+        </label>
+
+        <label>
+            <input type="radio" name="publicar" value="0"<?= $mod->parceiro_publicar == 0 ? ' CHECKED' : ''; ?> />
+            <?= TXT_OPCAO_NAO; ?>
+        </label>
+        <br /><br/>
+        
+        <button type="submit"><?= TXT_BOTAO_SUBMIT_SALVAR; ?></button>
+        <button type="reset"><?= TXT_BOTAO_RESET_CANCELAR; ?></button>
+    </form>
+</div>
+
+<script>
+    //<![CDATA[
+    window.onload = function(){
+        $("form[name='parceiro']")._dlformulario({
+            <?php if( !$editando ): ?>
+            depois: function(){
+                window.location = "<?= \DL::$dir_raiz; ?>/painel-dl/salakaboom/parceiros/lista";
+            },
+            <?php endif; ?>
+            controle: "parceiro/salvar",
+            campos  : {
+                "nome"      : { obr: true },
+                "descr"     : { obr: true },
+                "email"     : { validacao: EXPR_EMAIL },
+                "telefone"  : { mascara: MASK_CELULAR_9 },
+                "publicar"  : { obr: true, marcarobr: false, validacao: /^[0-1]{1}$/ }
+            },
+            aparencia: { tema: "<?= \DL::$plugin_formulario_tema; ?>", estilo: "formulario" }
+        });
+    };
+    //]]>
+</script>

@@ -17,7 +17,7 @@ define('TXT_TITULO_ALBUNS_DE_FOTOS', 'Álbuns de fotos');
 define('TXT_TITULO_FALE_CONOSCO', 'Fale conosco');
 
 # Links
-define('TXT_LINK_INSTITUCIONAL', 'Institucional');
+define('TXT_LINK_INSTITUCIONAL', 'O Buffet');
 define('TXT_LINK_ALBUNS_DE_FOTOS', 'Álbuns de fotos');
 define('TXT_LINK_FALE_CONOSCO', 'Fale conosco');
 define('TXT_LINK_VISUALIZAR_EMAIL_COMO_HTML', 'Mostrar e-mail como HTML');

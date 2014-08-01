@@ -199,7 +199,7 @@ abstract class Principal{
             
         if( !empty($ordem) )
             $query .= " ORDER BY {$ordem}";
-            
+            //echo $this->bd_select, ' <span style="color: red;">|< = >|</span> ', $query, '<br />--<br />';
         $sql = $pagina > 0 ?
             \DL::$bd_pdo->_paginacao($query, $pagina, $qtde) 
         : \DL::$bd_pdo->query($query);

@@ -7,16 +7,18 @@
  */
 
 # Diretórios
-$this->_dir_raiz('/framework/');
+$this->_dir_raiz('/buffet-salakaboom/');
 self::$dir_css = '/aplicacao/css/site/';
 
 # Configuração do sistema
 $this->_carregaridioma('pt-BR');
+self::$ap_nome = 'Buffet Salakaboom';
+self::$conf_separador_titulo = ' :|: ';
 
 # Configurações do banco de dados
-$this->bd_usuario   = 'root';
-$this->bd_senha     = '$d5Ro0t';
-$this->bd_base      = 'framework';
+$this->bd_usuario   = 'salakaboom';
+$this->bd_senha     = '$@l4K';
+$this->bd_base      = 'salakaboom';
 
 # Configuração dos plugins
 self::$plugin_formulario_tema   = 'colorido';

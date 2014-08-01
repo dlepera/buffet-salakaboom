@@ -14,17 +14,19 @@ class LogEmail extends Principal{
     protected $log_email_id, $log_email_data_criacao, $log_email_config, $log_email_ip, $log_email_classe,
         $log_email_tabela, $log_email_idreg, $log_email_mensagem, $log_email_status = 'S';
  
-    public function __construct($id=0){
+    public function __construct($tabela=null, $id=null){
         parent::__construct('dl_painel_email_logs', 'log_email_');
         
-        if( !empty($id) )
-            $this->_selecionarID($id);
+        $this->bd_select = "SELECT %s FROM %s";
+        
+        if( !is_null($tabela) && !is_null($id) )
+            $this->_selecionarID((string)$tabela, (int)$id);
     } // Fim do método mágico de construção da classe
     
     /**
      * Obter ou editar o valor da propriedade $log_email_config
      * 
-     * @param string $valor: string contendo o valor a ser atribuído à $this->log_email_config
+     * @param string $valor - string contendo o valor a ser atribuído à $this->log_email_config
      * 
      * @return string: valor da propriedade $log_email_config
      */
@@ -37,7 +39,7 @@ class LogEmail extends Principal{
     /**
      * Obter ou editar o valor da propriedade $log_email_ip
      * 
-     * @param string $valor: string contendo o valor a ser atribuído à $this->log_email_ip
+     * @param string $valor - string contendo o valor a ser atribuído à $this->log_email_ip
      * 
      * @return string: valor da propriedade $log_email_ip
      */
@@ -50,7 +52,7 @@ class LogEmail extends Principal{
     /**
      * Obter ou editar o valor da propriedade $log_email_classe
      * 
-     * @param string $valor: string contendo o valor a ser atribuído à $this->log_email_classe
+     * @param string $valor - string contendo o valor a ser atribuído à $this->log_email_classe
      * 
      * @return string: valor da propriedade $log_email_classe
      */
@@ -63,7 +65,7 @@ class LogEmail extends Principal{
     /**
      * Obter ou editar o valor da propriedade $log_email_tabela
      * 
-     * @param string $valor: string contendo o valor a ser atribuído à $this->log_email_tabela
+     * @param string $valor - string contendo o valor a ser atribuído à $this->log_email_tabela
      * 
      * @return string: valor da propriedade $log_email_tabela
      */
@@ -76,7 +78,7 @@ class LogEmail extends Principal{
     /**
      * Obter ou editar o valor da propriedade $log_email_idreg
      * 
-     * @param string $valor: string contendo o valor a ser atribuído à $this->log_email_idreg
+     * @param string $valor - string contendo o valor a ser atribuído à $this->log_email_idreg
      * 
      * @return string: valor da propriedade $log_email_idreg
      */
@@ -93,7 +95,7 @@ class LogEmail extends Principal{
      * E: enviado
      * F: falha
      * 
-     * @param string $valor: string contendo o valor a ser atribuído à $this->log_email_status
+     * @param string $valor - string contendo o valor a ser atribuído à $this->log_email_status
      * 
      * @return string: valor da propriedade $log_email_status
      */
@@ -110,7 +112,7 @@ class LogEmail extends Principal{
     /**
      * Obter ou editar o valor da propriedade $log_email_mensagem
      * 
-     * @param string $valor: string contendo o valor a ser atribuído à $this->log_email_mensagem
+     * @param string $valor - string contendo o valor a ser atribuído à $this->log_email_mensagem
      * 
      * @return string: valor da propriedade $log_email_mensagem
      */
@@ -121,11 +123,35 @@ class LogEmail extends Principal{
     } // Fim do método _log_email_status
     
     /**
+     * Selecionar um registro desse modelo pelo ID
+     * 
+     * @param int $id : ID do registro a ser selecionado
+     * 
+     * @return void
+     */
+    protected function _selecionarID($tabela, $idreg){
+        if( !method_exists($this, '_listar') )
+            throw new \Exception(printf(ERRO_PADRAO_METODO_NAO_EXISTE, '_listar'), 1500);
+        
+        # Garantir que o ID seja um número inteiro
+        $id = (int)$id;
+        
+        $lis_m = end($this->_listar("{$this->bd_prefixo}tabela = '{$tabela}' AND {$this->bd_prefixo}idreg = {$idreg}"));
+        
+        # Carregar os dados obtidos do banco de dados
+        # nas propriedades da classe
+        foreach( $lis_m as $c => $m ):
+            if( property_exists($this, $c) )
+               $this->{$c} = $m;
+        endforeach;
+    } // Fim do método _selecionarID
+    
+    /**
      * Salvar determinado registro
      * 
      * Obs.: Para esse modelo não é necessário alteração dos dados
      * 
-     * @param boolean $salvar: define se o registro será salvo ou apenas
+     * @param boolean $salvar - define se o registro será salvo ou apenas
      * será gerada a query de insert/update
      */
     public function _salvar($salvar=true){

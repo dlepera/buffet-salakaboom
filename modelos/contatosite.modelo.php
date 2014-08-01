@@ -32,20 +32,20 @@ class ContatoSite extends Principal{
     /**
      * Obter ou editar o valor da propriedade $contato_site_nome
      * 
-     * @param string $valor: string contendo o valor a ser atribuído à $this->contato_site_nome
-     * 
+     * @param string $valor - string contendo o valor a ser atribuído à $this->contato_site_nome
+     *  
      * @return string: valor da propriedade $contato_site_nome
      */
     public function _contato_site_nome($valor=null){
         return is_null($valor) ?
-            (string)$this->contato_site_nome
+            (string)$this->$valor -contato_site_nome
         : $this->contato_site_nome = (string)$valor;
     } // Fim do método _contato_site_nome
     
     /**
      * Obter ou editar o valor da propriedade $contato_site_email
      * 
-     * @param string $valor: string contendo o valor a ser atribuído à $this->contato_site_email
+     * @param string $valor - string contendo o valor a ser atribuído à $this->contato_site_email
      * 
      * @return string: valor da propriedade $contato_site_email
      */
@@ -62,7 +62,7 @@ class ContatoSite extends Principal{
     /**
      * Obter ou editar o valor da propriedade $contato_site_telefone
      * 
-     * @param string $valor: string contendo o valor a ser atribuído à $this->contato_site_telefone
+     * @param string $valor - string contendo o valor a ser atribuído à $this->contato_site_telefone
      * 
      * @return string: valor da propriedade $contato_site_telefone
      */
@@ -75,7 +75,7 @@ class ContatoSite extends Principal{
     /**
      * Obter ou editar o valor da propriedade $contato_site_assunto
      * 
-     * @param int $valor: ID do assunto a ser vinculado com esse contato
+     * @param int $valor - ID do assunto a ser vinculado com esse contato
      * 
      * @return int: valor da propriedade $contato_site_assunto
      */
@@ -88,7 +88,7 @@ class ContatoSite extends Principal{
     /**
      * Obter ou editar o valor da propriedade $contato_site_mensagem
      * 
-     * @param string $valor: string contendo o valor a ser atribuído à $this->contato_site_mensagem
+     * @param string $valor - string contendo o valor a ser atribuído à $this->contato_site_mensagem
      * 
      * @return string: valor da propriedade $contato_site_mensagem
      */
@@ -101,7 +101,7 @@ class ContatoSite extends Principal{
     /**
      * Salvar determinado registro
      * 
-     * @param boolean $salvar: define se o registro será salvo ou apenas
+     * @param boolean $salvar - define se o registro será salvo ou apenas
      * será gerada a query de insert/update
      * 
      * Obs.: Esse modelo não tem a opção de alteração dos dados, apenas inserção

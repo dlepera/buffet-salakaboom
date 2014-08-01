@@ -1,0 +1,181 @@
+<?php
+
+/**
+ * @Autor	: Diego Lepera
+ * @E-mail	: d_lepera@hotmail.com
+ * @Projeto	: Framework MVC
+ * @Data	: 08/01/2014
+ */
+ 
+$params = $this->_obterparams();
+$mod_o 	= $params['modelo'];
+$mod_p 	= $params['produto'];
+
+$http_host = filter_input(INPUT_SERVER, 'HTTP_HOST');
+
+?>
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    
+    <!-- Estilos da página -->
+    <style type="text/css">  
+        <?php include_once '.'. \DL::$dir_css .'todos/dl-emails.css'; ?>
+        
+        #lista{
+            /* Aparência */
+            border          : 1px solid #333;
+            border-collapse : collapse;
+            
+            /* Tamanho */
+            width: 100%;
+        }
+        
+            #lista tr:first-child{
+                /* Formatação da fonte */
+                font-weight: bold;
+            }
+        
+            #lista td{
+                /* Aparência */
+                border: 1px solid #333;
+                
+                /* Margens e espaçamentos */
+                padding: 3px 5px;
+                
+                /* Formatação do texto */
+                text-align: right;
+            }
+            
+            #lista td:first-child{
+                /* Formatação do texto */
+                text-align: left;
+            }
+            
+        #vr_festa{
+            /* Tamanho */
+            width: 20%;
+            
+            /* Aparência */
+            background: #9effb5;
+            
+            /* Formatação da fonte */
+            color       : green;
+            font-size   : 15px;
+            font-style  : italic;
+            text-align  : center; 
+            
+            /* Margens e espaçamentos */
+            padding: 10px 30px;
+            
+            /* Posicionamento */
+            float: right;
+        }
+        
+        #dia_semana{
+            /* Formatação do texto */
+            color       : red;
+            font-style  : italic;
+            
+            /* Margens e espaçamentos */
+            margin-left: 30px;
+        }
+    </style>
+</head>
+<body>
+    
+    <center>
+    	<?= MSG_EMAIL_CASO_NAO_ESTEJA_CONSEGUINDO_VISUALIZAR; ?><br />
+    	
+    	<a href="http://<?= $http_host . \DL::$dir_raiz ;?>/orcamento/mostrar-html/<?= $mod_o->orcamento_id; ?>">
+    		<?= TXT_LINK_VISUALIZAR_EMAIL_COMO_HTML; ?>
+    	</a>
+    </center>
+    
+    <!-- Cabeçalho do e-mail -->
+    <header class="dl">
+        <h1>
+            <a href="http://<?= $http_host . \DL::$dir_raiz; ?>" class="logotipo" target="_blank" style="background-image: url('http://<?= $http_host . \DL::$dir_raiz . \DL::$dir_css; ?>todos/imagens/logotipo.png');">
+                <?= \DL::$ap_nome; ?>
+            </a>
+        </h1>
+        
+        <div class="slogan">Orçamento on-line</div>
+    </header>
+
+    <div class="dl">
+        <p>
+            Olá, <?= $mod_o->orcamento_info_nome; ?>!<br /><br />        
+            Em <?= \Funcoes::_formatardatahora($mod_o->mod_lr->log_registro_data_criacao, 'd/m/Y H:i'); ?> você solicitou um orçamento através do site do 
+            <a href="http://<?= $http_host; ?>/"><?= \DL::$ap_nome; ?></a>
+            para uma festa com as seguintes características:        
+        </p>
+
+        <p>
+            <strong>Data pretendida     :</strong> 
+            <?= $mod_o->orcamento_festa_data != '' && $mod_o->orcamento_festa_data != '0000-00-00' ?
+                \Funcoes::_formatardatahora($mod_o->orcamento_festa_data, 'd/m/Y') .' ('. \Funcoes::_diadasemana(\Funcoes::_formatardatahora($mod_o->orcamento_festa_data, 'd-m-Y')) .')'
+            : 'Não informada'; ?>
+            <br />
+            <strong>Tipo de festa       :</strong> <?= $mod_p->produto_nome; ?><br />
+            <strong>Qtde. de convidados :</strong> <?= $mod_o->orcamento_festa_convidados; ?><br />
+
+            <strong>Opcionais:</strong>
+
+            <ol>
+            <?php foreach( $params['opcionais'] as $o ): ?>
+                <li><?= $o['produto_nome']; ?></li>
+            <?php endforeach; ?>
+            </ol>
+        </p>
+
+        <table id="lista">
+            <tr>
+                <th id="produto"><?= TXT_TABELA_TITULO_PRODUTO; ?></th>
+                <th id="qtde"><?= TXT_TABELA_TITULO_QTDE; ?></th>
+                <th id="valor_un"><?= TXT_TABELA_TITULO_VALOR_UNITARIO; ?></th>
+                <th id="valor_total"><?= TXT_TABELA_TITULO_VALOR_TOTAL; ?></th>
+            </tr>
+
+            <?php
+                # Valor inicial da festa 
+                $vr_festa = $mod_p->produto_valor; ?>
+                
+                <!-- Produto: Festa -->
+                <tr>
+                    <td headers="produto"><?= $mod_p->produto_nome; ?></td>
+                    <td headers="qtde">1</td>
+                    <td headers="valor_un">R$ <?= $mod_p->produto_valor; ?></td>
+                    <td headers="valor_total">R$ <?= $mod_p->produto_valor; ?></td>
+                </tr>
+
+				<!-- Produtos Opcionais -->
+                <?php foreach( $params['opcionais'] as $o ):
+                    # Definir o valor total para esse produto
+                    $vr_total = $o['opcional_orcamento_valor']*$o['opcional_orcamento_qtde'];
+
+                    # Incrementar ao valor total da festa
+                    $vr_festa += $vr_total;
+                    ?>
+
+                    <tr>
+                        <td headers="produto"><?= $o['produto_nome']; ?></td>
+                        <td headers="qtde"><?= $o['opcional_orcamento_qtde']; ?></td>
+                        <td headers="valor_un">R$ <?= $o['opcional_orcamento_valor']; ?></td>
+                        <td headers="valor_total">R$ <?= number_format($vr_total, 2, ',', '.'); ?></td>
+                    </tr>
+            <?php endforeach; ?>
+        </table>
+
+        <p id="vr_festa">Valor total da festa: R$ <?= number_format($vr_festa, 2, ',', '.'); ?></p>
+        
+        <em style="color: red">
+	        Orçamento válido por 10 dias.
+	    </em>
+    </div>
+    
+    <center>
+        <?php include './visoes/emails/_rodape.php'; ?>
+    </center>
+</body>
+</html>

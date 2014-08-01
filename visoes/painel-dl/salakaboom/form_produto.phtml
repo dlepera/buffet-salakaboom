@@ -1,0 +1,117 @@
+<?php
+
+/**
+ * @Autor	: Diego Lepera
+ * @E-mail	: d_lepera@hotmail.com
+ * @Projeto	: FrameworkDL
+ * @Data	: 29/06/2014 18:09:20
+ */
+
+$mod = $params['modelo'];
+
+# Verificar se o registro está sendo editado
+$editando = !is_null($mod->produto_id);
+
+# Definir qual título deve ser inserido na TAG H1
+$titulo_h1 = !$editando ? TXT_TITULO_FORMULARIO_NOVO_PRODUTO : TXT_TITULO_FORMULARIO_ALTERAR_PRODUTO;
+
+?>
+
+<div class="dl">
+    <h1><?= $titulo_h1; ?></h1>
+    
+    <?php include_once './visoes/painel-dl/_titulo-h2.phtml'; ?>
+    
+    <form name="produto" method="post" action="<?= \DL::$dir_raiz; ?>">
+        <?php if( $editando ): ?>
+        <!-- ID do registro atual -->
+        <input type="hidden" name="id" value="<?= $mod->produto_id; ?>" />
+        <?php endif; ?>
+        
+        <label for="tipo"><?= TXT_LABEL_TIPO; ?>:</label><br />
+        <select name="tipo" id="tipo" title="<?= TXT_LABEL_TIPO; ?>">
+            <option value=""><?= TXT_OPCAO_SELECIONE_UMA_OPCAO; ?></option>
+            
+            <?php foreach( $params['tipos'] as $t ): ?>
+            <option value="<?= $t['tipo_produto_id']; ?>"<?= $t['tipo_produto_id'] == $mod->produto_tipo ? ' SELECTED' : ''; ?>>
+                <?= $t['tipo_produto_descr']; ?>
+            </option>
+            <?php endforeach; ?>
+        </select>
+        <br /><br />
+        
+        <label for="nome"><?= TXT_LABEL_NOME; ?>:</label><br />
+        <input type="text" name="nome" id="nome" value="<?= $mod->produto_nome; ?>" title="<?= TXT_LABEL_NOME; ?>" />
+        <br /><br />
+        
+        <label for="descr"><?= TXT_LABEL_DESCRICAO; ?>:</label><br />
+        <textarea name="descr" id="descr" title="<?= TXT_LABEL_DESCRICAO; ?>"><?= $mod->produto_descr; ?></textarea>
+        <br /><br />
+
+        <label for="valor"><?= TXT_LABEL_VALOR; ?>:</label><br />
+        <input type="text" name="valor" id="valor" value="<?= $mod->produto_valor; ?>" title="<?= TXT_LABEL_VALOR; ?>" style="width: 20%;" />
+        
+        <!-- Tipo de valor -->
+        <select name="tipo_valor" id="tipo_valor" title="<?= TXT_LABEL_VALOR; ?>" style="width: 15%;">
+            <option value=""><?= TXT_OPCAO_SELECIONE_UMA_OPCAO; ?></option>
+            
+            <?php foreach( $params['tipos_valores'] as $tv ): ?>
+            <option value="<?= $tv['tipo_valor_id']; ?>"<?= $tv['tipo_valor_id'] == $mod->produto_tipo_valor ? ' SELECTED' : ''; ?>>
+                <?= $tv['tipo_valor_descr']; ?>
+            </option>
+            <?php endforeach; ?>
+        </select>
+        <br /><br />
+        
+        <label><?= TXT_LABEL_DISPONIBILIDADE; ?>:</label><br />
+        
+        <?php foreach( $params['dias'] as $ds ): ?>
+        <input 
+            type="checkbox"
+            name="dispon[]"
+            id="dia-<?= $ds['dia_semana_id']; ?>" 
+            value="<?= $ds['dia_semana_id']; ?>"
+            <?= in_array($ds['dia_semana_id'], $mod->produto_dispon) ? ' CHECKED' : ''; ?> />
+        <label for="dia-<?= $ds['dia_semana_id']; ?>"><?= $ds['dia_semana_descr']; ?></label>
+        <br />
+        <?php endforeach; ?>
+        <br />
+        
+        <label><?= TXT_LABEL_PUBLICAR; ?></label>
+        <label>
+            <input type="radio" name="publicar" value="1"<?= $mod->produto_publicar == 1 || !$editando ? ' CHECKED' : ''; ?> />
+            <?= TXT_OPCAO_SIM; ?>
+        </label>
+
+        <label>
+            <input type="radio" name="publicar" value="0"<?= $mod->produto_publicar == 0 ? ' CHECKED' : ''; ?> />
+            <?= TXT_OPCAO_NAO; ?>
+        </label>
+        <br /><br />
+        
+        <button type="submit"><?= TXT_BOTAO_SUBMIT_SALVAR; ?></button>
+        <button type="reset"><?= TXT_BOTAO_RESET_CANCELAR; ?></button>
+    </form>
+</div>
+
+<script>
+    //<![CDATA[
+    window.onload = function(){
+        $("form[name='produto']")._dlformulario({
+            <?php if( !$editando ): ?>
+            depois: function(){
+                window.location = "<?= \DL::$dir_raiz; ?>/painel-dl/salakaboom/produtos/lista";
+            },
+            <?php endif; ?>
+            controle: "produto/salvar",
+            campos  : {
+                "tipo"      : { obr: true, validacao: EXPR_APENAS_NUMEROS },
+                "nome"      : { obr: true },
+                "valor"     : { obr: true, validacao: EXPR_MOEDA_BRL },
+                "publicar"  : { obr: true, marcarobr: false, validacao: /^[0-1]{1}$/ }
+            },
+            aparencia: { tema: "<?= \DL::$plugin_formulario_tema; ?>", estilo: "formulario" }
+        });
+    };
+    //]]>
+</script>

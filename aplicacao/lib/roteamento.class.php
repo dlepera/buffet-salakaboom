@@ -31,7 +31,7 @@ class Roteamento{
 		
 		# Vetor que receberá as configurações da rota
 		$params = array();
-		
+        
 		foreach( $this->rotas as $rota => $conf ):
 			if( preg_match("#{$rota}#", $this->uri) ):
 				if( is_string($conf) || isset($conf['params']) ):

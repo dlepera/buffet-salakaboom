@@ -1,0 +1,82 @@
+<?php
+	
+/**d
+ * @Autor	: Diego Lepera
+ * @E-mail	: d_lepera@hotmail.com
+ * @Projeto	: Framework MVC / Site
+ * @Data	: 08/01/2014
+ */
+ 
+$mod_o = $params['modelo'];
+$mod_p = $params['produto'];
+$mod_s = $params['status'];
+
+?>
+
+<div class="dl">
+	<h1><?= TXT_TITULO_DETALHES_DO_ORCAMENTO; ?></h1>
+	
+    <h2 class="sub-h2">
+    <?php
+        printf(
+            MSG_ENVIADO_EM, 
+            $mod->orcamento_info_nome, 
+            \Funcoes::_formatardatahora($params['dt_criacao'], $_SESSION['data_hora_formato_completo'])
+        );
+    ?>
+    </h2>
+    
+    <p class="status-email">
+        <em><?= TXT_LABEL_STATUS_ENVIO; ?>:</em> <?= $mod_s->log_email_status; ?>
+        
+        <?php if( $mod_s->log_email_status == 'F' ): ?>
+            <br />
+            <em><?= TXT_LABEL_ERRO_ENCONTRADO; ?>:</em> <?= nl2br($mod_s->log_email_mensagem); ?>
+        <?php endif; ?>
+    </p>
+    
+	<a href="<?= \DL::$dir_raiz; ?>/orcamento/mostrar-html/<?= $mod_o->orcamento_id; ?>" target="_blank" class="email">
+		<?= TXT_LINK_VISUALIZAR_EMAIL_COMO_HTML; ?>	
+	</a>
+	<br />
+	
+	<legend><?= TXT_LEGENDA_DADOS_PESSOAIS; ?></legend>
+    
+	<b><?= TXT_LABEL_NOME_COMPLETO; ?></b>:
+	<?= $mod_o->orcamento_info_nome; ?>
+	<br />
+	
+	<b><?= TXT_LABEL_EMAIL; ?></b>:
+	<?= $mod_o->orcamento_info_email; ?>
+	<br />
+	
+	<b><?= TXT_LABEL_TELEFONE; ?></b>:
+	<?= $mod_o->orcamento_info_telefone; ?>
+	<br />
+	
+	<legend><?= TXT_LEGENDA_DADOS_DA_FESTA; ?></legend>
+	
+	<b><?= TXT_LABEL_PACOTE_DE_FESTA; ?></b>:
+	<?= $mod_p->produto_nome; ?>
+	<br />
+    
+	<b><?= TXT_LABEL_DATA_PRETENDIDA; ?></b>:
+	<?= $mod_o->orcamento_festa_data != '' && $mod_o->orcamento_festa_data != '0000-00-00' ? 
+        \Funcoes::_formatardatahora($mod_o->orcamento_festa_data, $_SESSION['data_hora_formato_data']) 
+    : 'Não informada'; ?>
+	<br />
+	
+	<b><?= TXT_LABEL_QTDE_CONVIDADOS; ?></b>:
+	<?= $mod_o->orcamento_festa_convidados; ?>
+	<br />
+	
+	<legend><?= TXT_LEGENDA_OPCIONAIS; ?></legend>
+	
+	<ol>
+	<?php foreach( $params['opcionais'] as $opc ): ?>
+		<li>
+			<?= $opc['produto_nome']; ?> (<?= $opc['opcional_orcamento_qtde']; ?>)
+		</li>
+	<?php endforeach; ?>
+	</ol>
+</div>

@@ -106,5 +106,4 @@ class Album extends PrincipalSistema{
         
         \Funcoes::_retornar(sprintf(SUCESSO_PADRAO_SALVAR_REGISTRO, $this->str_m), 'sucesso');
     } // Fim do método _salvar
-
 } // Fim do controle Album

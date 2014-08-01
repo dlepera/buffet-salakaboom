@@ -15,13 +15,17 @@ class Imagem{
     private $qlde_jpeg = 100, $qlde_png = 9;
     
     public function __construct($arquivo = null){
-        $this->_arquivo($arquivo);        
+        # Verificar se a bibilioteca GD foi inicializada
+        if( !extension_loaded('GD') )
+            throw new \Exception(ERRO_IMAGEM_CONSTRUCT_EXTENSAO_GD_NAO_CARREGADA, 1500);
+        
+        self::__set('arquivo', $arquivo);
     } // Fim do método mágico de construção da classe
     
     /**
      * Exibir o valor de determinada propriedade
      * 
-     * @param string $nome: nome da propriedade a ser exibida
+     * @param string $nome - nome da propriedade a ser exibida
      * @return mixed valor da propriedade definida em $nom
      */
     public function __get($nome){
@@ -31,8 +35,8 @@ class Imagem{
     /**
      * Editar as propriedades da classe
      * 
-     * @param string $nome: nome da propriedade a ser editada
-     * @param mixed $valor: valor a ser atribuído à propriedade
+     * @param string $nome - nome da propriedade a ser editada
+     * @param mixed $valor - valor a ser atribuído à propriedade
      * 
      * @return void
      */

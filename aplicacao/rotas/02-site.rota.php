@@ -11,7 +11,7 @@
  * Website comum
  * ------------------------------------------------------------------------------------------------------------------- */
 # Institucinal
-$rotas['^institucional$'] = array(
+$rotas['^o-buffet$'] = array(
     'controle'  =>  'WebSite',
     'acao'      =>  'institucional'
 );
@@ -37,4 +37,4 @@ $rotas['^fale-conosco$'] = array(
 /* ----------------------------------------------------------------------------------------------------------------------
  * Exibição de e-mails
  * ------------------------------------------------------------------------------------------------------------------- */
-$rotas['^email/([a-z]+)/mostrarhtml/(\d+)$'] = '/email/:controle/:acao/:id';
+$rotas['^email/[a-z]+/mostrarhtml/\d+$'] = '/email/:controle/:acao/:id';

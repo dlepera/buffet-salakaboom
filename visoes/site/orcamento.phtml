@@ -1,0 +1,142 @@
+<?php
+
+/**
+ * @Autor	: Diego Lepera
+ * @E-mail	: d_lepera@hotmail.com
+ * @Projeto	: Framework MVC
+ * @Data	: 14/09/2013
+ */
+ 
+?>
+
+<div class="dl orcamento">
+	<h1><?= TXT_TITULO_ORCAMENTO_ON_LINE; ?></h1>
+	
+	<form name="orcamento" method="post" action="<?= \DL::$dir_raiz; ?>">
+        <fieldset class="l50">
+            <legend><?= TXT_LEGENDA_DADOS_PESSOAIS; ?></legend>
+            
+            <label for="info_nome"><?= TXT_LABEL_NOME_COMPLETO; ?>:</label><br />
+            <input type="text" name="info_nome" id="info_nome" title="<?= TXT_LABEL_NOME_COMPLETO; ?>" alt="<?= TXT_ALT_NOME_COMPLETO; ?>" />
+            <br /><br />
+
+            <label for="info_email"><?= TXT_LABEL_EMAIL; ?>:</label><br />
+            <input type="text" name="info_email" id="info_email" title="<?= TXT_LABEL_EMAIL; ?>" />
+            <br /><br />
+
+            <label for="info_telefone"><?= TXT_LABEL_TELEFONE; ?>:</label><br />
+            <input type="text" name="info_telefone" id="info_telefone" title="<?= TXT_LABEL_TELEFONE; ?>" />
+        </fieldset>
+        
+        <fieldset class="l50">
+            <legend><?= TXT_LEGENDA_DADOS_DA_FESTA; ?></legend>
+            
+            <label for="festa_data"><?= TXT_LABEL_DATA_PRETENDIDA; ?>:</label><br />
+            <input type="text" name="festa_data" id="festa_data" title="<?= TXT_LABEL_DATA_PRETENDIDA; ?>" />
+            <br /><br />
+            
+            <label for="festa_pacote"><?= TXT_LABEL_PACOTE; ?>:</label><br />
+            <select name="festa_pacote" id="festa_pacote" title="<?= TXT_LABEL_PACOTE; ?>">
+                <option value=""><?= TXT_OPCAO_SELECIONE_UMA_OPCAO; ?></option>
+                
+                <?php foreach( $params['festas'] as $f ): ?>
+                <option value="<?= $f['produto_id']; ?>">
+                    <?= $f['produto_nome']; ?>
+                </option>
+                <?php endforeach; ?>
+            </select>
+            <br /><br />
+            
+            <label for="festa_convidados"><?= TXT_LABEL_QTDE_CONVIDADOS; ?>:</label><br />
+            <input type="number" name="festa_convidados" id="festa_convidados" title="<?= TXT_LABEL_QTDE_CONVIDADOS; ?>" min="50" max="300" />
+        </fieldset>
+        
+        <fieldset>
+            <legend><?= TXT_LEGENDA_OPCIONAIS; ?></legend>
+            
+            <?php if( !count($params['opcionais']) ):
+                echo MSG_PADRAO_NENHUM_REGISTRO_ENCONTRADO;
+            else: ?>            
+            <ul class="opcionais">
+            <?php foreach( $params['opcionais'] as $o ): ?>
+                <li>
+                    <label>
+                        <input type="checkbox" name="opcionais[]" value="<?= $o['produto_id']; ?>" />
+                        <?= $o['produto_nome']; ?><br />
+                        <span class="descr"><?= $o['produto_descr']; ?></span>
+                    </label>
+                </li>
+            <?php endforeach; ?>
+            </ul>
+            <?php endif; ?>
+        </fieldset>
+        
+		<button type="submit"><?= TXT_BOTAO_SUBMIT_ENVIAR; ?></button>
+		<button type="reset"><?= TXT_BOTAO_RESET_CANCELAR; ?></button>
+    </form>
+</div>
+
+<script>
+	//<![CDATA[
+    window.onload = function(){
+        $("form[name='orcamento']")._dlformulario({
+            controle : "orcamentow/enviar",
+            campos	 : {
+                "info_nome"         : { obr: true },
+                "info_email"		: { obr: true, validacao: EXPR_EMAIL },
+                "info_telefone"  	: { obr: false, mascara: MASK_CELULAR_9 },
+                "festa_data"        : { obr: false, mascara: MASK_DATA, validacao: EXPR_DATA },
+                "festa_pacote"      : { obr: true },
+                "festa_convidados"  : { obr: true, validacao: EXPR_APENAS_NUMEROS }
+            },
+            aparencia : { tema: "<?= \DL::$plugin_formulario_tema; ?>", estilo: "formulario" }
+        });
+
+        // Filtrar festas de acordo com a data digitada
+        $("#festa_data").on("change blur", function(){
+            var $this 	= $(this);
+            var $select = $("#festa_pacote");
+            var $option	= $select.find("option");
+            var valor 	= $this.val();
+
+            $.ajax({
+                url		: "<?= \DL::$dir_raiz; ?>/produtow/filtrardata",
+                type	: "post",
+                data	: "data="+ valor,
+                dataType: "json",
+                success	: function(json){
+                    if( json.length > 0 ){
+                        $option.each(function(){
+                            $(this).remove();
+                        });
+
+                        var qtde_o = json.length;
+
+                        for(var i=0; i<qtde_o; i++){
+                            var a = json[i];
+                            $(document.createElement("option")).attr("value", a.produto_id).text(a.produto_nome).appendTo($select);
+                        } // Fim for( a in json )
+                    } // Fim if( json.length > 0 )
+                }
+            });
+        });
+        
+        // Selecionar a qtde de convidados do pacote selecionado
+        $("#festa_pacote").on("change", function(){
+            var $this = $(this);
+            var valor = $this.val();
+            
+            $.ajax({
+                url		: "<?= \DL::$dir_raiz; ?>/produtow/obterqtdemax",
+                type	: "post",
+                data	: "produto="+ valor,
+                dataType: "text",
+                success	: function(qtde){                    
+                    // Alterar o mínimo do campos de convidados
+                    $("#festa_convidados").attr("min", qtde).val(qtde);
+                }
+            });
+        });
+    };
+	//]]>
+</script>
