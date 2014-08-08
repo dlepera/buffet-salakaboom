@@ -31,8 +31,8 @@ class ConfigEmail extends PrincipalSistema{
                 'de_email'  => FILTER_SANITIZE_EMAIL,
                 'de_nome'   => FILTER_SANITIZE_STRING,
                 'responder_para'    => FILTER_SANITIZE_EMAIL,
-                'html'      => FILTER_SANITIZE_NUMBER_INT,
-                'principal' => FILTER_SANITIZE_NUMBER_INT,
+                'html'      => array('filter' => FILTER_SANITIZE_NUMBER_INT, 'flags' => FILTER_NULL_ON_FAILURE, 'options' => array('min_range' => 0, 'max_range' => 1)),
+                'publicar'  => array('filter' => FILTER_SANITIZE_NUMBER_INT, 'flags' => FILTER_NULL_ON_FAILURE, 'options' => array('min_range' => 0, 'max_range' => 1))
             ));
             
             # Selecionar as informações atuais
@@ -78,7 +78,7 @@ class ConfigEmail extends PrincipalSistema{
     /**
      * Carregar o formulário de edição do registro
      * 
-     * @param int $id: ID do registro a ser selecionado
+     * @param int $id - ID do registro a ser selecionado
      */
     public function _formulario($id=null){
         # Preparar a visão
@@ -94,7 +94,7 @@ class ConfigEmail extends PrincipalSistema{
     /**
      * Testar o envio de e-mails
      * 
-     * @param int $id: ID da configuração de envio de e-mails a ser testada
+     * @param int $id - ID da configuração de envio de e-mails a ser testada
      */
     public function _testar($id){
         # Iniciar instancia de e-mail

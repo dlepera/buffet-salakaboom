@@ -1,0 +1,98 @@
+<?php
+
+/**
+ * @Autor	: Diego Lepera
+ * @E-mail	: d_lepera@hotmail.com
+ * @Projeto	: FrameworkDL
+ * @Data	: 29/06/2014 18:09:20
+ */
+
+$mod = $params['modelo'];
+
+# Verificar se o registro está sendo editado
+$editando   = !is_null($mod->horario_id);
+$sem_horas  = $editando && $mod->horario_consultar == 1;
+
+# Definir qual título deve ser inserido na TAG H1
+$titulo_h1 = !$editando ? TXT_TITULO_FORMULARIO_NOVO_HORARIO_DE_ATENDIMENTO : TXT_TITULO_FORMULARIO_ALTERAR_HORARIO_DE_ATENDIMENTO;
+
+?>
+
+<div class="dl">
+    <h1><?= $titulo_h1; ?></h1>
+    
+    <?php include_once './visoes/painel-dl/_titulo-h2.phtml'; ?>
+    
+    <form name="horario" method="post" action="<?= \DL::$dir_raiz; ?>">
+        <?php if( $editando ): ?>
+        <!-- ID do registro atual -->
+        <input type="hidden" name="id" value="<?= $mod->horario_id; ?>" />
+        <?php endif; ?>
+        
+        <label for="dia_semana"><?= TXT_LABEL_DIA_DE_SEMANA; ?>:</label><br />
+        <select name="dia_semana" id="dia_semana" title="<?= TXT_LABEL_DIA_DE_SEMANA; ?>">
+            <option value=""><?= TXT_OPCAO_SELECIONE_UMA_OPCAO; ?></option>
+            
+            <?php foreach( $params['dias'] as $ds ): ?>
+            <option value="<?= $ds['dia_semana_id']; ?>"<?= $ds['dia_semana_id'] == $mod->horario_dia_semana ? ' SELECTED' : ''; ?>>
+                <?= $ds['dia_semana_descr']; ?>
+            </option>
+            <?php endforeach; ?>
+        </select>
+        <br /><br />
+        
+        <label><?= TXT_LABEL_CONSULTAR; ?></label>
+        <input type="checkbox" name="consultar" id="consultar" value="1" class="s-ou-n"<?= $mod->horario_consultar == 1 ? ' CHECKED' : ''; ?> />
+        <label for="consultar"></label>
+        <br />
+        
+        <div id="horarios"<?= $sem_horas ? ' style="display: none;"' : ''; ?>>
+            <label for="abertura"><?= TXT_LABEL_HORARIO_DE_ABERTURA; ?>:</label><br />
+            <input type="text" name="abertura" id="abertura" value="<?= $mod->horario_abertura; ?>" title="<?= TXT_LABEL_HORARIO_DE_ABERTURA; ?>"<?= $sem_horas ? ' DISABLED' : ''; ?> />
+            <br /><br />
+
+            <label for="fechamento"><?= TXT_LABEL_HORARIO_DE_FECHAMENTO; ?>:</label><br />
+            <input type="text" name="fechamento" id="fechamento" value="<?= $mod->horario_fechamento; ?>" title="<?= TXT_LABEL_HORARIO_DE_FECHAMENTO; ?>"<?= $sem_horas ? ' DISABLED' : ''; ?> />
+            <br /><br />
+        </div>
+        
+        <label><?= TXT_LABEL_PUBLICAR; ?></label>
+        <input type="checkbox" name="publicar" id="publicar" value="1" class="s-ou-n"<?= $mod->horario_publicar == 1 || !$editando ? ' CHECKED' : ''; ?> />
+        <label for="publicar"></label>
+        <br /><br />
+        
+        <button type="submit"><?= TXT_BOTAO_SUBMIT_SALVAR; ?></button>
+        <button type="reset"><?= TXT_BOTAO_RESET_CANCELAR; ?></button>
+    </form>
+</div>
+
+<script>
+    //<![CDATA[
+    window.onload = function(){
+        $("form[name='horario']")._dlformulario({
+            <?php if( !$editando ): ?>
+            depois: function(){
+                window.location = "<?= \DL::$dir_raiz; ?>/painel-dl/salakaboom/horarios-de-atendimento/lista";
+            },
+            <?php endif; ?>
+            controle: "horario/salvar",
+            campos  : {
+                "dia_semana": { obr: true },
+                "consultar" : { obr: true, marcarobr: false, validacao: /^[0-1]{1}$/ },
+                "abertura"  : { obr: true, mascara: MASK_HORA, validacao: EXPR_HORA },
+                "fechamento": { obr: true, mascara: MASK_HORA, validacao: EXPR_HORA },
+                "publicar"  : { obr: true, marcarobr: false, validacao: /^[0-1]{1}$/ }
+            },
+            aparencia: { tema: "<?= \DL::$plugin_formulario_tema; ?>", estilo: "formulario" }
+        });
+        
+        var $consultar = $("#consultar").on("change", function(){
+            var $horas = $("#horarios").fadeToggle("fast");
+                $horas.find("input").each(function(){
+                    // this.disabled = this.disabled ? false : true;
+                    this.disabled = !this.disabled;
+                });
+        });
+    };
+    //]]>
+</script>

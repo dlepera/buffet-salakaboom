@@ -87,27 +87,13 @@ $titulo_h1 = !$editando ? TXT_TITULO_FORMULARIO_NOVA_CONFIGURACAO_DE_EMAIL : TXT
             <br /><br />
 
             <label><?= TXT_LABEL_FORMATO_HTML; ?></label><br />
-            <label>
-                <input type="radio" name="html" value="0" title="<?= TXT_LABEL_FORMATO_HTML; ?>"<?= $mod->config_email_autent == 0 ? ' CHECKED' : ''; ?> />
-                <?= TXT_OPCAO_NAO; ?>
-            </label>
-
-            <label>
-                <input type="radio" name="html" value="1" title="<?= TXT_LABEL_FORMATO_HTML; ?>"<?= $mod->config_email_autent == 1 || !$editando ? ' CHECKED' : ''; ?> />
-                <?= TXT_OPCAO_SIM; ?>
-            </label>
+            <input type="checkbox" name="html" id="html" value="1" class="s-ou-n"<?= $mod->config_email_html == 1 ? ' CHECKED' : ''; ?> />
+            <label for="html"></label>
         </fieldset>
         
         <label><?= TXT_LABEL_ENVIAR_DESSA_CONTA_POR_PADRAO; ?></label><br />
-        <label>
-            <input type="radio" name="principal" value="0" title="<?= TXT_LABEL_ENVIAR_DESSA_CONTA_POR_PADRAO; ?>"<?= $mod->config_email_principal == 0 ? ' CHECKED' : ''; ?> />
-            <?= TXT_OPCAO_NAO; ?>
-        </label>
-        
-        <label>
-            <input type="radio" name="principal" value="1" title="<?= TXT_LABEL_ENVIAR_DESSA_CONTA_POR_PADRAO; ?>"<?= $mod->config_email_principal == 1 || !$editando ? ' CHECKED' : ''; ?> />
-            <?= TXT_OPCAO_SIM; ?>
-        </label>
+        <input type="checkbox" name="principal" id="principal" value="1" class="s-ou-n"<?= $mod->config_email_principal == 1 ? ' CHECKED' : ''; ?> />
+        <label for="principal"></label>
         <br /><br />
         
         <button type="submit"><?= TXT_BOTAO_SUBMIT_SALVAR; ?></button>

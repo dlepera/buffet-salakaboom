@@ -83,6 +83,22 @@ $rotas['^painel-dl/web-site/albuns-de-fotos/alterar/\d+$'] = array(
     'params'    =>  '/painel-dl/web-site/albuns-de-fotos/alterar/:id'
 );
 
+$rotas['^painel-dl/web-site/formas-de-contato/lista$'] = array(
+    'controle'  =>  'TipoDadoContato',
+    'acao'      =>  'lista'
+);
+
+$rotas['^painel-dl/web-site/formas-de-contato/novo$'] = array(
+    'controle'  =>  'TipoDadoContato',
+    'acao'      =>  'formulario'
+);
+
+$rotas['^painel-dl/web-site/formas-de-contato/alterar/\d+$'] = array(
+    'controle'  =>  'TipoDadoContato',
+    'acao'      =>  'formulario',
+    'params'    =>  '/painel-dl/web-site/formas-de-contato/alterar/:id'
+);
+
 $rotas['^painel-dl/web-site/fotos/alterar/\d+$'] = array(
     'controle'  =>  'FotoAlbum',
     'acao'      =>  'formulario',

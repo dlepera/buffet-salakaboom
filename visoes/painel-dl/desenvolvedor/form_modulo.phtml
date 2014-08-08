@@ -67,15 +67,8 @@ $titulo_h1 = !$editando ? TXT_TITULO_FORMULARIO_NOVO_MODULO : TXT_TITULO_FORMULA
             <br /><br />
             
             <label><?= TXT_LABEL_PUBLICAR; ?></label>
-            <label>
-                <input type="radio" name="publicar" value="1"<?= $mod->modulo_publicar == 1 || $editando ? ' CHECKED' : ''; ?> />
-                <?= TXT_OPCAO_SIM; ?>
-            </label>
-            
-            <label>
-                <input type="radio" name="publicar" value="0"<?= $mod->modulo_publicar == 0 ? ' CHECKED' : ''; ?> />
-                <?= TXT_OPCAO_NAO; ?>
-            </label>
+            <input type="checkbox" name="publicar" id="publicar" value="1" class="s-ou-n"<?= $mod->modulo_publicar == 1 || !$editando ? ' CHECKED' : ''; ?> />
+            <label for="publicar"></label>
         </fieldset>
         
         <fieldset id="permissoes"<?= !$submod ? ' style="display: none;"' : ''; ?>>

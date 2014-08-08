@@ -18,34 +18,314 @@
  * ----------------------------------------------------------------------------------------------------------------- */
 body{
     /* Formatação da fonte */
-    font-size   : 12px;
-    font-family : TrebuchetMS, Tahoma, Verdana;    
+    font-size   : 14px;
+    font-family : TrebuchetMS, Tahoma, Verdana;
+    color       : #069;
+    
+    /* Margens e espaçamentos */
+    margin  : 0;
+    padding : 0;
+    
+    /* Aparência */
+    background-image        : url('imagens/back-site.jpg');
+    background-position     : bottom center;
+    background-attachment   : fixed;
+    overflow-x              : hidden;
+}
+
+header.dl, nav.dl,
+div.dl, footer.dl{
+    /* Posicionamento */
+    position: relative;
+    
+    /* Tamanho */
+    box-sizing: border-box;
+}
+
+a{
+    /* Formatação do texto */
+    text-decoration : none;
+    color           : orange;
 }
 
 /* --------------------------------------------------------------------------------------------------------------------
  * Cabeçalho da página
  * ----------------------------------------------------------------------------------------------------------------- */
 header.dl{
+    /* Aparência */
+    background-color: #4F658A;
+    box-shadow      : 0 3px 12px #999;
     
+    /* Tamanho */
+    width: 100%;
+    
+    /* Margens e espaçamentos */
+    padding         : 2% 2% calc(1.5% + 45px) 2%;
+    margin-bottom   : 2%;
+}
+
+header.dl > .slogan{
+    /* Formatação do texto */
+    color       : yellow;
+    font-variant: small-caps;
+    font-size   : 180%;
+    line-height : 45px;
+    text-align  : right;
+    
+    /* Aparência */
+    background-color: rgba(0, 0, 0, 0.3);
+    border-top      : 1px solid #344068; 
+    border-bottom   : 2px solid #344068;
+    
+    /* Posicionamento */
+    position: absolute;
+    left    : 0;
+    bottom  : 0;
+    
+    /* Tamanho */
+    box-sizing  : border-box;
+    width       : 100%;
+    
+    /* Margens e espaçamentos */
+    padding-right: calc(2% + 105px);
+}
+
+header.dl > .slogan > .rosto-salakaboom{
+    /* Posicionamento */
+    position: absolute;
+    right   : 2%;
+    top     : -25px;
+}
+
+header.dl > .logotipo{
+    /* Aparência */
+    background-image    : url('imagens/logotipo.png');
+    background-repeat   : no-repeat;
+    background-position : center;
+    background-size     : contain;
+    display             : inline-block;
+    
+    /* Formatação do texto */
+    color: transparent;
+    
+    /* Tamanho */
+    width   : 20%;
+    height  : 90px;
 }
 
 /* --------------------------------------------------------------------------------------------------------------------
  * Menu da página
  * ----------------------------------------------------------------------------------------------------------------- */
 nav.dl{
+    /* Posicionamento */
+    position: absolute;
+    right   : 2%;
+    top     : 9%;
     
+    /* Tamanho */
+    width: 75%;
+}
+
+nav.dl > h1{
+    /* Aparência */
+    display: none;
+}
+
+nav.dl > ul{
+    /* Aparência */
+    list-style  : none;
+    display     : table;
+    
+    /* Margens e espaçamentos */
+    margin  : 0;
+    padding : 0;
+    
+    /* Tamanho */
+    width: 100%;
+}
+
+nav.dl > ul > li{    
+    /* Posicionamento */
+    float: left;
+    
+    /* Tamanho */
+    width       : 14.2%;
+    box-sizing  : border-box;
+    
+    /* Formatação do texto */
+    line-height: 30px;
+}
+
+nav.dl > ul > li > a{
+    /* Posicionamento */
+    float: left;
+    
+    /* Tamanho */
+    width   : 100%;
+    height  : 100%;
+    
+    /* Formatação do texto */
+    text-align  : center;
+    color       : #FFF;
+    font-variant: small-caps;
+    font-size: 120%;
+    
+    /* Aparência */
+    border-radius: 8px;
+}
+
+nav.dl > ul > li > a:hover,
+nav.dl > ul > li > a.pg-atual{
+    /* Aparência */
+    background-color: #FFF;
+    color           : orange;
 }
 
 /* --------------------------------------------------------------------------------------------------------------------
  * Corpo da página
  * ----------------------------------------------------------------------------------------------------------------- */
 div.dl{
+    /* Tamanho */
+    width: 90%;
     
+    /* Margens e espaçamentos */
+    margin  : 0 5%;
+    padding : 2%;
+    
+    /* Aparência */
+    background-color: #FFF;
+    border-radius   : 8px;
+}
+
+div.dl > h1{
+    /* Formatação do texto */
+    color       : orange;
+    font-weight : normal;
+    font-variant: small-caps;
+    
+    /* Margens e espaçamentos */
+    margin-top: 0;
 }
 
 /* --------------------------------------------------------------------------------------------------------------------
  * Rodapé da página
  * ----------------------------------------------------------------------------------------------------------------- */
 footer.dl{
+    /* Aparência */
+    background-color: #3F506E;
+    border-top      : 1px solid #9bb1ba;
     
+    /* Formatação do texto */
+    color: #FFF;
+    
+    /* Tamanho */
+    width: 100%;
+    
+    /* Margens e espaçamentos */
+    margin-top  : 2%;
+    padding     : 1%;
+}
+
+footer.dl em{
+    /* Formatação do texto */
+    font-style: normal;
+}
+
+footer.dl > .rdp-infos{
+    /* Tamanho */
+    box-sizing  : border-box;
+    width       : 70%;
+    
+    /* Aparência */
+    display     : table;
+    list-style  : none;
+}
+
+footer.dl > .rdp-infos > li{
+    /* Posicionamento */
+    float   : left;
+    position: relative;
+    
+    /* Tamanho */
+    width: 33%;
+}
+
+footer.dl > .rdp-infos > .rdp-horario:before{
+    /* Aparência */
+    background-image    : url('icones/sprite-rodape.png');
+    background-repeat   : no-repeat;
+    background-position : -5px -5px;
+    
+    /* Conteúdo */
+    content: " ";
+    
+    /* Posicionamento */
+    position: absolute;
+    top     : 2px;
+    left    : -18px;
+    
+    /* Tamanho */
+    width   : 10px;
+    height  : 10px;
+}
+
+footer.dl > .rdp-infos > .rdp-endereco:before{
+    /* Aparência */
+    background-image    : url('icones/sprite-rodape.png');
+    background-repeat   : no-repeat;
+    background-position : -5px -25px;
+    
+    /* Conteúdo */
+    content: " ";
+    
+    /* Posicionamento */
+    position: absolute;
+    top     : 2px;
+    left    : -18px;
+    
+    /* Tamanho */
+    width   : 10px;
+    height  : 10px;
+}
+
+footer.dl > .rdp-infos > .rdp-contato:before{
+    /* Aparência */
+    background-image    : url('icones/sprite-rodape.png');
+    background-repeat   : no-repeat;
+    background-position : -3px -45px;
+    
+    /* Conteúdo */
+    content: " ";
+    
+    /* Posicionamento */
+    position: absolute;
+    top     : 2px;
+    left    : -20px;
+    
+    /* Tamanho */
+    width   : 13px;
+    height  : 13px;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------
+ * Banner do desenvolvedor
+ * ----------------------------------------------------------------------------------------------------------------- */
+#dl-desenvolvedor{
+    /* Formatação do texto */
+    font-size: 85%;
+    
+    /* Posicionamento */
+    position: absolute;
+    right   : 2%;
+    bottom  : 5%;
+    
+    /* Tamanho */
+    width: 10%;
+    
+    /* Aparência */
+    background      : url('imagens/dl-logotipo.png') no-repeat left;
+    background-size : contain;
+    
+    /* Margens e espaçamentos */
+    padding: 0.7% 0 0.7% 60px;
 }

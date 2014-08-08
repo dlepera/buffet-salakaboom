@@ -29,7 +29,7 @@ class Email{
     /**
      * Carregar as configurações
      * 
-     * @param int $id: ID da configuração a ser carregada. Se não for informado
+     * @param int $id - ID da configuração a ser carregada. Se não for informado
      * será carregada a configuração flagada como 'Principal'
      */
     public function _carregarconf($id=null){
@@ -55,10 +55,10 @@ class Email{
     /**
      * Enviar o e-mail
      * 
-     * @param string $dest: email ou emails do destinatário separados por ; (ponto e vírgula)
-     * @param string $assunto: assunto do e-mail
-     * @param string $corpo: corpo do e-mail
-     * @param int $config: ID da configuração a ser carregada
+     * @param string $dest - email ou emails do destinatário separados por ; (ponto e vírgula)
+     * @param string $assunto - assunto do e-mail
+     * @param string $corpo - corpo do e-mail
+     * @param int $config - ID da configuração a ser carregada
      * 
      * @return boolean: false em caso de falha e true em caso de sucesso
      */
@@ -91,10 +91,10 @@ class Email{
     /**
      * Gravar o log da tentativa/envio do e-mail
      * 
-     * @param string $classe: nome da classe que fez o envio do e-mail
-     * @param string $tabela: nome da tabela que contém o registro referenciado
+     * @param string $classe - nome da classe que fez o envio do e-mail
+     * @param string $tabela - nome da tabela que contém o registro referenciado
      * pelo envio do e-mail
-     * @param int $idreg: ID do registro, contido em $tabela que referencia esse envio de
+     * @param int $idreg - ID do registro, contido em $tabela que referencia esse envio de
      * e-mail
      */
     public function _gravarlog($classe = null, $tabela = null, $idreg = null){

@@ -54,7 +54,7 @@ $nome_h1 = !$editando ? TXT_TITULO_FORMULARIO_NOVO_PARCEIRO : TXT_TITULO_FORMULA
             <textarea name="descr" id="descr" title="<?= TXT_LABEL_DESCRICAO; ?>"><?= $mod->parceiro_descr; ?></textarea>
             <br /><br />
             
-            <!-- Inserir umlogotipo para o cliente -->
+            <!-- Inserir um logotipo para o parceiro -->
             <div class="img-visual">
                 <label for="imagem"><?= TXT_LABEL_LOGOTIPO; ?>:</label><br />
                 <input type="file" name="imagem" id="imagem" title="<?= TXT_LABEL_LOGOTIPO; ?>" />
@@ -78,19 +78,12 @@ $nome_h1 = !$editando ? TXT_TITULO_FORMULARIO_NOVO_PARCEIRO : TXT_TITULO_FORMULA
             <br /><br />
             
             <label for="site"><?= TXT_LABEL_SITE; ?>:</label><br />
-            <input type="url" name="site" id="site" value="<?= $mod->parceiro_site; ?>" title="<?= TXT_LABEL_SITE; ?>" />
+            <input type="url" name="site" id="site" value="<?= $mod->parceiro_site; ?>" title="<?= TXT_LABEL_SITE; ?>" placeholder="http://www.sitedoparceiro.com.br" />
         </fieldset>
         
         <label><?= TXT_LABEL_PUBLICAR; ?></label>
-        <label>
-            <input type="radio" name="publicar" value="1"<?= $mod->parceiro_publicar == 1 || !$editando ? ' CHECKED' : ''; ?> />
-            <?= TXT_OPCAO_SIM; ?>
-        </label>
-
-        <label>
-            <input type="radio" name="publicar" value="0"<?= $mod->parceiro_publicar == 0 ? ' CHECKED' : ''; ?> />
-            <?= TXT_OPCAO_NAO; ?>
-        </label>
+        <input type="checkbox" name="publicar" id="publicar" value="1" class="s-ou-n"<?= $mod->parceiro_publicar == 1 || !$editando ? ' CHECKED' : ''; ?> />
+        <label for="publicar"></label>
         <br /><br/>
         
         <button type="submit"><?= TXT_BOTAO_SUBMIT_SALVAR; ?></button>
@@ -109,6 +102,7 @@ $nome_h1 = !$editando ? TXT_TITULO_FORMULARIO_NOVO_PARCEIRO : TXT_TITULO_FORMULA
             <?php endif; ?>
             controle: "parceiro/salvar",
             campos  : {
+                "tipo"      : { obr: true, validacao: EXPR_APENAS_NUMEROS },
                 "nome"      : { obr: true },
                 "descr"     : { obr: true },
                 "email"     : { validacao: EXPR_EMAIL },

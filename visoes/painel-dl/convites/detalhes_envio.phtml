@@ -1,0 +1,63 @@
+<?php
+
+/**
+ * @Autor	: Diego Lepera
+ * @E-mail	: d_lepera@hotmail.com
+ * @Projeto	: FrameworkDL
+ * @Data	: 26/06/2014 09:08:11
+ */
+
+$mod    = $params['modelo'];
+$mod_st = $params['status'];
+
+?>
+
+<div class="dl">
+    <h1><?= TXT_TITULO_DETALHES_DO_ENVIO_DOS_CONVITES_VIRTUAIS; ?></h1>
+    
+    <h2 class="sub-h2">
+    <?php
+        printf(
+            MSG_ENVIADO_EM, 
+            $mod->envio_convite_festa_aniversariante,
+            \Funcoes::_formatardatahora($params['dt_criacao'], $_SESSION['formato_data_completo'])
+        );
+    ?>
+    </h2>
+    
+    <p style="margin-bottom: 4%;">
+        <a href="<?= \DL::$dir_raiz; ?>/email/contatosite/mostrarhtml/<?= $mod->envio_convite_id; ?>" class="email" target="_blank">
+            <?= TXT_LINK_VISUALIZAR_EMAIL_COMO_HTML; ?>
+        </a>
+    </p>
+    
+    <legend><?= TXT_LEGENDA_DADOS_DA_FESTA; ?></legend>    
+    <p>
+        <em><?= TXT_LABEL_ANIVERSARIANTE; ?></em>: <?= $mod->envio_convite_festa_aniversariante; ?><br />
+        <em><?= TXT_LABEL_IDADE; ?></em>: <?= $mod->envio_convite_festa_idade; ?><br />
+        <em><?= TXT_LABEL_DATA_DA_FESTA; ?></em>: <?= \Funcoes::_formatardatahora($mod->envio_convite_festa_data, $_SESSION['formato_data_data']); ?><br />
+        <em><?= TXT_LABEL_HORARIO; ?></em>: 
+        das <?= \Funcoes::_formatardatahora($mod->envio_convite_festa_inicio, $_SESSION['formato_data_hora']); ?> 
+        às <?= \Funcoes::_formatardatahora($mod->envio_convite_festa_fim, $_SESSION['formato_data_hora']); ?>
+    </p>
+    
+    <legend><?= TXT_LEGENDA_LISTA_DE_CONVIDADOS; ?></legend>
+    
+    <table class="lista">
+        <tr>
+            <th id="nome"><?= TXT_TABELA_TITULO_NOME; ?></th>
+            <th id="email"><?= TXT_TABELA_TITULO_EMAIL; ?></th>
+        </tr>
+        
+        <?php if( !count($mod->envio_convite_convidados_emails) )
+            echo '<tr><td colspan="2">', MSG_PADRAO_NENHUM_REGISTRO_ENCONTRADO,'</td></tr>';
+            
+        foreach( $mod->envio_convite_convidados_emails as $ch => $email ): ?>
+        <tr>
+            <td headers="nome"><?= $mod->envio_convite_convidados_nomes[$ch]; ?></td>
+            <td headers="email"><?= $email; ?></td>
+        </tr>
+        <?php endforeach; ?>
+    </table>
+    </table>
+</div>

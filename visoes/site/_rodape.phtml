@@ -4,6 +4,57 @@
     <script src="<?= \DL::$dir_raiz . \DL::$dir_js; ?>dl-formulario/dl-formulario-2.0.plugin.js"></script>
     <script src="<?= \DL::$dir_raiz . \DL::$dir_js; ?>dl-galeria/dl-galeria-2.0.plugin.js"></script>
     
+    <div id="redes-sociais">
+        <?php foreach( $params['redes-sociais'] as $rs ): ?>
+        <a href="<?= $rs['dado_contato_descr']; ?>" target="_blank">
+            <img src="<?= \DL::$dir_raiz .'/'. $rs['tipo_dado_icone']; ?>" title="<?= $rs['tipo_dado_descr']; ?>" />
+        </a>
+        <?php endforeach; ?>
+    </div>
+    
     <footer class="dl">
         <?= DL::$ap_nome; ?> &COPY; <?= date('Y'); ?>
+        
+        <ul class="rdp-infos">
+            <li class="rdp-horario">
+                <em><?= TXT_TITULO_HORARIOS_DE_ATENDIMENTO; ?></em><br />
+                
+                <?php foreach( $params['horarios'] as $h ):
+                    if( ($h['horario_abertura'] == $ha && $h['horario_fechamento'] == $hf) || empty($ha) )
+                        $ds[] = $h['dia_semana_abrev'];
+                    else {
+                        echo implode(', ', $ds) .': das '. \Funcoes::_formatardatahora($ha, \DL::$dh_formato_hora) .' às '. \Funcoes::_formatardatahora($hf, \DL::$dh_formato_hora) .'<br />';
+                        $ds = array();
+                        $ds[] = $h['dia_semana_abrev'];
+                    }
+                    
+                    $ha = $h['horario_abertura'];
+                    $hf = $h['horario_fechamento'];
+                endforeach; ?>
+                
+                <?= implode(', ', $ds) .': das '. \Funcoes::_formatardatahora($ha, \DL::$dh_formato_hora) .' às '. \Funcoes::_formatardatahora($hf, \DL::$dh_formato_hora); ?>
+            </li>
+            
+            <li class="rdp-endereco">
+                <em>Endereço</em><br />
+                
+                <address>
+                    R. Agostinho Gomes, 2604<br />
+                    Ipiranga - São Paulo - SP<br />
+                    CEP: 04206-001
+                </address>
+            </li>
+            
+            <li class="rdp-contato">
+                <em>Contato</em><br />
+                
+                <em>
+                    <?php foreach( $params['contatos'] as $c ): ?>
+                    <?= $c['tipo_dado_descr']; ?>: <?= $c['dado_contato_descr']; ?><br />
+                    <?php endforeach; ?>
+                </em>
+            </li>
+        </ul>
+        
+        <em id="dl-desenvolvedor"><?= MSG_DESENVOLVIDOR_POR; ?></em>
     </footer>

@@ -29,6 +29,9 @@ $params = $this->_obterparams();
     
     <!-- Estilos da página -->
     <link rel="stylesheet" media="all" href="<?= \DL::$dir_raiz . \DL::$dir_css; ?>todos/dl-layout.css" />
+    <link rel="stylesheet" media="all" href="<?= \DL::$dir_raiz . \DL::$dir_css; ?>todos/dl-site.css" />
+    <link rel="stylesheet" media="all" href="<?= \DL::$dir_raiz . \DL::$dir_css; ?>todos/lista.css" />
+    <link rel="stylesheet" media="all" href="<?= \DL::$dir_raiz . \DL::$dir_js .'dl-formulario/css/'. DL::$plugin_formulario_tema; ?>/formulario.css" />
 
     <title><?= \DL::$ap_nome; ?></title>
 </head>
@@ -37,10 +40,16 @@ $params = $this->_obterparams();
     <header class="dl">
         <a href="<?= \DL::$dir_raiz; ?>" class="logotipo" title="<?= \DL::$ap_nome; ?>"><?= \DL::$ap_nome; ?></a>
         
-        <div class="slogan"><?= \DL::$ap_slogan; ?></div>
+        <div class="slogan">
+            <?= \DL::$ap_slogan; ?>
+            
+            <img src="<?= \DL::$dir_raiz . \DL::$dir_imgs; ?>rosto-mago-salakaboom.png" class="rosto-salakaboom" />
+        </div>
     </header>
     
     <nav class="dl">
+        <h1><?= TXT_TITULO_MENU_PRINCIPAL; ?></h1>
+        
         <ul>
             <li>
                 <a href="<?= \DL::$dir_raiz; ?>/o-buffet"><?= TXT_LINK_INSTITUCIONAL; ?></a>

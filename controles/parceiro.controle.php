@@ -94,4 +94,4 @@ class Parceiro extends PrincipalSistema{
         
         $this->_formpadrao();
     } // Fim do método _formulario
-} // Fim do Controle PrincipalSistema
+} // Fim do Controle Parceiro

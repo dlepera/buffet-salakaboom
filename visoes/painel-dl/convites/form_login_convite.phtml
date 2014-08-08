@@ -1,0 +1,67 @@
+<?php
+
+/**
+ * @Autor	: Diego Lepera
+ * @E-mail	: d_lepera@hotmail.com
+ * @Projeto	: FrameworkDL
+ * @Data	: 29/06/2014 18:09:20
+ */
+
+$mod = $params['modelo'];
+
+# Verificar se o registro está sendo editado
+$editando = !is_null($mod->login_convite_id);
+
+# Definir qual título deve ser inserido na TAG H1
+$titulo_h1 = !$editando ? TXT_TITULO_FORMULARIO_NOVO_LOGIN_DE_CONVITE_VIRTUAL : TXT_TITULO_FORMULARIO_ALTERAR_LOGIN_DE_CONVITE_VIRTUAL;
+
+?>
+
+<div class="dl">
+    <h1><?= $titulo_h1; ?></h1>
+    
+    <?php include_once './visoes/painel-dl/_titulo-h2.phtml'; ?>
+    
+    <form name="login-convite" method="post" action="<?= \DL::$dir_raiz; ?>">
+        <?php if( $editando ): ?>
+        <!-- ID do registro atual -->
+        <input type="hidden" name="id" value="<?= $mod->login_convite_id; ?>" />
+        <?php endif; ?>
+        
+        <label for="usuario"><?= TXT_LABEL_USUARIO; ?>:</label><br />
+        <input type="text" name="usuario" id="usuario" value="<?= $mod->login_convite_usuario; ?>" title="<?= TXT_LABEL_USUARIO; ?>" maxlength="10" />
+        <br /><br />
+
+        <label for="email"><?= TXT_LABEL_EMAIL; ?>:</label><br />
+        <input type="text" name="email" id="email" value="<?= $mod->login_convite_email; ?>" title="<?= TXT_LABEL_EMAIL; ?>" />
+        <br /><br />
+        
+        <label for="senha"><?= TXT_LABEL_SENHA; ?>:</label><br />
+        <input type="text" name="senha" id="senha" value="<?= $mod->login_convite_senha; ?>" title="<?= TXT_LABEL_SENHA; ?>" maxlength="10" />
+        <br /><br />
+        
+        <button type="submit"><?= TXT_BOTAO_SUBMIT_SALVAR; ?></button>
+        <button type="reset"><?= TXT_BOTAO_RESET_CANCELAR; ?></button>
+    </form>
+</div>
+
+<script>
+    //<![CDATA[
+    window.onload = function(){
+        $("form[name='login-convite']")._dlformulario({
+            <?php if( !$editando ): ?>
+            depois: function(){
+                window.location = "<?= \DL::$dir_raiz; ?>/painel-dl/convites-virtuais/logins/lista";
+            },
+            <?php endif; ?>
+            controle: "loginconvite/salvar",
+            campos  : {
+                "usuario"   : { obr: true, validacao: /^[a-z0-9-\.\_]{5,10}$/ },
+                "email"     : { obr: true, validacao: EXPR_EMAIL },
+                "senha"     : { obr: true }
+            },
+            aparencia: { tema: "<?= \DL::$plugin_formulario_tema; ?>", estilo: "formulario" }
+        });
+    };
+    //]]>
+</script>

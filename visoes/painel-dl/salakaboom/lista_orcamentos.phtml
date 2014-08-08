@@ -77,7 +77,7 @@ $perm = $params['perm'];
     window.onload = function(){
         <?php if( $perm['remover'] ): ?>
         $editar_lista = $("form[name='editar-lista']")._dlformulario({
-            controle    : "produto/remover",
+            controle    : "orcamento/remover",
             depois      : function(){
                 $(".lista :checkbox:checked").parents("tr").remove();
             },

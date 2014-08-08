@@ -1,0 +1,37 @@
+<?php
+
+/**
+ * @Autor	: Diego Lepera
+ * @E-mail	: d_lepera@hotmail.com
+ * @Projeto	: FrameworkDL
+ * @Data	: Aug 5, 2014 9:42:45 AM
+ */
+
+?>
+
+<div class="dl depoimentos">
+    <h1><?= TXT_TITULO_DEPOIMENTOS; ?></h1>
+    
+    <div>
+        <a href="javascript:;" onclick="AbrirForm('<?= \DL::$dir_raiz; ?>/enviar-depoimento');">
+            Quero mandar um depoimento também
+        </a>
+    </div>
+    
+    <?php if( !count($params['lista']) )
+        echo '<p>', MSG_PADRAO_NENHUM_REGISTRO_ENCONTRADO, '</p>';
+    
+    foreach( $params['lista'] as $l ): ?>
+    <p>
+        <span class="depoimento-aspas">"</span>
+        <?= nl2br($l['depoimento_texto']); ?>
+        <span class="depoimento-aspas">"</span>
+        <br />
+        
+        <span class="depoimento-dono">
+            - Enviado por <?= $l['depoimento_nome']; ?>
+            em <?= \Funcoes::_formatardatahora($l['data'], 'd/m/Y H:i'); ?>
+        </span>
+    </p>
+    <?php endforeach; ?>
+</div>

@@ -25,6 +25,31 @@ $rotas['^orcamento-on-line$'] = array(
     'acao'      =>  'formulario'
 );
 
+$rotas['^depoimentos$'] = array(
+    'controle'  =>  'DepoimentoW',
+    'acao'      =>  'lista'
+);
+
+$rotas['^enviar-depoimento$'] = array(
+    'controle'  =>  'DepoimentoW',
+    'acao'      =>  'formulario'
+);
+
+$rotas['^certificado-de-excelencia$'] = array(
+    'controle'  =>  'WebSite',
+    'acao'      =>  'certificado'
+);
+
+$rotas['^mapa$'] = array(
+    'controle'  =>  'WebSite',
+    'acao'      =>  'mapa'
+);
+
+$rotas['^convites-virtuais$'] = array(
+    'controle'  =>  'ConviteVirtual',
+    'acao'      =>  'formulario'
+);
+
 /* ----------------------------------------------------------------------------------------------------------------------
  * Painel-DL <Módulo Salakaboom>
  * ------------------------------------------------------------------------------------------------------------------- */
@@ -103,6 +128,73 @@ $rotas['^painel-dl/salakaboom/orcamentos-recebidos/detalhes-do-orcamento/\d+$'] 
     'params'    =>  '/painel-dl/salakaboom/orcamentos-recebidos/detalhes-do-orcamento/:id'
 );
 
+$rotas['^painel-dl/salakaboom/depoimentos/lista$'] = array(
+    'controle'  =>  'Depoimento',
+    'acao'      =>  'lista'
+);
+
+$rotas['^painel-dl/salakaboom/horarios-de-atendimento/lista$'] = array(
+    'controle'  =>  'Horario',
+    'acao'      =>  'lista'
+);
+
+$rotas['^painel-dl/salakaboom/horarios-de-atendimento/novo$'] = array(
+    'controle'  =>  'Horario',
+    'acao'      =>  'formulario'
+);
+
+$rotas['^painel-dl/salakaboom/horarios-de-atendimento/alterar/\d+$'] = array(
+    'controle'  =>  'Horario',
+    'acao'      =>  'formulario',
+    'params'    =>  '/painel-dl/salakaboom/horarios-de-atendimento/alterar/:id'
+);
+
+/* ----------------------------------------------------------------------------------------------------------------------
+ * Painel-DL <Módulo Convites Virtuais>
+ * ------------------------------------------------------------------------------------------------------------------- */
+$rotas['^painel-dl/convites-virtuais/modelos/lista$'] = array(
+    'controle'  =>  'ModeloConvite',
+    'acao'      =>  'lista'
+);
+
+$rotas['^painel-dl/convites-virtuais/modelos/novo$'] = array(
+    'controle'  =>  'ModeloConvite',
+    'acao'      =>  'formulario'
+);
+
+$rotas['^painel-dl/convites-virtuais/modelos/alterar/\d+$'] = array(
+    'controle'  =>  'ModeloConvite',
+    'acao'      =>  'formulario',
+    'params'    =>  '/painel-dl/convites-virtuais/modelos/alterar/:id'
+);
+
+$rotas['^painel-dl/convites-virtuais/logins/lista$'] = array(
+    'controle'  =>  'LoginConvite',
+    'acao'      =>  'lista'
+);
+
+$rotas['^painel-dl/convites-virtuais/logins/novo$'] = array(
+    'controle'  =>  'LoginConvite',
+    'acao'      =>  'formulario'
+);
+
+$rotas['^painel-dl/convites-virtuais/logins/alterar/\d+$'] = array(
+    'controle'  =>  'loginConvite',
+    'acao'      =>  'formulario',
+    'params'    =>  '/painel-dl/salakaboom/logins/alterar/:id'
+);
+
+$rotas['^painel-dl/convites-virtuais/envios/lista$'] = array(
+    'controle'  =>  'EnvioConvite',
+    'acao'      =>  'lista'
+);
+
+$rotas['^painel-dl/convites-virtuais/envios/detalhes-do-envio/\d+$'] = array(
+    'controle'  =>  'EnvioConvite',
+    'acao'      =>  'detalhes',
+    'params'    =>  '/painel-dl/convites-virtuais/envios/detalhes-do-envio/:id'
+);
+
 /* ----------------------------------------------------------------------------------------------------------------------
  * Ações
  * ------------------------------------------------------------------------------------------------------------------- */
@@ -114,4 +206,11 @@ $rotas['^orcamento/mostrar-html/\d+'] = array(
     'controle'  =>  'OrcamentoW',
     'acao'      =>  'mostrarhtml',
     'params'    =>  '/orcamento/mostrar-html/:id'
+);
+
+# Mostrar o e-mail HTML do email convite virtual
+$rotas['^convites-virtuais/mostrar-html/\d+/.+'] = array(
+    'controle'  =>  'ConviteVirtual',
+    'acao'      =>  'mostrarhtml',
+    'params'    =>  '/convites-virtuais/mostrar-html/:id/:email'
 );

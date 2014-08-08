@@ -18,11 +18,11 @@ abstract class PrincipalSistema extends Principal{
     # Status da sessão
     protected $sessao_status;
     
-    public function __construct($raiz){
+    public function __construct($raiz, $sessao_prefixo = 'dl'){
         parent::__construct($raiz);
         
         # Iniciar classe de acesso restrito
-        $this->obj_ar        = new \AcessoRestrito('painel-dl/login/form_login');
+        $this->obj_ar        = new \AcessoRestrito('painel-dl/login/form_login', $sessao_prefixo);
         $this->sessao_status = $this->obj_ar->_verificarlogin(false);
     } // Fim do método mágico __construct
     
@@ -33,8 +33,8 @@ abstract class PrincipalSistema extends Principal{
     /**
      * Escolher o tamplate e juntá-lo com os templates padrão (_topo e _rodape)
      * 
-     * @param string $tpl: nome do template a ser carregado
-     * @param string $perm: vetor contendo as permissões que são necessárias
+     * @param string $tpl - nome do template a ser carregado
+     * @param string $perm - vetor contendo as permissões que são necessárias
      * realizar a verificação
      */
     public function _escolhertpl($tpl, array $perm = array()){
@@ -65,29 +65,6 @@ abstract class PrincipalSistema extends Principal{
         $this->obj_v->_incluirparams('sub-modulos', $lis_sm);
         $this->obj_v->_incluirparams('perm', $_SESSION['permissoes']['modulo_'. $this->perm_m]);
     } // Fim do método _escolhertpl
-    
-    /**
-     * Ações padrões para criar uma lista de registros
-     * 
-     * @param string $ordem: string que contém os campos a serem ordenados
-     * @param string $campos: string que contenham os campos a serem selecionados
-     * @param int $qtde: número de registros a serem exibidos na paginação
-     */
-    public function _listapadrao($ordem = '', $campos = '*', $qtde = 0){
-        # Obter a busca realizada
-        $_get_t = filter_input(INPUT_GET, 't', FILTER_DEFAULT);
-        $_get_c = filter_input(INPUT_GET, 'c', FILTER_DEFAULT);
-        $_get_p = filter_input(INPUT_GET, 'pg', FILTER_SANITIZE_NUMBER_INT);
-        
-        # Montar a string de filtro
-        $filtro = !empty($_get_t) ? "{$_get_c} LIKE '{$_get_t}%'" : null;
-                            
-        # Incluir os parâmetros na visão
-        $this->obj_v->_incluirparams('_get_c', $_get_c);
-        $this->obj_v->_incluirparams('_get_t', $_get_t);
-        $this->obj_v->_incluirparams('qtde_pg', ceil($this->obj_m->_qtde_registros($filtro)/$_SESSION['usuario_pref_num_registros']));
-        $this->obj_v->_incluirparams('lista', $this->obj_m->_listar($filtro, $ordem, $campos, !$_get_p ? 1 : $_get_p, $qtde));
-    } // Fim do métoto _listapadrao 
     
     /**
      * Ações padrões para criar um formulário

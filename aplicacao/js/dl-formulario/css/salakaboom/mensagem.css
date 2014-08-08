@@ -1,0 +1,192 @@
+/**
+ *  @Autor  : Diego Lepera
+ *  @E-mail : d_lepera@hotmail.com
+ *  @Projeto: Framework MVC / Site
+ *  @Data   : 07/08/2014
+ */
+
+/* --------------------------------------------------------------------------------------------------------------------------
+ * DIV principal da mensagem de campo
+ * ----------------------------------------------------------------------------------------------------------------------- */
+div.dl-formulario-mensagem.salakaboom.campo{
+    /* Tamanho */
+    box-sizing  : border-box;
+    width       : 35%;
+    
+    /* Posicionamento */
+    position: relative;
+    
+    /* Aparência */
+    border-left     : 4px solid;
+    background-color: #FFF;
+    
+    /* Margens e espaçamentos */
+    margin-top: 1%;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------
+ * Parágrafo da mensagem de campo
+ * ----------------------------------------------------------------------------------------------------------------------- */
+div.dl-formulario-mensagem.salakaboom.campo p{
+    /* Margens e espaçamentos */
+    padding: 2%;
+    margin : 0;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------
+ * DIV principal da mensagem de alerta
+ * ----------------------------------------------------------------------------------------------------------------------- */
+div.dl-formulario-mensagem.salakaboom.alerta{
+    /* Margens e espaçamentos */
+    padding : 0 2%;
+    margin  : auto;
+    
+    /* Tamanho */
+    box-sizing  : border-box;
+    width       : 100%;
+    height      : 100%;
+    
+    /* Posicionamento */
+    position: fixed;
+    top     : 0;
+    left    : 0;
+    
+    /* Aparência */
+    background          : rgba(0, 0, 0,.5) url('imagens/rosto-mago-salakaboom.png') no-repeat;
+    background-position : left calc(33% - 80px) top calc(10% + 120px);
+    
+    /* Margens e espaçamentos */
+    padding: auto;
+}
+
+div.dl-formulario-mensagem.salakaboom.alerta.sucesso,
+div.dl-formulario-mensagem.salakaboom.campo.sucesso{
+    /* Formatação do texto */
+    color: green;
+}
+
+div.dl-formulario-mensagem.salakaboom.alerta.atencao,
+div.dl-formulario-mensagem.salakaboom.campo.atencao{
+    /* Formatação do texto */
+    color: #069;
+}
+
+div.dl-formulario-mensagem.salakaboom.alerta.erro,
+div.dl-formulario-mensagem.salakaboom.campo.erro{
+    /* Formatação do texto */
+    color: #900;
+}
+
+div.dl-formulario-mensagem.salakaboom.campo.sucesso{
+    /* Aparência */
+    border-color    : green;
+    background-color: #d2ffd4; 
+}
+
+div.dl-formulario-mensagem.salakaboom.campo.atencao{
+    /* Aparência */
+    border-color    : #069;
+    background-color: #d5e1f3; 
+}
+
+div.dl-formulario-mensagem.salakaboom.campo.erro{
+    /* Aparência */
+    border-color    : #900;
+    background-color: #ffdfe6; 
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------
+ * Parágrafo da mensagem de alerta
+ * ----------------------------------------------------------------------------------------------------------------------- */
+div.dl-formulario-mensagem.salakaboom.alerta > p{
+    /* Aparência */
+    background-color: #FFF;
+    border-radius   : 8px;
+    
+    /* Tamanho */
+    box-sizing  : border-box;
+    width       : 33%;
+    
+    /* Margens e espaçamentos */
+    margin  : 10% auto;
+    padding : 1% 2%;
+    
+    /* Posicionamento */
+    position: relative;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------
+ * Botão da mensagem de alerta
+ * ----------------------------------------------------------------------------------------------------------------------- */
+div.dl-formulario-mensagem.salakaboom.alerta button,
+div.dl-formulario-mensagem.salakaboom.campo button{
+    /* Aparência */
+    border          : none;
+    background      : none;
+    border-radius   : 50%;
+    
+    /* Posicionamento */
+    position: absolute;
+    right   : 1%;
+    top     : 25%;
+    
+    /* Tamanho */
+    width       : 17px;
+    height      : 17px;
+    line-height : 100%;
+    
+    /* Transições */
+    transition          : background-color 0.7s, color 0.7s;
+    -o-transition       : background-color 0.7s, color 0.7s;
+    -moz-transition     : background-color 0.7s, color 0.7s;
+    -webkit-transition  : background-color 0.7s, color 0.7s;
+    
+    /* Formatação do texto */
+    text-indent : 0;
+    text-align  : center;
+}
+
+div.dl-formulario-mensagem.salakaboom.alerta.sucesso button,
+div.dl-formulario-mensagem.salakaboom.campo.sucesso button{
+    /* Formatação do texto */
+    color: green;
+}
+
+div.dl-formulario-mensagem.salakaboom.alerta.sucesso button:hover,
+div.dl-formulario-mensagem.salakaboom.campo.sucesso button:hover{
+    /* Aparência */
+    background-color: green;
+    
+    /* Formatação do texto */
+    color: #FFF;
+}
+
+div.dl-formulario-mensagem.salakaboom.alerta.atencao button,
+div.dl-formulario-mensagem.salakaboom.campo.atencao button{
+    /* Formatação do texto */
+    color: #069;
+}
+
+div.dl-formulario-mensagem.salakaboom.alerta.atencao button:hover,
+div.dl-formulario-mensagem.salakaboom.campo.atencao button:hover{
+    /* Aparência */
+    background-color: #069;
+    
+    /* Formatação do texto */
+    color: #FFF;
+}
+
+div.dl-formulario-mensagem.salakaboom.alerta.erro button,
+div.dl-formulario-mensagem.salakaboom.campo.erro button{
+    /* Formatação do texto */
+    color: #900;
+}
+
+div.dl-formulario-mensagem.salakaboom.alerta.erro button:hover,
+div.dl-formulario-mensagem.salakaboom.campo.erro button:hover{
+    /* Aparência */
+    background-color: #900;
+    
+    /* Formatação do texto */
+    color: #FFF;
+}

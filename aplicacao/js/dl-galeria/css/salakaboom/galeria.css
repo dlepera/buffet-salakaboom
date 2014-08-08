@@ -1,0 +1,264 @@
+/**
+ * @Autor	: Diego Lepera
+ * @E-mail	: d_lepera@hotmail.com
+ * @Projeto	: FrameworkDL
+ * @Data	: Jul 28, 2014 2:41:15 PM
+ */
+
+@charset 'ISO-8859-1';
+
+/* --------------------------------------------------------------------------------------------------------------------
+ * Carregar fonte a ser utilizada
+ * ----------------------------------------------------------------------------------------------------------------- */
+@font-face{
+    font-family	: FKnight;
+    src		: url('fontes/foughtknight.ttf');
+}
+
+/* --------------------------------------------------------------------------------------------------------------------
+ * Galeria
+ * ----------------------------------------------------------------------------------------------------------------- */
+.salakaboom.galeria{
+    /* Tamanho */
+    width: 100%;
+    
+    /* Aparência */
+    display: table;
+    
+    /* Posicionamento */
+    position: relative;
+    
+    /* Margens e espaçamentos */
+    margin: 2% 0;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------
+ * <figure> : criação do contexto da imagem
+ * ----------------------------------------------------------------------------------------------------------------- */
+.salakaboom.galeria > figure{
+    /* Tamanho */
+    width: 48%;
+    
+    /* Margens e espaçamentos */
+    padding : 0.5%;
+    margin  : 0;
+    
+    /* Aparência */
+    border-radius   : 8px;
+    border          : 1px solid #CCC;
+    box-sizing      : border-box;
+    display         : none;
+    opacity         : 0;
+    background-color: #FFF;
+    
+    /* Posicionamento */
+    position: relative;
+    float   : left;
+}
+
+.salakaboom.galeria > figure:first-child{
+    /* Aparência */
+    display: block;
+    opacity: 1;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------
+ * <img> : imagem
+ * ----------------------------------------------------------------------------------------------------------------- */
+.salakaboom.galeria > figure > img{
+    /* Tamanho */
+    max-width   : 100%;
+    max-height  : 100%;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------
+ * <figcaption> : informações da imagem
+ * ----------------------------------------------------------------------------------------------------------------- */
+.salakaboom.galeria > figure > figcaption{
+    /* Posicionamento */
+    position: absolute;
+    bottom  : 0;
+    left    : 0; 
+    
+    /* Tamanho */
+    width: 100%;
+    
+    /* Aparência */
+    border-top      : 1px solid #EEE;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-bottom-left-radius   : 8px;
+    border-bottom-right-radius  : 8px;
+    opacity         : 0.2; 
+    
+    /* Formatação do texto */
+    text-align  : center;
+    color       : #FFF;
+    
+    /* Transiçoes */
+    transition: opacity 0.5s;
+}
+
+.salakaboom.galeria > figure > figcaption > h2{
+    /* Formatação do texto */
+    color       : #FFF;
+    font-weight : normal;
+    font-variant: small-caps;
+    line-height : 25px;
+    
+    /* Margens e espaçamentos */
+    margin  : 0;
+    padding : 0;
+}
+
+.salakaboom.galeria > figure:hover > figcaption{
+    /* Aparência */
+    opacity: 1;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------
+ * <div.dl-galeria-minis> : exibição das miniaturas das imagens
+ * ----------------------------------------------------------------------------------------------------------------- */
+.salakaboom.galeria > .dl-galeria-minis{
+    /* Tamanho */
+    width       : 48%;
+    height      : 100%;
+    max-height  : 100%;
+       
+    /* Posicionamento */
+    position: absolute;
+    right   : 0;
+    top     : 0;
+    
+    /* Aparência */
+    display     : block;
+    overflow-y  : auto;
+}
+
+.salakaboom.galeria > .dl-galeria-minis > figure{
+    /* Tamanho */
+    width: 29%;
+    
+    /* Margens e espaçamentos */
+    padding : 0.5%;
+    margin  : 0 1% 2% 1%;
+    
+    /* Aparência */
+    border-radius   : 5px;
+    border          : 1px solid #CCC;
+    background-color: #FFF;
+    
+    /* Posicionamento */
+    float: left;
+}
+
+.salakaboom.galeria > .dl-galeria-minis > figure:nth-child(3n+1){
+    /* Margens e espaçamentos */
+    margin-left: 0;
+}
+
+.salakaboom.galeria > .dl-galeria-minis > figure:nth-child(3n){
+    /* Margens e espaçamentos */
+    margin-right: 0;
+}
+
+.salakaboom.galeria > .dl-galeria-minis > figure:hover{
+    /* Aparência */
+    cursor      : pointer;
+    border-color: orange;
+}
+
+.salakaboom.galeria > .dl-galeria-minis > figure > img{
+    /* Tamanho */
+    max-width   : 100%;
+    max-height  : 100%;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------
+ * <div.dl-galeria-naveg> : exibição dos botões de navegação entre as imagens
+ * ----------------------------------------------------------------------------------------------------------------- */
+.salakaboom.galeria > .dl-galeria-naveg{
+    /* Aparência */
+    border-radius   : 8px;
+    border          : 1px solid #CCC;
+    background-color: #FFF;
+    
+    /* Margens e espaçamentos */
+    padding: 0 1%;
+    
+    /* Posicionamento */
+    position: absolute;
+    bottom  : -30px;
+    
+    /* Formatação do texto */
+    line-height: 25px;
+}
+
+.salakaboom.galeria > .dl-galeria-naveg > a{
+    /* Formatação do texto */
+    color           : orange;
+    text-decoration : none;
+    font-family     : FKnight;
+    font-weight     : bold;
+    
+    /* Margens e espaçamentos */
+    margin: 0 5%;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------
+ * <div.dl-galeria-indicador> : criação do contexto da imagem
+ * ----------------------------------------------------------------------------------------------------------------- */
+.salakaboom.galeria > .dl-galeria-indicador{   
+    /* Margens e espaçamentos */
+    padding: 0 1%;
+    
+    /* Posicionamento */
+    position: absolute;
+    bottom  : -20px;
+    
+    /* Formatação do texto */
+    text-align: center;
+    
+    /* Tamanho */
+    box-sizing  : border-box;
+    width       : 48%;
+}
+
+.salakaboom.galeria > .dl-galeria-indicador > a{
+    /* Aparência */
+    border-radius   : 50%;
+    border          : 3px solid #FFF;
+    background-color: orange;
+    
+    /* Posicionamento */
+    /* float: left; */
+    display: inline-block;
+    
+    /* Tamanho */
+    width   : 8px;
+    height  : 8px;
+    
+    /* Formatação do texto */
+    color: transparent;
+    
+    /* Margens e espaçamentos */
+    margin: 0 1%;
+    
+    /* Transição */
+    transition: border-color 0.75s;
+}
+
+.salakaboom.galeria > .dl-galeria-indicador > a:first-child{
+    /* Margens e espaçamentos */
+    margin-left: 0;
+}
+
+.salakaboom.galeria > .dl-galeria-indicador > a:last-child{
+    /* Margens e espaçamentos */
+    margin-right: 0;
+}
+
+.salakaboom.galeria > .dl-galeria-indicador > a.atual{
+    /* Aparência */
+    background-color: #FFF;
+    border-color    : orange;
+}

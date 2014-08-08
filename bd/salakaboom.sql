@@ -141,3 +141,79 @@ CREATE TABLE IF NOT EXISTS salakaboom_orcamentos_opcionais(
     CONSTRAINT FK_opcional_orcamento_produto FOREIGN KEY(opcional_orcamento_produto) REFERENCES salakaboom_produtos(produto_id),
     CONSTRAINT CK_opcional_qtde CHECK( opcional_qtde > 0 )
 ) ENGINE=INNODB;
+
+-- Depoimentos sobre o Buffet Salakaboom
+CREATE TABLE IF NOT EXISTS salakaboom_depoimentos(
+    depoimento_id BIGINT NOT NULL AUTO_INCREMENT,
+    depoimento_nome VARCHAR(100) NOT NULL,
+    depoimento_texto LONGTEXT NOT NULL,
+    depoimento_publicar INT NOT NULL DEFAULT 0,
+    depoimento_delete INT NOT NULL DEFAULT 0,
+    PRIMARY KEY(depoimento_id),
+    CONSTRAINT CK_depoimento_publicar CHECK( depoimento_publicar IN(0,1) ),
+    CONSTRAINT CK_depoimento_delete CHECK( depoimento_delete IN(0,1) )
+) ENGINE=INNODB;
+
+-- Horários de atendimento
+CREATE TABLE IF NOT EXISTS salakaboom_horarios(
+    horario_id BIGINT NOT NULL AUTO_INCREMENT,
+    horario_dia_semana BIGINT NOT NULL,
+    horario_abertura TIME,
+    horario_fechamento TIME,
+    horario_consultar INT NOT NULL DEFAULT 0,
+    horario_publicar INT NOT NULL DEFAULT 1,
+    horario_delete INT NOT NULL DEFAULT 0,
+    PRIMARY KEY(horario_id),
+    CONSTRAINT CK_horario_consultar CHECK( horario_consultar IN(0,1) ),
+    CONSTRAINT CK_horario_publicar CHECK( horario_publicar IN(0,1) ),
+    CONSTRAINT CK_horario_delete CHECK( horario_delete IN(0,1) )
+) ENGINE=INNODB;
+
+-- Convites virtuais
+-- Modelos de convites
+CREATE TABLE IF NOT EXISTS salakaboom_convites_modelos(
+    modelo_convite_id BIGINT NOT NULL AUTO_INCREMENT,
+    modelo_convite_titulo VARCHAR(50) NOT NULL,
+    modelo_convite_imagem VARCHAR(200) NOT NULL,
+    modelo_convite_publicar INT NOT NULL DEFAULT 1,
+    modelo_convite_delete INT NOT NULL DEFAULT 0,
+    PRIMARY KEY(modelo_convite_id),
+    CONSTRAINT CK_modelo_convite_publicar CHECK( modelo_convite_publicar IN(0,1) ),
+    CONSTRAINT CK_modelo_convite_delete CHECK( modelo_convite_delete IN(0,1) )
+) ENGINE=INNODB;
+
+-- Logins para enviar convites virtuais
+CREATE TABLE IF NOT EXISTS salakaboom_convites_logins(
+    login_convite_id BIGINT NOT NULL AUTO_INCREMENT,
+    login_convite_usuario VARCHAR(10) NOT NULL,
+    login_convite_senha VARCHAR(10) NOT NULL,
+    login_convite_email VARCHAR(100) NOT NULL,
+    login_convite_delete INT NOT NULL DEFAULT 0,
+    PRIMARY KEY(login_convite_id),
+    UNIQUE KEY(login_convite_email),
+    CONSTRAINT CK_login_convite_delete CHECK( login_convite_delete IN(0,1) )
+) ENGINE=INNODB;
+
+-- Envios de convites virtuais
+CREATE TABLE IF NOT EXISTS salakaboom_convites_envios(
+    envio_convite_id BIGINT NOT NULL AUTO_INCREMENT,
+    envio_convite_festa_aniversariante VARCHAR(50) NOT NULL,
+    envio_convite_festa_data DATE,
+    envio_convite_festa_inicio TIME NOT NULL,
+    envio_convite_festa_fim TIME NOT NULL,
+    envio_convite_festa_idade INT NOT NULL,
+    envio_convite_modelo BIGINT NOT NULL,
+    envio_convite_delete INT NOT NULL DEFAULT 0,
+    PRIMARY KEY(envio_convite_id),
+    CONSTRAINT FK_envio_convite_modelo FOREIGN KEY(envio_convite_modelo) REFERENCES salakaboom_convites_modelos(modelo_convite_id),
+    CONSTRAINT CK_envio_convite_delete CHECK( envio_convite_delete IN(0,1) )
+) ENGINE=INNODB;
+
+CREATE TABLE IF NOT EXISTS salakaboom_convites_envios_convidados(
+    convidado_envio BIGINT NOT NULL,
+    convidado_envio_id BIGINT NOT NULL AUTO_INCREMENT,
+    convidado_envio_nome VARCHAR(50) NOT NULL,
+    convidado_envio_email VARCHAR(100) NOT NULL,
+    PRIMARY KEY(convidado_envio_id),
+    CONSTRAINT FK_convidado_envio FOREIGN KEY(convidado_envio) REFERENCES salakaboom_convites_envios(envio_convite_id) ON DELETE CASCADE
+) ENGINE=INNODB;

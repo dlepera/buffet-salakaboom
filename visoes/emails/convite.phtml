@@ -1,0 +1,74 @@
+<?php
+
+/**
+ * @Autor	: Diego Lepera
+ * @E-mail	: d_lepera@hotmail.com
+ * @Projeto	: Framework MVC
+ * @Data	: 16/01/2014
+ */
+ 
+$params = $this->_obterparams();
+
+# Objetos
+$obj_ec = $params['envio'];
+$obj_mc = $params['modelo'];
+
+$http_host = filter_input(INPUT_SERVER, 'HTTP_HOST');
+    
+?>
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!-- Estilos da página -->    
+    <style type="text/css">
+        <?php include_once '.'. \DL::$dir_css .'todos/dl-emails.css'; ?>
+    </style>
+</head>
+<body>
+    
+    <p style="text-align: center;">
+    	<?= MSG_EMAIL_CASO_NAO_ESTEJA_CONSEGUINDO_VISUALIZAR; ?><br />
+    	
+    	<a href="http://<?= $http_host . \DL::$dir_raiz; ?>/email/contatosite/mostrarhtml/<?= $mod_cs->contato_site_id; ?>">
+    		<?= TXT_LINK_VISUALIZAR_EMAIL_COMO_HTML; ?>
+    	</a>
+    </p>
+    
+    <!-- Cabeçalho do e-mail -->
+    <header class="dl">
+        <h1>
+            <a href="http://<?= $http_host . \DL::$dir_raiz; ?>" class="logotipo" target="_blank" style="background-image: url('http://<?= $http_host . \DL::$dir_raiz . \DL::$dir_css; ?>todos/imagens/logotipo.png');">
+                <?= \DL::$ap_nome; ?>
+            </a>
+        </h1>
+        
+        <div class="slogan"><?= TXT_TITULO_CONVITES_VIRTUAIS; ?></div>
+    </header>
+
+    <div class="dl">
+        <p>Olá <?= $params['convidado']; ?>!</p>
+		
+		<p>
+			O <a href="http://<?= $http_host . \DL::$dir_raiz; ?>" target="_blank">Buffet Salakaboom</a> tem a honra de lhe convidar 
+			para a festa de comemoração do <strong><?= $obj_ec->envio_convite_festa_idade; ?>º</strong> aniversário
+			de <strong><?= $obj_ec->envio_convite_festa_aniversariante; ?></strong>, que acontecerá em
+			<strong><?= \Funcoes::_formatardatahora($obj_ec->envio_convite_festa_data, 'd/m/Y'); ?></strong>, das
+			<strong><?= \Funcoes::_formatardatahora($obj_ec->envio_convite_festa_inicio, 'H\h:i\m'); ?></strong> até
+			<strong><?= \Funcoes::_formatardatahora($obj_ec->envio_convite_festa_fim, 'H\h:i\m'); ?></strong>.
+		</p>
+		
+		<p>
+			<strong>Local:</strong> Buffet Salakaboom<br />
+			<address>
+				R. Agostinho Gomes, 2604<br />
+	            Ipiranga, São Paulo/SP<br />
+	            CEP: 04206-001
+			</address>
+		</p>
+		
+		<img src="http://<?= $http_host . \DL::$dir_raiz ."/{$obj_mc->modelo_convite_imagem}"; ?>" alt="" />
+    </div>
+    
+    <?php include './visoes/emails/_rodape.php'; ?>
+</body>
+</html>

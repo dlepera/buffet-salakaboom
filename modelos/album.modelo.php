@@ -26,9 +26,9 @@ class Album extends Principal{
     /**
      * Obter ou editar o valor da propriedade $album_nome
      * 
-     * @param string $valor : string contendo o valor a ser atribuído à $this->album_nome
+     * @param string $valor - string contendo o valor a ser atribuído à $this->album_nome
      * 
-     * @return string: valor da propriedade $album_nome
+     * @return string - valor da propriedade $album_nome
      */
     public function _album_nome($valor=null){
         return is_null($valor) ?

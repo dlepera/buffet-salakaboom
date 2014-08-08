@@ -71,7 +71,7 @@ class DadoContato extends PrincipalSistema{
     /**
      * Carregar o formulário de edição do registro
      * 
-     * @param int $id: ID do registro a ser selecionado
+     * @param int $id - ID do registro a ser selecionado
      */
     public function _formulario($id=null){
         # Preparar a visão

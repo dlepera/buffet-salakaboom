@@ -1,0 +1,116 @@
+<?php
+
+/**
+ * @Autor	: Diego Lepera
+ * @E-mail	: d_lepera@hotmail.com
+ * @Projeto	: FrameworkDL
+ * @Data	: 24/06/2014 16:49:27
+ */
+
+$perm = $params['perm'];
+
+?>
+
+<div class="dl">
+    <h1><?= TXT_TITULO_DEPOIMENTOS; ?></h1>
+    
+    <div class="mais-opcoes">        
+        <?php include_once './visoes/painel-dl/_form_filtro.phtml'; ?>
+    </div>
+    
+    <form name="editar-lista" method="post" action="<?= \DL::$dir_raiz; ?>">
+        <table class="lista">
+            <tr>
+                <th id="id" class="td-id"><input type="checkbox" /></th>
+                <th id="nome"><?= TXT_TABELA_TITULO_NOME; ?></th>
+                <th id="depoimento"><?= TXT_TABELA_TITULO_DEPOIMENTO; ?></th>
+                <th id="publicar"><?= TXT_TABELA_TITULO_PUBLICADO; ?></th>
+                <th id="opcoes" class="td-opcoes"><?= TXT_TABELA_TITULO_OPCOES; ?></th>
+            </tr>
+
+            <?php 
+            if( !count($params['lista']) )
+                echo '<tr><td colspan="5">', MSG_PADRAO_NENHUM_REGISTRO_ENCONTRADO, '</td></tr>';
+            
+            foreach( $params['lista'] as $l ): ?>
+            <tr>
+                <td headers="id" class="td-id">
+                    <input type="checkbox" name="id[]" value="<?= $l['depoimento_id']; ?>" />
+                </td>
+                <td headers="nome"><?= $l['depoimento_nome']; ?></td>
+                <td headers="email"><?= nl2br($l['depoimento_texto']); ?></td>
+                <td headers="publicar">                    
+                    <input type="checkbox" id="publicar-<?= $l['depoimento_id']; ?>" class="s-ou-n"<?= $l['depoimento_publicar'] == 1 ? ' CHECKED' : ''; ?> />
+                    <label for="publicar-<?= $l['depoimento_id']; ?>"></label>
+                </td>
+                <td headers="opcoes" class="td-opcoes">
+                    <?php if( $perm['remover'] ): ?>
+                    <a href="javascript:;" class="lista remover" title="<?= TXT_LINK_TITLE_REMOVER_REGISTRO; ?>" onclick="if( SelecionarLinha(this) ) RemoverRegistro('<?= MSG_PADRAO_DESEJA_REALMENTE_REMOVER_ESSE_REGISTRO; ?>');">
+                        <?= TXT_LINK_REMOVER; ?>
+                    </a>
+                    <?php endif; ?>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+            
+            <tr class="com-marcados">
+                <td colspan="5">
+                    <?php if( $perm['remover'] ): ?>
+                    <a href="javascript:;" class="remover" title="<?= TXT_LINK_TITLE_REMOVER_REGISTROS_SELECIONADOS; ?>" onclick="RemoverRegistro('<?= MSG_PADRAO_DESEJA_REALMENTE_REMOVER_REGISTROS_SELECIONADOS; ?>');">
+                        <?= TXT_LINK_REMOVER; ?>
+                    </a>
+                    <?php endif; ?>
+                </td>
+            </tr>
+        </table>
+        
+        <div id="paginacao"></div>
+    </form>
+</div>
+
+<script>
+    //<![CDATA[
+    window.onload = function(){
+        <?php if( $perm['remover'] ): ?>
+        $editar_lista = $("form[name='editar-lista']")._dlformulario({
+            controle    : "depoimento/remover",
+            depois      : function(){
+                $(".lista :checkbox:checked").parents("tr").remove();
+            },
+            cktodos     : [true, "tr:first-child :checkbox:first-child", ":checkbox[name='id[]']"],
+            aparencia   : { tema: "<?= \DL::$plugin_formulario_tema; ?>", estilo: "formulario" }
+        });
+        <?php endif; ?>
+        
+        $("#paginacao")._dlpaginacao({
+            pgtotal     : <?= $params['qtde_pg']; ?>,
+            mostrar     : 5,
+            aparencia   : { tema: "<?= \FrameworkDL::$plugin_paginacao_tema; ?>", estilo: "paginacao" }
+        });
+        
+        // Configurar os 'toogles' para salvar as informações automaticamente
+        $("[id^='publicar-']").on("change", function(){
+            var $this    = $(this);
+            var id       = /\-([0-9]+)$/.exec($this.attr("id"));
+                id       = id[id.length-1];
+            var publicar = !this.checked ? 0 : 1;
+                        
+            $.ajax({
+                url     : "<?= \DL::$dir_raiz; ?>/depoimento/salvar",
+                type    : "post",
+                data    : "id="+ id +"&publicar="+ publicar,
+                success : function(json){
+                    var resp = TratarResposta(json);
+                    
+                    $("body")._dlmostrarmsg({
+                        mensagem    : resp.msg,
+                        tipo        : ["alerta", resp.ret],
+                        aparencia   : { tema: "<?= \DL::$plugin_formulario_tema; ?>", estilo: "mensagem" },
+                        botao       : { texto: "x" }
+                    });
+                }
+            });
+        });
+    };
+    //]]>
+</script>

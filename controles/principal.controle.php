@@ -28,19 +28,72 @@ abstract class Principal{
     /**
      * Escolher o tamplate e juntá-lo com os templates padrão (_topo e _rodape)
      * 
-     * @param string $tpl: nome do template a ser carregado
+     * @param string $tpl - nome do template a ser carregado
      */
     public function _escolhertpl($tpl){
         # Topo da página
         $this->obj_v->_template('_topo');
         $this->obj_v->_template($tpl);
         $this->obj_v->_template('_rodape');
+        
+        # Selecionar os dados para contato
+        $mod_dc = new \Modelo\DadoContato();
+        $lis_dc = $mod_dc->_listar(
+            'dado_contato_publicar = 1 AND tipo_dado_rede_social = 0', 
+            'tipo_dado_descr, dado_contato_descr', 
+            'tipo_dado_descr, dado_contato_descr'
+        );
+        
+        $lis_rs = $mod_dc->_listar(
+            'dado_contato_publicar = 1 AND tipo_dado_rede_social = 1', 
+            'tipo_dado_descr, dado_contato_descr', 
+            'tipo_dado_descr, dado_contato_descr, tipo_dado_icone'
+        );
+        
+        # Selecionar a lista de horários de atendimento
+        $mod_h  = new \Modelo\Horario();
+        $lis_h = $mod_h->_listar(
+            'H.horario_publicar = 1', 
+            'H.horario_abertura, H.horario_fechamento, DS.dia_semana_id', 
+            'DS.dia_semana_abrev, H.horario_abertura, H.horario_fechamento'
+        );
+        
+        # Incluir os parâmetros na visão
+        $this->obj_v->_incluirparams('contatos', $lis_dc);
+        $this->obj_v->_incluirparams('redes-sociais', $lis_rs);
+        $this->obj_v->_incluirparams('horarios', $lis_h);
     } // Fim do método _escolhertpl
+    
+    /**
+     * Ações padrões para criar uma lista de registros
+     * 
+     * @param string $ordem - string que contém os campos a serem ordenados
+     * @param string $campos - string que contenham os campos a serem selecionados
+     * @param int $qtde - número de registros a serem exibidos na paginação
+     */
+    public function _listapadrao($ordem = '', $campos = '*', $qtde = 0){
+        # Obter a busca realizada
+        $_get_t = filter_input(INPUT_GET, 't', FILTER_DEFAULT);
+        $_get_c = filter_input(INPUT_GET, 'c', FILTER_DEFAULT);
+        $_get_p = filter_input(INPUT_GET, 'pg', FILTER_SANITIZE_NUMBER_INT);
+        
+        # Montar a string de filtro
+        $filtro = !empty($_get_t) ? "{$_get_c} LIKE '{$_get_t}%'" : null;
+        
+        # Obter a quantidade de registros a serem exibidos
+        $qtde = empty($qtde) ? $_SESSION['usuario_pref_num_registros'] : $qtde;
+        
+        # Incluir os parâmetros na visão
+        $this->obj_v->_incluirparams('_get_c', $_get_c);
+        $this->obj_v->_incluirparams('_get_t', $_get_t);
+        $this->obj_v->_incluirparams('qtde_pg', ceil($this->obj_m->_qtde_registros($filtro)/$qtde));
+        $this->obj_v->_incluirparams('lista', $this->obj_m->_listar($filtro, $ordem, $campos, !$_get_p ? 1 : $_get_p, $qtde));
+    } // Fim do métoto _listapadrao 
     
     /**
      * Salvar o registro no banco de dados
      * 
-     * @param boolean $salvar: define se o registro será salvo ou apenas retornará
+     * @param boolean $salvar - define se o registro será salvo ou apenas retornará
      * a string da query gerada
      * 
      * @return boolean se $salvar é definido como true ou string se $salvar é definido

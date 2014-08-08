@@ -13,7 +13,7 @@
 	<h1><?= TXT_TITULO_ORCAMENTO_ON_LINE; ?></h1>
 	
 	<form name="orcamento" method="post" action="<?= \DL::$dir_raiz; ?>">
-        <fieldset class="l50">
+        <fieldset>
             <legend><?= TXT_LEGENDA_DADOS_PESSOAIS; ?></legend>
             
             <label for="info_nome"><?= TXT_LABEL_NOME_COMPLETO; ?>:</label><br />
@@ -28,11 +28,11 @@
             <input type="text" name="info_telefone" id="info_telefone" title="<?= TXT_LABEL_TELEFONE; ?>" />
         </fieldset>
         
-        <fieldset class="l50">
+        <fieldset>
             <legend><?= TXT_LEGENDA_DADOS_DA_FESTA; ?></legend>
             
             <label for="festa_data"><?= TXT_LABEL_DATA_PRETENDIDA; ?>:</label><br />
-            <input type="text" name="festa_data" id="festa_data" title="<?= TXT_LABEL_DATA_PRETENDIDA; ?>" />
+            <input type="date" name="festa_data" id="festa_data" title="<?= TXT_LABEL_DATA_PRETENDIDA; ?>" />
             <br /><br />
             
             <label for="festa_pacote"><?= TXT_LABEL_PACOTE; ?>:</label><br />
@@ -57,16 +57,16 @@
             <?php if( !count($params['opcionais']) ):
                 echo MSG_PADRAO_NENHUM_REGISTRO_ENCONTRADO;
             else: ?>            
-            <ul class="opcionais">
-            <?php foreach( $params['opcionais'] as $o ): ?>
+            <ul class="orc-opcionais">
+                <?php foreach( $params['opcionais'] as $o ): ?>
                 <li>
                     <label>
                         <input type="checkbox" name="opcionais[]" value="<?= $o['produto_id']; ?>" />
                         <?= $o['produto_nome']; ?><br />
-                        <span class="descr"><?= $o['produto_descr']; ?></span>
+                        <span class="opcional-descr"><?= nl2br($o['produto_descr']); ?></span>
                     </label>
                 </li>
-            <?php endforeach; ?>
+                <?php endforeach; ?>
             </ul>
             <?php endif; ?>
         </fieldset>

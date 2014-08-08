@@ -17,6 +17,7 @@ define('TXT_MODELO_MODULO', 'módulo');
 define('TXT_MODELO_TEMA', 'tema');
 define('TXT_MODELO_ALBUM', 'álbum');
 define('TXT_MODELO_FOTOALBUM', 'foto');
+define('TXT_MODELO_TIPODADOCONTATO', 'tipo de dado de contato');
 
 # Títulos de páginas
 define('TXT_TITULO_CONFIGURACOES_DE_EMAILS', 'Configurações de envio de e-mails');
@@ -49,6 +50,11 @@ define('TXT_TITULO_FORMULARIO_ALTERAR_TEMA', 'Alterar esse tema');
 define('TXT_TITULO_ALBUNS_DE_FOTOS', 'Álbuns de fotos');
 define('TXT_TITULO_FORMULARIO_NOVO_ALBUM_DE_FOTOS', 'Inserir um novo álbum de fotos');
 define('TXT_TITULO_FORMULARIO_ALTERAR_ALBUM_DE_FOTOS', 'Atualizar esse álbum de fotos');
+define('TXT_TITULO_TIPOS_DE_DADOS_DE_CONTATO', 'Tipo de dados de contato');
+define('TXT_TITULO_FORMULARIO_NOVO_TIPO_DE_DADO_PARA_CONTATO', 'Inserir um novo tipo de dado para contato');
+define('TXT_TITULO_INFORMACOES_DA_FOTO', 'Informações da foto');
+define('TXT_TITULO_FORMULARIO_ALTERAR_TIPO_DE_DADO_PARA_CONTATO', 'Atualizar esse tipo de dado para contato');
+define('TXT_TITULO_REDES_SOCIAIS', 'Redes Sociais');
 
 # Títulos de tabelas
 define('TXT_TABELA_TITULO_DESCRICAO', 'Descrição');
@@ -72,7 +78,7 @@ define('TXT_TABELA_TITULO_LINK', 'Link');
 define('TXT_TABELA_TITULO_DIRETORIO', 'Diretório');
 define('TXT_TABELA_TITULO_PADRAO', 'Padrão?');
 define('TXT_TABELA_TITULO_ID', 'ID');
-define('TXT_TITULO_INFORMACOES_DA_FOTO', 'Informações da foto');
+define('TXT_TABELA_TITULO_REDE_SOCIAL', 'Rede Social?');
 
 # Links
 define('TXT_LINK_EDITAR', 'Editar');
@@ -97,6 +103,7 @@ define('TXT_LINK_NOVO_MODULO', 'Novo módulo');
 define('TXT_LINK_TEMAS', 'Temas');
 define('TXT_LINK_NOVO_TEMA', 'Novo tema');
 define('TXT_LINK_NOVO_ALBUNS_DE_FOTOS', 'Novo álbum de fotos');
+define('TXT_LINK_NOVO_TIPO_DE_DADO_DE_CONTATO', 'Novo tipo de dado de contato');
 
 # Atributo 'title' do link
 define('TXT_LINK_TITLE_SAIR_DO_SISTEMA', 'Encerrar a sessão e sair do sistema');
@@ -151,6 +158,8 @@ define('TXT_LABEL_DIRETORIO', 'Diretório');
 define('TXT_LABEL_PADRAO', 'Padrão?');
 define('TXT_LABEL_SELECIONE_UMA_OU_MAIS_FOTOS', 'Selecione uma ou mais fotos');
 define('TXT_LABEL_DEFINIR_COMO_CAPA_DO_ALBUM', 'Definir como capa do álbum?');
+define('TXT_LABEL_REDE_SOCIAL', 'É uma rede social?');
+define('TXT_LABEL_ICONE', 'Ícone');
 
 # Opções
 define('TXT_OPCAO_NAO', 'Não');

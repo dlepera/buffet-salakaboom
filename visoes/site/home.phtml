@@ -9,6 +9,98 @@
 
 ?>
 
-<div class="dl">
+<div id="banner-rotativo"></div>
+
+<div class="dl home">
     <h1><?= TXT_TITULO_PAGINA_INICIAL; ?></h1>
+    
+    <ul class="colunas-2">
+        <li>
+            <p>
+                Venha conhecer o nosso espaço!
+            </p>
+            
+            <p>
+                Totalmente regulamentado conforme normas vigentes.
+            </p>
+        </li>
+        
+        <li>
+            <ul>
+                <li>1000m² de área plana</li>
+                <li>Gerador</li>
+                <li>Ar condicionado</li>
+                <li>Brinquedos de última geração</li>
+            </ul>
+        </li>
+    </ul>
+    
+    <ul class="colunas-3">
+        <li class="depoimentos">
+            <h2><?= TXT_TITULO_DEPOIMENTOS; ?></h2>
+            
+            <?php
+            if( empty($params['depoimento']) ):
+                echo "<p>Ainda não há nenhum depoimento sobre o buffet.<br />"
+                    ."Seja o primeiro, "
+                    ."<a href='javascript:;' onclick=\"AbrirForm('". \DL::$dir_raiz ."/enviar-depoimento');\">"
+                    ."clique aqui"
+                    ."</a>."
+                    ."</p>";
+			else: ?>
+                <p>
+                    <span class="depoimento-aspas">"</span>
+                    <?= nl2br($params['depoimento']['depoimento_texto']); ?>
+                    <span class="depoimento-aspas">"</span>
+                    - 
+                    <span class="depoimento-dono">Enviado por <?= $params['depoimento']['depoimento_nome']; ?> em <?= \Funcoes::_formatardatahora($params['depoimento']['data'], 'd/m/Y H:i'); ?></span>
+                </p>
+            
+		        - <a href="<?= \DL::$dir_raiz; ?>/depoimentos">Legal! Quero ver os depoimentos</a><br />
+		        - <a href="javascript:;" onclick="AbrirForm('<?= \DL::$dir_raiz; ?>/enviar-depoimento');">Quero mandar um depoimento também</a>
+	        <?php endif; ?>
+        </li>
+        
+        <li class="certificado">
+            <h2><?= TXT_TITULO_CERTIFICADO_DE_EXCELENCIA; ?></h2>
+            
+            <p>
+                O <strong>Buffet Salakaboom</strong> possui certificado de <strong>Excelência total em atendimento</strong>.
+                <a href="<?= \DL::$dir_raiz; ?>/certificado-de-excelencia">
+                    Saiba mais
+                </a>
+            </p>
+        </li>
+        
+        <li class="localizacao">
+            <h2><?= TXT_TITULO_LOCALIZACAO; ?></h2>
+            
+            <p>
+                <a href="javascript:;" onclick="window.open('<?= \DL::$dir_raiz; ?>/mapa', 'Mapa', 'width=600px,height=600px');">
+                    Clique aqui
+                </a>
+                para ver o mapa
+            </p>
+        </li>
+    </ul>
 </div>
+
+<script>
+	//<![CDATA[
+    window.onload = function(){
+        // Configurar a galeria de álbuns
+        $("#banner-rotativo")._dlgaleria({
+            loop    	: true,
+            autotroca   : { ativar: true, tempo: 5000 },
+            indicador   : true,
+            fotos       : [
+                <?php foreach( $params['banners'] as $b ): ?>
+                { src: "<?= \DL::$dir_raiz . "/{$b}"; ?>" },
+                <?php endforeach; ?>
+            ],
+            transicao   : { nome: "slide-direita", tempo: "0.5s" },
+            aparencia	: { tema: "<?= \DL::$plugin_galeria_tema; ?>", estilo: "banners" }
+        });
+    };
+    //]]>
+</script>

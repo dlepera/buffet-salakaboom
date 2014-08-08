@@ -44,15 +44,8 @@ $titulo_h1 = !$editando ? TXT_TITULO_FORMULARIO_NOVO_CARDAPIO : TXT_TITULO_FORMU
             <br /><br />
 
             <label><?= TXT_LABEL_PUBLICAR; ?></label>
-            <label>
-                <input type="radio" name="publicar" value="1"<?= $mod->cardapio_publicar == 1 || !$editando ? ' CHECKED' : ''; ?> />
-                <?= TXT_OPCAO_SIM; ?>
-            </label>
-
-            <label>
-                <input type="radio" name="publicar" value="0"<?= $mod->cardapio_publicar == 0 ? ' CHECKED' : ''; ?> />
-                <?= TXT_OPCAO_NAO; ?>
-            </label>
+            <input type="checkbox" name="publicar" id="publicar" value="1" class="s-ou-n"<?= $mod->cardapio_publicar == 1 || !$editando ? ' CHECKED' : ''; ?> />
+            <label for="publicar"></label>
         </fieldset>
         
         <button type="submit"><?= TXT_BOTAO_SUBMIT_SALVAR; ?></button>

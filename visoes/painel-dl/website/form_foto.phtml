@@ -33,27 +33,13 @@ $mod = $params['modelo'];
         <br /><br />
         
         <label><?= TXT_LABEL_DEFINIR_COMO_CAPA_DO_ALBUM; ?></label>
-        <label>
-            <input type="radio" name="capa" value="1"<?= $mod->foto_album_capa == 1 ? ' CHECKED' : ''; ?> />
-            <?= TXT_OPCAO_SIM; ?>
-        </label>
-        
-        <label>
-            <input type="radio" name="capa" value="0"<?= $mod->foto_album_capa == 0 ? ' CHECKED' : ''; ?> />
-            <?= TXT_OPCAO_NAO; ?>
-        </label>
+        <input type="checkbox" name="capa" id="capa" value="1" class="s-ou-n"<?= $mod->foto_album_capa == 1 ? ' CHECKED' : ''; ?> />
+        <label for="capa"></label>
         <br /><br />
         
         <label><?= TXT_LABEL_PUBLICAR; ?></label>
-        <label>
-            <input type="radio" name="publicar" value="1"<?= $mod->foto_album_publicar == 1 ? ' CHECKED' : ''; ?> />
-            <?= TXT_OPCAO_SIM; ?>
-        </label>
-
-        <label>
-            <input type="radio" name="publicar" value="0"<?= $mod->foto_album_publicar == 0 ? ' CHECKED' : ''; ?> />
-            <?= TXT_OPCAO_NAO; ?>
-        </label>
+        <input type="checkbox" name="publicar" id="publicar" value="1" class="s-ou-n"<?= $mod->foto_album_publicar == 1 || !$editando ? ' CHECKED' : ''; ?> />
+        <label for="publicar"></label>
         <br /><br />
         
         <button type="submit"><?= TXT_BOTAO_SUBMIT_SALVAR; ?></button>

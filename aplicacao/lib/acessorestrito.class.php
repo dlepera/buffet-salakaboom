@@ -79,10 +79,10 @@ class AcessoRestrito{
 			$lis_u['usuario_conf_reset']        = '0';
             $lis_u['tema_diretorio']            = 'painel/';
 			$lis_u['usuario_pref_idioma']       = 1;
-			$lis_u['usuario_pref_qtde_registros'] 	= 20;
+			$lis_u['usuario_pref_num_registros']= 20;
 			$lis_u['formato_data_data']         = 'd/m/Y';
 			$lis_u['formato_data_hora']         = 'H:i';
-			$lis_u['formato_data_completo'] 	= 'd/m/Y H:i';
+			$lis_u['formato_data_completo']     = 'd/m/Y H:i';
 			
 			# Selecionar os módulos ativos do sistema
 			$query = "SELECT"
@@ -143,7 +143,7 @@ class AcessoRestrito{
         return $this->_carregarsessao($lis_u, "{$this->sessao_prefixo}{$lis_u['usuario_id']}");
 	} // Fim do método _fazerlogin
 	
-	private function _carregarsessao(array $dados, $sessao_id){
+	public function _carregarsessao(array $dados, $sessao_id){
         # Definir o nome da sessão
         session_name($this->sessao_nome);
         

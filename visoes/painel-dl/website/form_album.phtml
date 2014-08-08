@@ -42,15 +42,8 @@ $titulo_h1 = !$editando ? TXT_TITULO_FORMULARIO_NOVO_ALBUM_DE_FOTOS : TXT_TITULO
             <?php endif; ?>
             
             <label><?= TXT_LABEL_PUBLICAR; ?></label>
-            <label>
-                <input type="radio" name="publicar" value="1"<?= $mod->album_publicar == 1 || !$editando ? ' CHECKED' : ''; ?> />
-                <?= TXT_OPCAO_SIM; ?>
-            </label>
-
-            <label>
-                <input type="radio" name="publicar" value="0"<?= $mod->album_publicar == 0 ? ' CHECKED' : ''; ?> />
-                <?= TXT_OPCAO_NAO; ?>
-            </label>
+            <input type="checkbox" name="publicar" id="publicar" value="1" class="s-ou-n"<?= $mod->album_publicar == 1 || !$editando ? ' CHECKED' : ''; ?> />
+            <label for="publicar"></label>
         </fieldset>
         
         <button type="submit"><?= $editando ? TXT_BOTAO_SUBMIT_SALVAR : TXT_BOTAO_SUBMIT_SALVAR_E_ENVIAR_AS_FOTOS; ?></button>

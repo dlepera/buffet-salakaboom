@@ -1,0 +1,60 @@
+/*
+ * @Autor   : Diego Lepera
+ * @E-mail  : d_lepera@hotmail.com
+ * @Projeto : Framework MVC / Site
+ * @Data    : 26/03/2014
+ */
+
+/* --------------------------------------------------------------------------------------------------------------------------
+ * Fade-in / Fade-out
+ * ----------------------------------------------------------------------------------------------------------------------- */
+@-webkit-keyframes fadein {
+    from {
+        /* Aparência */
+        opacity: 0;
+    }
+    
+    to {
+        /* Aparência */
+        opacity: 100;
+    }
+}
+
+@-webkit-keyframes fadeout {
+    from {
+        /* Aparência */
+        opacity: 100;
+    }
+    
+    to {
+        /* Aparência */
+        opacity: 0;
+    }
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------
+ * Para baixo / Para cima
+ * ----------------------------------------------------------------------------------------------------------------------- */
+@-webkit-keyframes para-baixo{
+    from {
+        /* Posicionamento */
+        margin-top: -100%;
+    }
+    
+    to {
+        /* Posicionamento */
+        margin-top: 0;
+    }
+}
+
+@-webkit-keyframes para-cima{
+    from {
+        /* Posicionamento */
+        margin-top: 0;
+    }
+    
+    to {
+        /* Posicionamento */
+        margin-top: -100%;
+    }
+}

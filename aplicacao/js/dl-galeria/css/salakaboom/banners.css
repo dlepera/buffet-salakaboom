@@ -1,0 +1,121 @@
+/**
+ * @Autor	: Diego Lepera
+ * @E-mail	: d_lepera@hotmail.com
+ * @Projeto	: FrameworkDL
+ * @Data	: Aug 4, 2014 10:53:34 AM
+ */
+
+/* --------------------------------------------------------------------------------------------------------------------
+ * Galeria
+ * ----------------------------------------------------------------------------------------------------------------- */
+.salakaboom.banners{
+    /* Tamanho */
+    box-sizing  : border-box;
+    width       : 90%;
+    
+    /* Posicionamento */
+    position: relative;
+    
+    /* Margens e espaçamentos */
+    margin  : 2% 5% 40px 5%;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------
+ * <figure> : criação do contexto da imagem
+ * ----------------------------------------------------------------------------------------------------------------- */
+.salakaboom.banners > figure{
+    /* Tamanho */
+    width: 100%;
+    
+    /* Margens e espaçamentos */
+    padding : 0;
+    margin  : 0;
+    
+    /* Aparência */
+    box-sizing      : border-box;
+    display         : none;
+    opacity         : 0;
+    
+    /* Posicionamento */
+    position: relative;
+}
+
+.salakaboom.banners > figure:first-child{
+    /* Aparência */
+    display: block;
+    opacity: 1;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------
+ * <img> : imagem
+ * ----------------------------------------------------------------------------------------------------------------- */
+.salakaboom.banners > figure > img{
+    /* Tamanho */
+    box-sizing  : border-box;
+    max-width   : 100%;
+    max-height  : 100%;
+    
+    /* Aparência */
+    border-radius   : 8px;
+    border          : 4px solid orange;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------
+ * <div.dl-galeria-indicador> : criação do contexto da imagem
+ * ----------------------------------------------------------------------------------------------------------------- */
+.salakaboom.banners > .dl-galeria-indicador{   
+    /* Margens e espaçamentos */
+    padding: 0 1%;
+    margin : 0 5%;
+    
+    /* Posicionamento */
+    position: absolute;
+    bottom  : -30px;
+    
+    /* Formatação do texto */
+    text-align: center;
+    
+    /* Tamanho */
+    box-sizing  : border-box;
+    width       : 90%;
+}
+
+.salakaboom.banners > .dl-galeria-indicador > a{
+    /* Aparência */
+    border-radius   : 50%;
+    border          : 3px solid #FFF;
+    background-color: orange;
+    
+    /* Posicionamento */
+    /* float: left; */
+    display: inline-block;
+    
+    /* Tamanho */
+    width   : 8px;
+    height  : 8px;
+    
+    /* Formatação do texto */
+    color: transparent;
+    
+    /* Margens e espaçamentos */
+    margin: 0 1%;
+    
+    /* Transição */
+    transition: border-color 0.75s;
+}
+
+.salakaboom.banners > .dl-galeria-indicador > a:first-child{
+    /* Margens e espaçamentos */
+    margin-left: 0;
+}
+
+.salakaboom.banners > .dl-galeria-indicador > a:last-child{
+    /* Margens e espaçamentos */
+    margin-right: 0;
+}
+
+.salakaboom.banners > .dl-galeria-indicador > a.atual{
+    /* Aparência */
+    background-color: #FFF;
+    border-color    : orange;
+}

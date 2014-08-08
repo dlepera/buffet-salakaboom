@@ -1,0 +1,478 @@
+/**
+ * @Autor	: Diego Lepera
+ * @E-mail	: d_lepera@hotmail.com
+ * @Projeto	: FrameworkDL
+ * @Data	: Aug 1, 2014 5:10:42 PM
+ */
+
+.colunas-2, .colunas-3{
+    /* Aparência */
+    display     : table;
+    list-style  : none;
+    
+    /* Margens e espaçamentos */
+    padding : 0;
+    margin  : 2% 0;
+    
+    /* Tamanho */
+    width: 100%;
+}
+
+.colunas-2 > li, .colunas-3 > li{
+    /* Posicionamento */
+    float: left;
+    
+    /* Tamanho */
+    box-sizing: border-box;
+}
+
+.colunas-2 > li{
+    /* Tamanho */
+    width: 50%;
+}
+
+.colunas-3 > li{
+    /* Tamanho */
+    width: 33%;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------
+ * DIV acima do conteúdo
+ * ----------------------------------------------------------------------------------------------------------------- */
+.sobre-tela{
+    /* Posicionamento */
+    position: fixed;
+    top     : 0;
+    left    : 0;
+    z-index : 10;
+    
+    /* Tamanho */
+    box-sizing  : border-box;
+    width       : 100%;
+    height      : 100%;
+    
+    /* Margens e espaçamentos */
+    padding-top: 7%;
+    
+    /* Aparência */
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.sobre-tela > div.dl{
+    /* Tamanho */
+    box-sizing  : border-box;
+    max-height  : 70%;
+    width       : 50%;
+    
+    /* Aparência */
+    overflow-y: auto;
+    
+    /* Margens e espaçamentos */
+    margin: auto auto;
+}
+
+/* ---------------------------------------------------------------------------------------------------------
+ * Carregando
+ * ------------------------------------------------------------------------------------------------------ */
+.carregando{
+    /* Aparência */
+    background-color    : #FFF;
+    background-image    : url('imagens/loadbar.gif');
+    background-repeat   : no-repeat;
+    background-position : bottom 2px center;
+    border-radius       : 10px;
+    
+    /* Margens e espaçamentos */
+    margin-top      : 15%;
+    margin-left     : calc(50% - 172px);
+    padding-left    : 3px;
+    padding-right   : 3px;
+    padding-bottom  : 25px;
+    
+    /* Tamanho */
+    width       : 345px;
+    min-height  : 22px;
+    
+    /* Formatação do texto */
+    line-height : 25px;
+    font-style  : italic;
+    color       : #069;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------
+ * Página inicial
+ * ----------------------------------------------------------------------------------------------------------------- */
+.home > h1{
+    /* Aparência */
+    display: none;
+}
+
+.home > .colunas-2 > li:first-child{
+    /* Aparência */
+    background-image    : url('imagens/venha-conhecer-nosso-espaco.png');
+    background-position : center;
+    background-repeat   : no-repeat;
+    background-size     : contain;
+    
+    /* Formatação do texto */
+    color: transparent;
+    
+    /* Tamanho */
+    height: 250px;
+}
+
+.home > .colunas-2 > li:last-child{
+    /* Formatação do texto */
+    font-family : "Comic Sans MS";
+    font-size   : 20px;
+    line-height : 50px;
+    text-shadow : 2px 2px 3px #999;
+}
+
+.home > .colunas-3 > li{
+    /* Margens e espaçamentos */
+    padding-left: 50px;
+    
+    /* Tamanho */
+    width: 31%;
+    
+    /* Posicionamento */
+    position: relative;
+}
+
+.home > .colunas-3 > li:nth-child(2){
+    /* Margens e eespaçamentos */
+    margin: 0 3.5%;
+}
+
+.home > .colunas-3 > li:before{
+    /* Posicionamento */
+    position: absolute;
+    top     : 20px;
+    left    : 0;
+    
+    /* Conteúdo */
+    content: " ";
+    
+    /* Tamanho */
+    width   : 40px;
+    height  : 40px;
+    
+    /* Aparência */
+    background-image: url('icones/sprite-home.png');
+}
+
+.home > .colunas-3 > li.certificado:before{
+    /* Aparência */
+    background-position-y: 80px;
+}
+
+.home > .colunas-3 > li.localizacao:before{
+    /* Aparência */
+    background-position-y: 40px;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------
+ * Depoimentos
+ * ----------------------------------------------------------------------------------------------------------------- */
+.depoimento-aspas{
+    /* Formatação do texto */
+    color       : orange;
+    font-weight : bold;
+}
+
+.depoimento-dono{
+    /* Formatação do texto */
+    color: #888;
+}
+
+div.dl.depoimentos{
+    /* Aparência */
+    display: table;
+}
+
+div.dl.depoimentos > p{
+    /* Margens e espaçamentos */
+    padding-bottom  : 1%;
+    margin-top      : 1%;
+    
+    /* Aparência */
+    border-bottom: 1px dashed #DDD;
+    
+    /* Tamanho */
+    box-sizing  : border-box;
+    width       : 48%;
+    
+    /* Posicionamento */
+    float: left;
+}
+
+div.dl.depoimentos > p:nth-child(even){
+    /* Margens e espaçamentos */
+    margin-left: 3%;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------
+ * Institucional
+ * ----------------------------------------------------------------------------------------------------------------- */
+#inst-linha-tempo{
+    /* Formatação do texto */
+    color       : orange;
+    text-align  : center;
+    line-height : 25px;
+    
+    /* Tamanho */
+    width: 100%;
+    
+    /* Aparência */
+    border-top      : 1px dashed #CCC;
+    border-bottom   : 1px dashed #CCC;
+    display         : table;
+    
+    /* Margens e espaçamentos */
+    margin-bottom: 2%;
+}
+
+#inst-linha-tempo > .ano{
+    /* Posicionamento */
+    float: left;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------
+ * Nosso Cardápio
+ * ----------------------------------------------------------------------------------------------------------------- */
+.cardapio > .lista-cardapio{
+    /* Aparência */
+    display     : table;
+    list-style  : none;
+    
+    /* Margens e espaçamentos */
+    margin  : 0;
+    padding : 0;
+    
+    /* Tamanho */
+    width: 100%;
+}
+
+.cardapio > .lista-cardapio > li{
+    /* Aparência */
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius   : 8px;
+    display         : table;
+    
+    /* Margens e espaçamentos */
+    padding : 2%;
+    margin  : 1% 0;
+    
+    /* Tamanho */
+    box-sizing  : border-box;
+    width       : 100%;
+    
+    /* Transição */
+    transition: background-color 0.75s;
+}
+
+.cardapio > .lista-cardapio > li:hover{
+    /* Aparência */
+    background-color: rgba(0, 0, 0, 0.2);
+    cursor          : pointer;
+}
+
+.cardapio > .lista-cardapio > li > h2{
+    /* Formatação do texto */
+    font-weight: normal;
+    
+    /* Margens e espaçamentos */
+    margin-top      : 0;
+    margin-bottom   : 1%;
+}
+
+.cardapio > .lista-cardapio > li > .cardapio-descr{
+    /* Formatação do texto */
+    color: #1F80CC;
+}
+
+.cardapio > .lista-cardapio > li > .cardapio-itens{
+    /* Aparência */
+    display: none;
+    
+    /* Margens e espaçamentos */
+    margin  : 1% 0 0 0;
+}
+
+.cardapio > .lista-cardapio > li > .cardapio-itens > li{
+    /* Posicionamento */
+    float: left;
+    
+    /* Tamanho */
+    width: 50%;
+    
+    /* Formatação do texto */
+    line-height: 22px;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------
+ * Nossos parceiros
+ * ----------------------------------------------------------------------------------------------------------------- */
+.parceiros > .parceiros-lista,
+.parceiros > .parceiros-lista .parceiro{
+    /* Aparência */
+    display     : table;
+    list-style  : none;
+    
+    /* Margens e espaçamentos */
+    margin  : 0;
+    padding : 0;
+    
+    /* Tamanho */
+    width: 100%;
+}
+
+
+
+.parceiros > .parceiros-lista .parceiro > .parceiro-cartao{
+    /* Tamanho */
+    box-sizing  : border-box;
+    width       : 48%;
+    
+    /* Margens e espaçamentos */
+    padding         : 1%;
+    margin-bottom   : 2%;
+    
+    /* Aparência */
+    border          : 1px solid #DDD;
+    box-shadow      : 3px 3px 9px #AAA;
+    background-color: #FFF;
+    
+    /* Posicionamento */
+    float: left;
+}
+
+.parceiros > .parceiros-lista .parceiro > .parceiro-cartao:nth-child(odd){
+    /* Margens e espaçamentos */
+    margin-right: 4%;
+}
+
+.parceiros > .parceiros-lista .parceiro > .parceiro-cartao > img{
+    /* Aparência */
+    background-color: #FFF;
+    border          : 1px solid #DDD;
+    border-radius   : 8px;
+    
+    /* Margens e espaçamentos */
+    padding: 1%;
+    
+    /* Tamanho */
+    max-height  : 80px;
+    max-width   : 200px; 
+}
+
+/* --------------------------------------------------------------------------------------------------------------------
+ * Orçamento on-line
+ * ----------------------------------------------------------------------------------------------------------------- */
+.orcamento .orc-opcionais{
+    /* Aparência */
+    display     : table;
+    list-style  : none;
+    
+    /* Margens e espaçamentos */
+    margin  : 0;
+    padding : 0;
+}
+
+.orcamento .orc-opcionais > li{
+    /* Margens e espaçamentos */
+    padding : 1% 0;
+    
+    /* Aparência */
+    border-bottom: 1px dotted #CCC;
+    
+    /* Posicionamento */
+    float: left;
+    
+    /* Tamanho */
+    box-sizing  : border-box;
+    width       : 48%;
+}
+
+.orcamento .orc-opcionais > li:nth-child(2n+1){
+    /* Margens e espaçamentos */
+    margin-right: 4%;
+}
+
+.orcamento .opcional-descr{
+    /* Formatação do texto */
+    color: #999;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------
+ * Fale conosco
+ * ----------------------------------------------------------------------------------------------------------------- */
+.fale-conosco > .dados-para-contato{
+    /* Posicionamento */
+    position: absolute;
+    top     : 10%;
+    right   : 5%;
+    
+    /* Tamanho */
+    box-sizing  : border-box;
+    width       : 45%;
+    
+    /* Margens e espaçamentos */
+    padding: 2% 1%;
+    
+    /* Aparência */
+    background-color: #EFEFEF;
+    border-top      : 1px solid #DDD;
+    border-bottom   : 1px solid #DDD;
+}
+
+.fale-conosco > .dados-para-contato > .redes-sociais{
+    /* Aparência */
+    list-style  : none;
+    display     : table;
+    
+    /* Margens e espaçamentos */
+    margin  : 0;
+    padding : 0;
+    
+    /* Tamanho */
+    width: 100%;
+}
+
+.fale-conosco > .dados-para-contato > .redes-sociais > li{
+    /* Posicionamento */
+    float: left;
+    
+    /* Tamanho */
+    box-sizing  : border-box;
+    width       : 20%; 
+}
+
+/* --------------------------------------------------------------------------------------------------------------------
+ * Redes sociais acima do rodapé
+ * ----------------------------------------------------------------------------------------------------------------- */
+#redes-sociais{
+    /* Tamanho */
+    width: auto;
+    
+    /* Posicionamento */
+    position: relative;
+    
+    /* Formatação do texto */
+    text-align: center;
+    
+    /* Margens e espaçamentos */
+    margin: 1% 0;
+}
+
+#redes-sociais img{
+    /* Tamanho */
+    max-width   : 32px;
+    max-height  : 32px;
+}
+
+#redes-sociais a:not(:first-child){
+    /* Margens e espaçamentos */
+    margin-left: 1%;
+}

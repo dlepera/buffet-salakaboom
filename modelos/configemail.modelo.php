@@ -26,21 +26,20 @@ class ConfigEmail extends Principal{
     /**
      * Obter ou editar o valor da propriedade $config_email_titulo
      * 
-     * @param string $valor: string contendo o valor a ser atribuído à $this->config_email_titulo
+     * @param string $valor - string contendo o valor a ser atribuído à $this->config_email_titulo
      * 
      * @return string: valor da propriedade $config_email_titulo
      */
     public function _config_email_titulo($valor=null){
-        if( is_null($valor) )
-            return $this->config_email_titulo;
-        
-        return $this->config_email_titulo = (string)$valor;
+        return is_null($valor) ?
+            (string)$this->config_email_titulo      
+        : $this->config_email_titulo = (string)$valor;
     } // Fim do método _config_email_titulo
     
     /**
      * Obter ou editar o valor da propriedade $config_email_host
      * 
-     * @param string $valor: string contendo o valor a ser atribuído à $this->config_email_host
+     * @param string $valor - string contendo o valor a ser atribuído à $this->config_email_host
      * 
      * @return string: valor da propriedade $config_email_host
      */
@@ -54,20 +53,19 @@ class ConfigEmail extends Principal{
     /**
      * Obter ou editar o valor da propriedade $config_email_porta
      * 
-     * @param int $valor: string contendo o valor a ser atribuído à $this->config_email_porta
+     * @param int $valor - string contendo o valor a ser atribuído à $this->config_email_porta
      * 
      * @return int: valor da propriedade $config_email_porta
      */
     public function _config_email_porta($valor=null){
-        if( is_null($valor) )
-            return $this->config_email_porta;
-        
-        return $this->config_email_porta = (int)$valor;
+        return is_null($valor) ?
+            (int)$this->config_email_porta
+        : $this->config_email_porta = (int)$valor;
     } // Fim do método _config_email_porta
     
     /**
      * Obter ou editar o valor da propriedade $config_email_autent
-     * @param string $valor: string contendo o valor a ser atribuído à $this->config_email_autent
+     * @param string $valor - string contendo o valor a ser atribuído à $this->config_email_autent
      * 
      * @return int: valor da propriedade $config_email_autent
      */
@@ -84,49 +82,46 @@ class ConfigEmail extends Principal{
     /**
      * Obter ou editar o valor da propriedade $config_email_cripto
      * 
-     * @param string $valor: string contendo o valor a ser atribuído à $this->config_email_cripto
+     * @param string $valor - string contendo o valor a ser atribuído à $this->config_email_cripto
      * 
      * @return string: valor da propriedade $config_email_cripto
      */
     public function _config_email_cripto($valor=null){
-        if( is_null($valor) )
-            return $this->config_email_cripto;
-        
-        return $this->config_email_cripto = (string)$valor;
+        return is_null($valor) ?
+            (string)$this->config_email_cripto
+        : $this->config_email_cripto = (string)$valor;
     } // Fim do método _config_email_cripto
     
     /**
      * Obter ou editar o valor da propriedade $config_email_conta
      * 
-     * @param string $valor: string contendo o valor a ser atribuído à $this->config_email_conta
+     * @param string $valor - string contendo o valor a ser atribuído à $this->config_email_conta
      * 
      * @return string: valor da propriedade $config_email_conta
      */
     public function _config_email_conta($valor=null){
-        if( is_null($valor) )
-            return $this->config_email_conta;
-        
-        return $this->config_email_conta = (string)$valor;
+        return is_null($valor) ?
+            (string)$this->config_email_conta
+        : $this->config_email_conta = (string)$valor;
     } // Fim do método _config_email_conta
     
     /**
      * Obter ou editar o valor da propriedade $config_email_senha
      * 
-     * @param string $valor: string contendo o valor a ser atribuído à $this->config_email_senha
+     * @param string $valor - string contendo o valor a ser atribuído à $this->config_email_senha
      * 
      * @return string: valor da propriedade $config_email_senha
      */
     public function _config_email_senha($valor=null){
-        if( is_null($valor) )
-            return $this->config_email_senha;
-        
-        return $this->config_email_senha = (string)$valor;
+        return is_null($valor) ?
+            (string)$this->config_email_senha
+        : $this->config_email_senha = (string)$valor;
     } // Fim do método _config_email_senha
     
     /**
      * Obter ou editar o valor da propriedade $config_email_de_email
      * 
-     * @param string $valor: string contendo o valor a ser atribuído à $this->config_email_de_email
+     * @param string $valor - string contendo o valor a ser atribuído à $this->config_email_de_email
      * 
      * @return string: valor da propriedade $config_email_de_email
      */
@@ -143,21 +138,20 @@ class ConfigEmail extends Principal{
     /**
      * Obter ou editar o valor da propriedade $config_email_de_nome
      * 
-     * @param string $valor: string contendo o valor a ser atribuído à $this->config_email_de_nome
+     * @param string $valor - string contendo o valor a ser atribuído à $this->config_email_de_nome
      * 
      * @return string: valor da propriedade $config_email_de_nome
      */
     public function _config_email_de_nome($valor=null){
-        if( is_null($valor) )
-            return $this->config_email_de_nome;
-        
-        return $this->config_email_de_nome = (string)$valor;
+        return is_null($valor) ?
+            (string)$this->config_email_de_nome
+        : $this->config_email_de_nome = (string)$valor;
     } // Fim do método _config_email_de_nome
     
     /**
      * Obter ou editar o valor da propriedade $config_email_responder_para
      * 
-     * @param string $valor: string contendo o valor a ser atribuído à $this->config_email_responder_para
+     * @param string $valor - string contendo o valor a ser atribuído à $this->config_email_responder_para
      * 
      * @return string: valor da propriedade $config_email_responder_para
      */
@@ -173,7 +167,7 @@ class ConfigEmail extends Principal{
     
     /**
      * Obter ou editar o valor da propriedade $config_email_html
-     * @param string $valor: string contendo o valor a ser atribuído à $this->config_email_html
+     * @param string $valor - string contendo o valor a ser atribuído à $this->config_email_html
      * 
      * @return int: valor da propriedade $config_email_html
      */
@@ -189,7 +183,7 @@ class ConfigEmail extends Principal{
     
     /**
      * Obter ou editar o valor da propriedade $config_email_principal
-     * @param string $valor: string contendo o valor a ser atribuído à $this->config_email_principal
+     * @param string $valor - string contendo o valor a ser atribuído à $this->config_email_principal
      * 
      * @return int: valor da propriedade $config_email_principal
      */
@@ -206,7 +200,7 @@ class ConfigEmail extends Principal{
     /**
      * Salvar determinado registro
      * 
-     * @param boolean $salvar: define se o registro será salvo ou apenas
+     * @param boolean $salvar - define se o registro será salvo ou apenas
      * será gerada a query de insert/update
      */
     protected function _salvar($salvar=true){

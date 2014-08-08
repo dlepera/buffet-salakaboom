@@ -42,6 +42,30 @@
         <button type="submit"><?= TXT_BOTAO_SUBMIT_ENVIAR; ?></button>
         <button type="reset"><?= TXT_BOTAO_RESET_CANCELAR; ?></button>
     </form>
+    
+    <div class="dados-para-contato">
+        <p>Para melhor atendê-lo também disponibilizamos os canais de comunicação abaixo:</p>
+        
+        <ul class="contato">
+            <?php foreach( $params['contatos'] as $c ): ?>
+            <li>
+                <?= $c['tipo_dado_descr']; ?>: <?= $c['dado_contato_descr']; ?>
+            </li>
+            <?php endforeach; ?>
+        </ul>
+        
+        <p>... e não deixe de nos acompanhar nas redes sociais:</p>
+        
+        <ul class="redes-sociais">
+            <?php foreach( $params['redes-sociais'] as $rs ): ?>
+            <li>
+                <a href="<?= $rs['dado_contato_descr']; ?>" target="_blank">
+                    <img src="<?= \DL::$dir_raiz .'/'. $rs['tipo_dado_icone']; ?>" />
+                </a>
+            </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
 </div>
 
 <script>

@@ -23,7 +23,7 @@ class Cardapio extends Principal{
     /**
      * Obter ou editar o valor da propriedade $cardapio_titulo
      * 
-     * @param string $valor : string contendo o valor a ser atribuído à $this->cardapio_titulo
+     * @param string $valor - string contendo o valor a ser atribuído à $this->cardapio_titulo
      * 
      * @return string: valor da propriedade $cardapio_titulo
      */
@@ -36,7 +36,7 @@ class Cardapio extends Principal{
     /**
      * Obter ou editar o valor da propriedade $cardapio_descr
      * 
-     * @param string $valor : string contendo o valor a ser atribuído à $this->cardapio_descr
+     * @param string $valor - string contendo o valor a ser atribuído à $this->cardapio_descr
      * 
      * @return string: valor da propriedade $cardapio_descr
      */
@@ -62,7 +62,7 @@ class Cardapio extends Principal{
 	/**
      * Salvar determinado registro
      * 
-     * @param boolean $salvar : define se o registro será salvo ou apenas
+     * @param boolean $salvar - define se o registro será salvo ou apenas
      * será gerada a query de insert/update
      */
     protected function _salvar($salvar=true){        

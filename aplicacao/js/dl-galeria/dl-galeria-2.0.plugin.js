@@ -34,6 +34,8 @@
             // titulo (opcional): título a ser exibido da foto
             // descr (opcional): descrição a ser exibida juntamente com a foto
             // ir (opcional): link para onde a imagem deve direcionar ao ser clicada
+            // js (opcional): ação JS a ser executada (só funciona caso a opção 'ir' não
+            //  tenha sido definida
             fotos: [],
             
             // Opcões da transição a ser utilizada
@@ -45,7 +47,13 @@
             // tema (obrigatório): nome do tema a ser utilizado
             // estilo (obrigatório): nome da folha de estilo que pertence ao
             // tema selecionado que deverá ser aplicada nessa galeria
-            aparencia: { tema: "galeria-2", estilo: "galeria" }
+            aparencia: { tema: "galeria-2", estilo: "galeria" },
+            
+            // Definir a auto troca de imagens, como numa apresentação de slides
+            // ativar (obrigatório): ativar ou desativar a opção
+            // tempo (obrigatório): tempo que a imagem será exibida antes de ser alterada
+            // para a próxima
+            autotroca: { ativar: false, tempo: 10000 }
         };
         
         // Unir os valores de configuração do usuário com os valores padrão
@@ -73,7 +81,7 @@
         for(var i = 0; i < qtde_f; i++){
             var foto    = opcoes.fotos[i];
             var $figure = $(document.createElement("figure")).attr({
-                onclick: foto.ir !== undefined ? "window.location = '"+ foto.ir +"';" : ""
+                onclick: foto.ir !== undefined ? "window.location = '"+ foto.ir +"';" : foto.js !== undefined ? foto.js : ""
             }).appendTo($this);
             
             // Incluir a imagem
@@ -151,7 +159,7 @@
         /**
          * Configurar o indicador
          */
-        if( opcoes.minis ){
+        if( opcoes.indicador ){
             var $indic = $(document.createElement("div")).addClass('dl-galeria-indicador').appendTo($this);
             
             for(var i = 0; i < qtde_f; i++){
@@ -166,6 +174,15 @@
             } // Fim do for(i)
         } // Fim if( opcoes.minis )
             
+        /**
+         * Configurar a auto-troca das imagens
+         */
+        if( opcoes.autotroca.ativar ){
+            window.setInterval(function(){ 
+                $this.find("> figure")._dltrocaritem($this.find("> figure:visible").index()+1, opcoes.transicao, opcoes.loop);
+            }, opcoes.autotroca.tempo);
+        } // Fim if( opcoes.autotroca.ativar )
+        
         return $this;
     };
     

@@ -5,12 +5,15 @@
  * @Data	: 20/05/2014 11:43:08
  */
 
-var dir_raiz = "/framework/";
+var dir_raiz = "/buffet-salakaboom/";
 
 function CarregarCSS(arquivo_css){
+    // Tratar o nome do arquivo CSS
+    arquivo_css = dir_raiz.replace(/\/$/, "") +"/"+ arquivo_css.replace(dir_raiz, "").replace(/^\//, "");
+    
     $(document).ready(function(){
         // Verificar se o arquivo CSS já não foi carregado
-        $css_carregado = $("link[rel='stylesheet'][href='"+ arquivo_css +"']");
+        var $css_carregado = $("link[rel='stylesheet'][href='"+ arquivo_css +"']");
 
         if( $css_carregado.length > 0 )
             return true; // Arquivo já carregado
@@ -19,11 +22,11 @@ function CarregarCSS(arquivo_css){
         // - Incluir a TAG na sessão HEAD da página
         // Obs.: Para manter organizado a folha de estilo será adicionada
         // em seguida à última
-        $link = $(document.createElement("link")).attr({
-            rel: 'stylesheet',
-            type: 'text/css',
-            media: 'all',
-            href: arquivo_css
+        $(document.createElement("link")).attr({
+            rel     : 'stylesheet',
+            type    : 'text/css',
+            media   : 'all',
+            href    : arquivo_css
         }).insertAfter("html head link:last-of-type");
     });
 

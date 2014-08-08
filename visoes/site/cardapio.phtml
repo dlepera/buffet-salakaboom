@@ -14,16 +14,16 @@ $mod_i = $params['item'];
 <div class="dl cardapio">
     <h1><?= TXT_TITULO_CARDAPIO; ?></h1>
     
-    <?= $params['txt_pagina']; ?>
+    <p>Aqui você monta o cardápio da sua <strong>festa</strong> como você quiser e tudo é servido à  vontade!</p>
     
-    <ul class="cardapio">
+    <ul class="lista-cardapio">
         <?php foreach( $params['cardapios'] as $c ): ?>
 	    <li>
             <h2><?= $c['cardapio_titulo']; ?></h2>
 	        
-	        <div class="descr"><?= $c['cardapio_descr']; ?></div>
+	        <div class="cardapio-descr"><?= $c['cardapio_descr']; ?></div>
             
-            <ul class="itens">
+            <ul class="cardapio-itens">
                 <?php
                 # Selecionar os itens desse cardáio
                 $lis_i = $mod_i->_listar("item_cardapio = {$c['cardapio_id']}", 'item_cardapio_descr', 'item_cardapio_descr');
@@ -39,16 +39,18 @@ $mod_i = $params['item'];
 
 <script>
 	//<![CDATA[
-	$("ul.cardapio > li").click(function(){
-        var $this = $(this);
-        
-        // Esconder itens que estiverem sendo mostrados
-        $("ul.cardapio > li").not($this).find('.itens').slideUp("fast");
-        
-        // Mostrar ou esconder os itens desse cardápio
-        $this.find(".itens").slideToggle("fast");
-        
-        window.scrollTo(0, $this.position().top);
-    });
+    window.onload = function(){
+        $("ul.lista-cardapio > li").click(function(){
+            var $this = $(this);
+
+            // Esconder itens que estiverem sendo mostrados
+            $("ul.lista-cardapio > li").not($this).find('.cardapio-itens').slideUp("fast");
+
+            // Mostrar ou esconder os itens desse cardápio
+            $this.find(".cardapio-itens").slideToggle("fast");
+
+            window.scrollTo(0, $this.position().top);
+        });
+    };
     //]]>
 </script>
