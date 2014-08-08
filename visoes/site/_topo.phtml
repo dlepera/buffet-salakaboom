@@ -7,7 +7,11 @@
 * @Data	: 19/05/2014 18:22:01
 */
 
+# Configurar o header da requisição
 header('Content-type: text/html; charset='. \DL::$ap_encoding, true);
+
+if( strpos(filter_input(INPUT_SERVER, 'HTTP_USER_AGENT'), 'MSIE') !== false )
+    header('X-UA-Compatible: IE='. \DL::$browser_versao_ie, true);
 
 $params = $this->_obterparams();
 
@@ -20,9 +24,6 @@ $params = $this->_obterparams();
     <meta name="author" content="Diego Lepera @DL" />
     <meta name="keywords" content="" />
     <meta name="description" content="" />
-    
-    <!-- Configurar a versão do IE suportada -->
-    <meta http-equiv="X-UA-Compatible" content="IE=<?= \DL::$browser_versao_ie; ?>" />
     
     <!-- Favicon -->
     <link rel="shortcut icon" href="<?= \DL::$dir_raiz . \DL::$dir_imgs; ?>favicon-website.ico" />
@@ -43,7 +44,7 @@ $params = $this->_obterparams();
         <div class="slogan">
             <?= \DL::$ap_slogan; ?>
             
-            <img src="<?= \DL::$dir_raiz . \DL::$dir_imgs; ?>rosto-mago-salakaboom.png" class="rosto-salakaboom" />
+            <img src="<?= \DL::$dir_raiz . \DL::$dir_imgs; ?>rosto-mago-salakaboom.png" class="rosto-salakaboom" alt="" />
         </div>
     </header>
     

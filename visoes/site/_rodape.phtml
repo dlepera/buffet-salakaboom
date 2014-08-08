@@ -6,8 +6,8 @@
     
     <div id="redes-sociais">
         <?php foreach( $params['redes-sociais'] as $rs ): ?>
-        <a href="<?= $rs['dado_contato_descr']; ?>" target="_blank">
-            <img src="<?= \DL::$dir_raiz .'/'. $rs['tipo_dado_icone']; ?>" title="<?= $rs['tipo_dado_descr']; ?>" />
+        <a href="<?= urlencode($rs['dado_contato_descr']); ?>" target="_blank">
+            <img src="<?= \DL::$dir_raiz .'/'. $rs['tipo_dado_icone']; ?>" title="<?= $rs['tipo_dado_descr']; ?>" alt="<?= $rs['tipo_dado_descr']; ?>" />
         </a>
         <?php endforeach; ?>
     </div>

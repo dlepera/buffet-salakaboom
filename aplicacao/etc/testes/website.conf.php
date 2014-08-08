@@ -17,9 +17,10 @@ self::$ap_slogan    = 'Oi! Meu nome é Salakaboom. Seja bem-vindo a um mundo de m
 self::$conf_separador_titulo = ' :|: ';
 
 # Configurações do banco de dados
+$this->bd_host      = 'mysql.hostinger.com.br';
 $this->bd_usuario   = 'u260168511_salak';
 $this->bd_senha     = '$@l4K@';
-$this->bd_base      = 'salakaboom';
+$this->bd_base      = 'u260168511_salak';
 
 # Configurações de data
 self::$dh_formato_hora = 'H:i';

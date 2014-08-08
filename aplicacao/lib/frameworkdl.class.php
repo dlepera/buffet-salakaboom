@@ -76,7 +76,8 @@ class FrameworkDL{
     # Configurações de bancodedados
     public static $bd_pdo;
     private $bd_driver = 'mysql', $bd_host = 'localhost', $bd_porta = 3306, $bd_base, $bd_usuario = 'root', $bd_senha = '';
-    public static $bd_dh_formato_completo = 'Y-m-d H:i:s', $bd_dh_formato_data = 'Y-m-d', $bd_dh_formato_hora = 'H:i:s';
+    public static $bd_dh_formato_completo = 'Y-m-d H:i:s', $bd_dh_formato_data = 'Y-m-d', $bd_dh_formato_hora = 'H:i:s',
+        $bd_encoding = 'latin1';
    
     # Configurações de exibição de datas
     public static $dh_formato_completo  = 'd/m/Y H:i';
@@ -230,6 +231,9 @@ class FrameworkDL{
         } catch(PDOException $e){
             var_dump($e);
         }
+        
+        if( $this->bd_driver == 'mysql' )
+            self::$bd_pdo->exec('SET NAMES '. self::$bd_encoding);
     } // Fim do método de conexão ao banco de dados
     
     /**

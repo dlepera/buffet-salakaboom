@@ -17,9 +17,10 @@ self::$ap_slogan    = 'Gerenciador de conteúdo';
 self::$conf_versao  = '<span class="dl-versao">1.1 BETA</span>';
 
 # Configurações do banco de dados
+$this->bd_host      = 'mysql.hostinger.com.br';
 $this->bd_usuario   = 'u260168511_salak';
 $this->bd_senha     = '$@l4K@';
-$this->bd_base      = 'salakaboom';
+$this->bd_base      = 'u260168511_salak';
 
 # Configuração dos plugins
 self::$plugin_formulario_tema   = 'colorido';
