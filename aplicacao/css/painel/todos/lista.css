@@ -59,9 +59,7 @@ table.lista th{
  * ----------------------------------------------------------------------------------------------------------------- */
 table.lista .com-marcados{
     /* Aparência */
-    background-color    : #FFF !important;
-    background-image    : url('icones/sprite-lista.png');
-    background-repeat   : no-repeat;
+    background          : #FFF url('icones/sprite-lista.png') no-repeat !important;
     background-position : left 0 top -169px; 
     border-top          : 1.5px solid #CCC;
         
@@ -253,8 +251,7 @@ form[name="filtro"]{
     /* Aparência */
     border              : 1px solid #EFEFEF;
     box-shadow          : 2px 2px 8px #AAA;
-    background-image    : url('icones/sprite-lista.png');
-    background-repeat   : no-repeat;
+    background          : url('icones/sprite-lista.png') no-repeat;
     background-position : left top -200px;
     
     /* Margens e espaçamentos */

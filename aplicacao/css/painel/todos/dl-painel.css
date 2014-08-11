@@ -20,7 +20,7 @@
     height  : 100%;
     
     /* Aparência */
-    background-image: url('imagens/back-transp-preto.png');
+    background: rgba(0,0,0,.6);
 }
 
 .sobre-tela > div.dl{
@@ -36,18 +36,14 @@
  * ------------------------------------------------------------------------------------------------------ */
 .carregando{
     /* Aparência */
-    background-color    : #FFF;
-    background-image    : url('imagens/loadbar.gif');
-    background-repeat   : no-repeat;
+    background          : #FFF url('imagens/loadbar.gif') no-repeat;
     background-position : bottom 2px center;
     border-radius       : 10px;
+    display             : block;
     
     /* Margens e espaçamentos */
-    margin-top      : 15%;
-    margin-left     : calc(50% - 172px);
-    padding-left    : 3px;
-    padding-right   : 3px;
-    padding-bottom  : 25px;
+    margin  : 15% auto 0 auto;
+    padding : 0 3px 25px 3px;
     
     /* Tamanho */
     width       : 345px;

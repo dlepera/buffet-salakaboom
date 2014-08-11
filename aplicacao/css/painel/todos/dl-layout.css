@@ -231,12 +231,11 @@ nav.dl{
 
 .menu-horizontal > li:hover:not(:last-child){
     /* Aparência */
-    background-color: #FFF;
-    background-image: url('icones/seta-baixo.png');
-    background-position: top 3px right 8px;
-    background-repeat: no-repeat;
-    /* box-shadow      : 2px 2px 2px #AAA; */
-    border-color    : #EEE;
+    background-color    : #FFF;
+    background-image    : url('icones/seta-baixo.png');
+    background-position : top 3px right 8px;
+    background-repeat   : no-repeat;
+    border-color        : #EEE;
     
     /* Margens e espaçamentos */
     padding     : 0.3% 0;
