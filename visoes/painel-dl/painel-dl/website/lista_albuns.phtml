@@ -38,7 +38,7 @@ $perm = $params['perm'];
 
             <?php 
             if( !count($params['lista']) )
-                echo '<tr><td colspan="5">', MSG_PADRAO_NENHUM_REGISTRO_ENCONTRADO, '</td></tr>';
+                echo '<tr><td colspan="4">', MSG_PADRAO_NENHUM_REGISTRO_ENCONTRADO, '</td></tr>';
             
             foreach( $params['lista'] as $l ): 
                 $qtde = $mod_p->_qtde_registros("foto_album = {$l['album_id']}");
@@ -73,7 +73,7 @@ $perm = $params['perm'];
             <?php endforeach; ?>
             
             <tr class="com-marcados">
-                <td colspan="5">
+                <td colspan="4">
                     <?php if( $perm['remover'] ): ?>
                     <a href="javascript:;" class="remover" title="<?= TXT_LINK_TITLE_REMOVER_REGISTROS_SELECIONADOS; ?>" onclick="RemoverRegistro('<?= MSG_PADRAO_DESEJA_REALMENTE_REMOVER_REGISTROS_SELECIONADOS; ?>');">
                         <?= TXT_LINK_REMOVER; ?>

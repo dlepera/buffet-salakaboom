@@ -7,6 +7,9 @@
  * @Data	: 24/07/2014 17:31:11
  */
 
+# Modelos utilizados
+$mod_p = $params['mod-fotoalbum'];
+
 $perm = $params['perm'];
 
 ?>
@@ -28,21 +31,30 @@ $perm = $params['perm'];
         <table class="lista">
             <tr>
                 <th id="id" class="td-id"><input type="checkbox" /></th>
-                <th id="nome"><?= TXT_TABELA_TITULO_NOME; ?></th>
+                <th id="albuns"><?= TXT_TABELA_TITULO_ALBUM; ?></th>
                 <th id="publicado"><?= TXT_TABELA_TITULO_PUBLICADO; ?></th>
                 <th id="opcoes" class="td-opcoes"><?= TXT_TABELA_TITULO_OPCOES; ?></th>
             </tr>
 
             <?php 
             if( !count($params['lista']) )
-                echo '<tr><td colspan="5">', MSG_PADRAO_NENHUM_REGISTRO_ENCONTRADO, '</td></tr>';
+                echo '<tr><td colspan="4">', MSG_PADRAO_NENHUM_REGISTRO_ENCONTRADO, '</td></tr>';
             
-            foreach( $params['lista'] as $l ): ?>
+            foreach( $params['lista'] as $l ): 
+                $qtde = $mod_p->_qtde_registros("foto_album = {$l['album_id']}");
+            ?>
             <tr>
                 <td headers="id" class="td-id">
                     <input type="checkbox" name="id[]" value="<?= $l['album_id']; ?>" />
                 </td>
-                <td headers="nome"><?= $l['album_nome']; ?></td>
+                <td headers="albuns" class="td-infos">
+                    <?php if( !empty($l['foto_album_imagem']) ): ?>
+                    <img src="<?= \DL::$dir_raiz ."/{$l['foto_album_imagem']}"; ?>" alt="Capa do álbum <?= $l['album_nome']; ?>" />
+                    <?php endif; ?>
+                    
+                    <?= $l['album_nome']; ?><br />
+                    <?php printf(MSG_QTDE_FOTOS, (int)$qtde['QTDE']); ?>
+                </td>
                 <td headers="publicado"><?= $l['PUBLICADO']; ?></td>
                 <td headers="opcoes" class="td-opcoes">
                     <?php if( $perm['editar'] ): ?>
@@ -61,7 +73,7 @@ $perm = $params['perm'];
             <?php endforeach; ?>
             
             <tr class="com-marcados">
-                <td colspan="5">
+                <td colspan="4">
                     <?php if( $perm['remover'] ): ?>
                     <a href="javascript:;" class="remover" title="<?= TXT_LINK_TITLE_REMOVER_REGISTROS_SELECIONADOS; ?>" onclick="RemoverRegistro('<?= MSG_PADRAO_DESEJA_REALMENTE_REMOVER_REGISTROS_SELECIONADOS; ?>');">
                         <?= TXT_LINK_REMOVER; ?>

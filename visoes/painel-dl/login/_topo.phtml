@@ -7,6 +7,11 @@
  * @Data	: 27/06/2014 08:32:29
  */
 
+header('Content-type: text/html; charset='. \DL::$ap_encoding, true);
+
+if( strpos(filter_input(INPUT_SERVER, 'HTTP_USER_AGENT'), 'MSIE') !== false )
+    header('X-UA-Compatible: IE='. \DL::$browser_versao_ie, true);
+
 $params = $this->_obterparams();
 
 ?>
@@ -19,18 +24,23 @@ $params = $this->_obterparams();
     <meta name="keywords" content="" />
     <meta name="description" content="" />
     
-    <!-- Configurar a versão do IE suportada -->
-    <meta http-equiv="X-UA-Compatible" content="IE=<?= \DL::$browser_versao_ie; ?>" />
-    
     <!-- Favicon -->
     <link rel="shortcut icon" href="<?= \DL::$dir_raiz . \DL::$dir_imgs; ?>favicon-painel.ico" />
     
     <!-- Estilos da página -->
     <link rel="stylesheet" media="all" href="<?= \DL::$dir_raiz . \DL::$dir_css; ?>todos/dl-layout.css" />
     <link rel="stylesheet" media="all" href="<?= \DL::$dir_raiz . \DL::$dir_css; ?>todos/dl-painel.css" />
-    <link rel="stylesheet" media="all" href="<?= \DL::$dir_raiz . \DL::$dir_css; ?>todos/formulario.css" />
     <link rel="stylesheet" media="all" href="<?= \DL::$dir_raiz . \DL::$dir_css; ?>todos/login.css" />
+    <link rel="stylesheet" media="all" href="<?= \DL::$dir_raiz . \DL::$dir_js .'dl-formulario/css/'. DL::$plugin_formulario_tema; ?>/formulario.css" />
 
     <title><?= \DL::$ap_nome; ?></title>
 </head>
 <body>
+    
+    <header class="dl">
+        <a href="<?= \DL::$dir_raiz; ?>/painel-dl/home" class="logotipo">
+            <?= \DL::$ap_nome; ?>
+        </a>
+        
+        <span class="slogan"><?= \DL::$ap_slogan; ?></span>
+    </header>

@@ -1,29 +1,22 @@
 <?php require_once '_topo.phtml'; ?>
     
-    <form id="login" name="login" method="post" action="<?= \DL::$dir_raiz; ?>">
-        <a href="<?= \DL::$dir_raiz; ?>" class="logotipo">
-            <?= \DL::$ap_nome; ?>
-        </a>
-        
-        <span class="slogan"><?= \DL::$ap_slogan; ?></span>
-        <br /><br />
-        
-        <div class="campos">
-            <label for="info_login" class="com-imagem login"><?= TXT_LABEL_LOGIN; ?>:</label>
-            <input type="text" name="info_login" id="info_login" title="<?= TXT_LABEL_LOGIN; ?>" class="recuado" />
+    <form name="login" id="form-login" method="post" action="<?= \DL::$dir_raiz; ?>">
+        <fieldset>
+            <label for="login"><?= TXT_LABEL_LOGIN; ?>:</label>
+            <input type="text" name="info_login" id="login" title="<?= TXT_LABEL_LOGIN; ?>" placeholder="<?= TXT_LABEL_LOGIN; ?>" />
             <br /><br />
+
+            <label for="senha"><?= TXT_LABEL_SENHA; ?>:</label>
+            <input type="password" name="info_senha" id="senha" title="<?= TXT_LABEL_SENHA; ?>" placeholder="<?= TXT_LABEL_SENHA; ?>" />
+        </fieldset>
         
-            <label for="info_senha" class="com-imagem senha"><?= TXT_LABEL_SENHA; ?>:</label>
-            <input type="password" name="info_senha" id="info_senha" title="<?= TXT_LABEL_SENHA; ?>" class="recuado" />
-        </div>
-        
-        <center>
+        <div class="form-botoes">
             <button type="submit"><?= TXT_BOTAO_ENTRAR; ?></button>
             
             <a href="<?= \DL::$dir_raiz; ?>/painel-dl/admin/usuarios/esqueci-minha-senha">
                 <?= TXT_LINK_ESQUECI_MINHA_SENHA; ?>
             </a>
-        </center>
+        </div>
     </form>
     
     <?php require_once '_rodape.phtml'; ?>

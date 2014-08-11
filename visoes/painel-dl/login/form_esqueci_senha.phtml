@@ -1,25 +1,18 @@
 <?php require_once '_topo.phtml'; ?>
     
-    <form id="login" name="login" method="post" action="<?= \DL::$dir_raiz; ?>">
-        <a href="<?= \DL::$dir_raiz; ?>" class="logotipo">
-            <?= \DL::$ap_nome; ?>
-        </a>
-        
-        <span class="slogan"><?= \DL::$ap_slogan; ?></span>
-        <br /><br />
-        
-        <div class="campos">
+    <form name="login" id="form-login" method="post" action="<?= \DL::$dir_raiz; ?>">        
+        <fieldset>
             <label for="login"><?= TXT_LABEL_ESQUECI_MINHA_SENHA; ?>:</label><br />
-            <input type="text" name="login" id="login" title="<?= TXT_LABEL_LOGIN; ?>" />
-        </div>
+            <input type="text" name="login" id="login" title="<?= TXT_LABEL_LOGIN; ?>" placeholder="<?= TXT_LABEL_ESQUECI_MINHA_SENHA; ?>" />
+        </fieldset>
         
-        <center>
+        <div class="form-botoes">
             <button type="submit"><?= TXT_BOTAO_SUBMIT_ENVIAR; ?></button>
             
             <a href="javascript:;" onclick="history.back();">
                 <?= TXT_LINK_VOLTAR; ?>
             </a>
-        </center>
+        </div>
     </form>
     
     <?php require_once '_rodape.phtml'; ?>
