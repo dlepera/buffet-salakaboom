@@ -41,11 +41,11 @@ class ConfigEmail extends Principal{
      * 
      * @param string $valor - string contendo o valor a ser atribuído à $this->config_email_host
      * 
-     * @return string: valor da propriedade $config_email_host
+     * @return string - valor da propriedade $config_email_host
      */
     public function _config_email_host($valor=null){
         if( is_null($valor) )
-            return $this->config_email_host;
+            return (string)$this->config_email_host;
         
         return $this->config_email_host = (string)$valor;
     } // Fim do método _config_email_host
@@ -65,15 +65,15 @@ class ConfigEmail extends Principal{
     
     /**
      * Obter ou editar o valor da propriedade $config_email_autent
-     * @param string $valor - string contendo o valor a ser atribuído à $this->config_email_autent
+     * @param int $valor - string contendo o valor a ser atribuído à $this->config_email_autent
      * 
-     * @return int: valor da propriedade $config_email_autent
+     * @return int - valor da propriedade $config_email_autent
      */
     public function _config_email_autent($valor=null){
         if( is_null($valor) )
-            return $this->config_email_autent;
+            return (int)$this->config_email_autent;
         
-        if( $valor < 0 && $valor > 1 )
+        if( (int)$valor < 0 || (int)$valor > 1 )
             throw new \Exception(sprintf(ERRO_PADRAO_VALOR_INVALIDO, __METHOD__), 1500);
         
         return $this->config_email_autent = (int)$valor;
@@ -132,7 +132,7 @@ class ConfigEmail extends Principal{
         if( !$this->config_email_de_email = filter_var($valor, FILTER_VALIDATE_EMAIL, FILTER_NULL_ON_FAILURE) )
             throw new \Exception(sprintf(ERRO_PADRAO_FORMATO_NAO_CORRESPONDE, __METHOD__), 1500);
         
-        return $this->config_email_de_email;
+        return $this->config_email_de_email = (string)$valor;
     } // Fim do método _config_email_de_email
     
     /**
@@ -153,16 +153,16 @@ class ConfigEmail extends Principal{
      * 
      * @param string $valor - string contendo o valor a ser atribuído à $this->config_email_responder_para
      * 
-     * @return string: valor da propriedade $config_email_responder_para
+     * @return string - valor da propriedade $config_email_responder_para
      */
     public function _config_email_responder_para($valor=null){
         if( is_null($valor) )
-            return $this->config_email_responder_para;
+            return (string)$this->config_email_responder_para;
         
         if( !$this->config_email_responder_para = filter_var($valor, FILTER_VALIDATE_EMAIL, FILTER_NULL_ON_FAILURE) )
             throw new \Exception(sprintf(ERRO_PADRAO_FORMATO_NAO_CORRESPONDE, __METHOD__), 1500);
         
-        return $this->config_email_responder_para;
+        return $this->config_email_responder_para = (string)$valor;
     } // Fim do método _config_email_responder_para
     
     /**
@@ -173,9 +173,9 @@ class ConfigEmail extends Principal{
      */
     public function _config_email_html($valor=null){
         if( is_null($valor) )
-            return $this->config_email_html;
+            return (int)$this->config_email_html;
         
-        if( $valor < 0 && $valor > 1 )
+        if( (int)$valor < 0 || (int)$valor > 1 )
             throw new \Exception(sprintf(ERRO_PADRAO_VALOR_INVALIDO, __METHOD__), 1500);
         
         return $this->config_email_html = (int)$valor;
@@ -189,9 +189,9 @@ class ConfigEmail extends Principal{
      */
     public function _config_email_principal($valor=null){
         if( is_null($valor) )
-            return $this->config_email_principal;
+            return (int)$this->config_email_principal;
         
-        if( $valor < 0 && $valor > 1 )
+        if( (int)$valor < 0 || (int)$valor > 1 )
             throw new \Exception(sprintf(ERRO_PADRAO_VALOR_INVALIDO, __METHOD__), 1500);
         
         return $this->config_email_principal = (int)$valor;

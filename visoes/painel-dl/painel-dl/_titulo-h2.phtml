@@ -1,0 +1,19 @@
+    <?php if( $editando ): ?>
+    <h2 class="sub-h2">
+    <?php
+        printf(
+            MSG_CRIADO_EM, 
+            $params['usr_criacao'], 
+            \Funcoes::_formatardatahora($params['dt_criacao'], $_SESSION['formato_data_completo'])
+        );
+        
+        if( !empty($params['dt_alteracao']) && $params['dt_alteracao'] !== '0000-00-00 00:00:00' ):
+            printf(
+                '<br>'. MSG_ALTERADO_EM, 
+                $params['usr_alteracao'], 
+                \Funcoes::_formatardatahora($params['dt_alteracao'], $_SESSION['formato_data_completo'])
+            );
+        endif;
+    ?>
+    </h2>
+    <?php endif; ?>

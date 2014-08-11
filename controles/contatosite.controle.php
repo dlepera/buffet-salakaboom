@@ -11,7 +11,7 @@ namespace Controle;
 
 class ContatoSite extends Principal{
     public function __construct(){
-        parent::__construct('site');
+        parent::__construct('/site/');
         
         # Configurar esse Controle
         $this->obj_m = new \Modelo\ContatoSite();
@@ -45,7 +45,6 @@ class ContatoSite extends Principal{
     public function _formulario(){
         # Preparar a visão
         $this->_escolhertpl('contato');
-        $this->obj_v->_titulo(TXT_TITULO_FALE_CONOSCO);
         
         # Selecionar a lista de assuntos de e-mails
         $mod_ac = new \Modelo\AssuntoContato();
@@ -77,7 +76,7 @@ class ContatoSite extends Principal{
     /**
      * Obter o HTML do corpo do e-mail
      * 
-     * @param int $id - ID do contato enviado
+     * @param int $id: ID do contato enviado
      */
     public function _emailhtml($id){
         # Preparar a visão
@@ -100,7 +99,7 @@ class ContatoSite extends Principal{
     /**
      * Mostrar o HTML obtido pelométodo _emailhtml
      * 
-     * @param int $id - ID do contato enviado
+     * @param int $id: ID do contato enviado
      */
     public function _mostrarhtml($id){
         echo $this->_emailhtml((int)$id);

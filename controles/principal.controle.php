@@ -38,30 +38,10 @@ abstract class Principal{
         
         # Selecionar os dados para contato
         $mod_dc = new \Modelo\DadoContato();
-        $lis_dc = $mod_dc->_listar(
-            'dado_contato_publicar = 1 AND tipo_dado_rede_social = 0', 
-            'tipo_dado_descr, dado_contato_descr', 
-            'tipo_dado_descr, dado_contato_descr'
-        );
-        
-        $lis_rs = $mod_dc->_listar(
-            'dado_contato_publicar = 1 AND tipo_dado_rede_social = 1', 
-            'tipo_dado_descr, dado_contato_descr', 
-            'tipo_dado_descr, dado_contato_descr, tipo_dado_icone'
-        );
-        
-        # Selecionar a lista de horários de atendimento
-        $mod_h  = new \Modelo\Horario();
-        $lis_h = $mod_h->_listar(
-            'H.horario_publicar = 1', 
-            'H.horario_abertura, H.horario_fechamento, DS.dia_semana_id', 
-            'DS.dia_semana_abrev, H.horario_abertura, H.horario_fechamento'
-        );
+        $lis_dc = $mod_dc->_listar('dado_contato_publicar = 1', 'tipo_dado_descr, dado_contato_descr', 'tipo_dado_descr, dado_contato_descr');
         
         # Incluir os parâmetros na visão
         $this->obj_v->_incluirparams('contatos', $lis_dc);
-        $this->obj_v->_incluirparams('redes-sociais', $lis_rs);
-        $this->obj_v->_incluirparams('horarios', $lis_h);
     } // Fim do método _escolhertpl
     
     /**
@@ -70,8 +50,9 @@ abstract class Principal{
      * @param string $ordem - string que contém os campos a serem ordenados
      * @param string $campos - string que contenham os campos a serem selecionados
      * @param int $qtde - número de registros a serem exibidos na paginação
+     * @param string $metodo - nome do método a ser executado para montar a lista 
      */
-    public function _listapadrao($ordem = '', $campos = '*', $qtde = 0){
+    public function _listapadrao($ordem = '', $campos = '*', $qtde = 0, $metodo = '_listar'){
         # Obter a busca realizada
         $_get_t = filter_input(INPUT_GET, 't', FILTER_DEFAULT);
         $_get_c = filter_input(INPUT_GET, 'c', FILTER_DEFAULT);
@@ -87,7 +68,7 @@ abstract class Principal{
         $this->obj_v->_incluirparams('_get_c', $_get_c);
         $this->obj_v->_incluirparams('_get_t', $_get_t);
         $this->obj_v->_incluirparams('qtde_pg', ceil($this->obj_m->_qtde_registros($filtro)/$qtde));
-        $this->obj_v->_incluirparams('lista', $this->obj_m->_listar($filtro, $ordem, $campos, !$_get_p ? 1 : $_get_p, $qtde));
+        $this->obj_v->_incluirparams('lista', $this->obj_m->{$metodo}($filtro, $ordem, $campos, !$_get_p ? 1 : $_get_p, $qtde));
     } // Fim do métoto _listapadrao 
     
     /**

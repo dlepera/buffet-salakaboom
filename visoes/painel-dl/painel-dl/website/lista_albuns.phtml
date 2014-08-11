@@ -1,0 +1,111 @@
+<?php
+
+/**
+ * @Autor	: Diego Lepera
+ * @E-mail	: d_lepera@hotmail.com
+ * @Projeto	: FrameworkDL
+ * @Data	: 24/07/2014 17:31:11
+ */
+
+# Modelos utilizados
+$mod_p = $params['mod-fotoalbum'];
+
+$perm = $params['perm'];
+
+?>
+
+<div class="dl">
+    <h1><?= TXT_TITULO_ALBUNS_DE_FOTOS; ?></h1>
+    
+    <div class="mais-opcoes">
+        <?php if( $perm['inserir'] ): ?>
+        <a href="<?= \DL::$dir_raiz; ?>/painel-dl/web-site/albuns-de-fotos/novo" class="inserir">
+            <?= TXT_LINK_NOVO_ALBUNS_DE_FOTOS; ?>
+        </a>
+        <?php endif; ?>
+        
+        <?php include_once './visoes/painel-dl/_form_filtro.phtml'; ?>
+    </div>
+    
+    <form name="editar-lista" method="post" action="<?= \DL::$dir_raiz; ?>">
+        <table class="lista">
+            <tr>
+                <th id="id" class="td-id"><input type="checkbox" /></th>
+                <th id="albuns"><?= TXT_TABELA_TITULO_ALBUM; ?></th>
+                <th id="publicado"><?= TXT_TABELA_TITULO_PUBLICADO; ?></th>
+                <th id="opcoes" class="td-opcoes"><?= TXT_TABELA_TITULO_OPCOES; ?></th>
+            </tr>
+
+            <?php 
+            if( !count($params['lista']) )
+                echo '<tr><td colspan="5">', MSG_PADRAO_NENHUM_REGISTRO_ENCONTRADO, '</td></tr>';
+            
+            foreach( $params['lista'] as $l ): 
+                $qtde = $mod_p->_qtde_registros("foto_album = {$l['album_id']}");
+            ?>
+            <tr>
+                <td headers="id" class="td-id">
+                    <input type="checkbox" name="id[]" value="<?= $l['album_id']; ?>" />
+                </td>
+                <td headers="albuns" class="td-infos">
+                    <?php if( !empty($l['foto_album_imagem']) ): ?>
+                    <img src="<?= \DL::$dir_raiz ."/{$l['foto_album_imagem']}"; ?>" alt="Capa do álbum <?= $l['album_nome']; ?>" />
+                    <?php endif; ?>
+                    
+                    <?= $l['album_nome']; ?><br />
+                    <?php printf(MSG_QTDE_FOTOS, (int)$qtde['QTDE']); ?>
+                </td>
+                <td headers="publicado"><?= $l['PUBLICADO']; ?></td>
+                <td headers="opcoes" class="td-opcoes">
+                    <?php if( $perm['editar'] ): ?>
+                    <a href="<?= \DL::$dir_raiz; ?>/painel-dl/web-site/albuns-de-fotos/alterar/<?= $l['album_id']; ?>" class="lista editar" title="<?= TXT_LINK_TITLE_EDITAR_REGISTRO; ?>">
+                        <?= TXT_LINK_EDITAR; ?>
+                    </a>
+                    <?php endif;
+                
+                    if( $perm['remover'] ): ?>
+                    <a href="javascript:;" class="lista remover" title="<?= TXT_LINK_TITLE_REMOVER_REGISTRO; ?>" onclick="if( SelecionarLinha(this) ) RemoverRegistro('<?= MSG_PADRAO_DESEJA_REALMENTE_REMOVER_ESSE_REGISTRO; ?>');">
+                        <?= TXT_LINK_REMOVER; ?>
+                    </a>
+                    <?php endif; ?>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+            
+            <tr class="com-marcados">
+                <td colspan="5">
+                    <?php if( $perm['remover'] ): ?>
+                    <a href="javascript:;" class="remover" title="<?= TXT_LINK_TITLE_REMOVER_REGISTROS_SELECIONADOS; ?>" onclick="RemoverRegistro('<?= MSG_PADRAO_DESEJA_REALMENTE_REMOVER_REGISTROS_SELECIONADOS; ?>');">
+                        <?= TXT_LINK_REMOVER; ?>
+                    </a>
+                    <?php endif; ?>
+                </td>
+            </tr>
+        </table>
+        
+        <div id="paginacao"></div>
+    </form>
+</div>
+
+<script>
+    //<![CDATA[
+    window.onload = function(){
+        <?php if( $perm['remover'] ): ?>
+        $editar_lista = $("form[name='editar-lista']")._dlformulario({
+            controle    : "album/remover",
+            depois      : function(){
+                $(".lista :checkbox:checked").parents("tr").remove();
+            },
+            cktodos     : [true, "tr:first-child :checkbox:first-child", ":checkbox[name='id[]']"],
+            aparencia   : { tema: "<?= \DL::$plugin_formulario_tema; ?>", estilo: "formulario" }
+        });
+        <?php endif; ?>
+        
+        $("#paginacao")._dlpaginacao({
+            pgtotal     : <?= $params['qtde_pg']; ?>,
+            mostrar     : 5,
+            aparencia   : { tema: "<?= \FrameworkDL::$plugin_paginacao_tema; ?>", estilo: "paginacao" }
+        });
+    };
+    //]]>
+</script>

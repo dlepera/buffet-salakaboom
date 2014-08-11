@@ -11,7 +11,7 @@ namespace Controle;
 
 class ConfigEmail extends PrincipalSistema{
     public function __construct(){
-        parent::__construct('/painel-dl/');
+        parent::__construct('painel-dl');
         
         # Configurar esse Controle
         $this->obj_m    = new \Modelo\ConfigEmail();
@@ -24,7 +24,7 @@ class ConfigEmail extends PrincipalSistema{
                 'titulo'    => FILTER_SANITIZE_STRING, 
                 'host'      => FILTER_SANITIZE_STRING,
                 'porta'     => FILTER_SANITIZE_NUMBER_INT,
-                'autent'    => FILTER_SANITIZE_NUMBER_INT,
+                'autent'    => array('filter' => FILTER_SANITIZE_NUMBER_INT, 'flags' => FILTER_NULL_ON_FAILURE, 'options' => array('min_range' => 0, 'max_range' => 1)),
                 'cripto'    => FILTER_SANITIZE_STRING,
                 'conta'     => FILTER_SANITIZE_STRING,
                 'senha'     => FILTER_SANITIZE_STRING,
@@ -32,9 +32,14 @@ class ConfigEmail extends PrincipalSistema{
                 'de_nome'   => FILTER_SANITIZE_STRING,
                 'responder_para'    => FILTER_SANITIZE_EMAIL,
                 'html'      => array('filter' => FILTER_SANITIZE_NUMBER_INT, 'flags' => FILTER_NULL_ON_FAILURE, 'options' => array('min_range' => 0, 'max_range' => 1)),
-                'publicar'  => array('filter' => FILTER_SANITIZE_NUMBER_INT, 'flags' => FILTER_NULL_ON_FAILURE, 'options' => array('min_range' => 0, 'max_range' => 1))
+                'principal' => array('filter' => FILTER_SANITIZE_NUMBER_INT, 'flags' => FILTER_NULL_ON_FAILURE, 'options' => array('min_range' => 0, 'max_range' => 1))
             ));
-            
+        
+            # Tratar as flags
+            $post['autent']     = (int)$post['autent'];
+            $post['html']       = (int)$post['html'];
+            $post['principal']  = (int)$post['principal'];
+        
             # Selecionar as informações atuais
             $this->obj_m->_selecionarID($post['id']);
         

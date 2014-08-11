@@ -93,6 +93,39 @@ table.lista .td-opcoes{
     position: relative;
 }
 
+table.lista .td-infos{
+    /* Tamanho */
+    max-height: 40%;
+    
+    /* Formatação do texto */
+    color: #888;
+}
+
+table.lista .td-infos:first-line{
+    /* Formatação do texto */
+    font-weight : 600;
+    color       : #000;
+}
+
+table.lista .td-infos > img{
+    /* Tamanho */
+    box-sizing  : border-box;
+    max-height  : 100px;
+    max-width   : 100px;
+    
+    /* Margens e espaçamentos */
+    padding : 0.5%;
+    margin  : 0 1% 0 0;
+    
+    /* Aparência */
+    border-radius   : 4px;
+    border          : 1px solid #AAA;
+    background-color: #FFF;
+    
+    /* Posicionamento */
+    float: left;
+}
+
 /* --------------------------------------------------------------------------------------------------------------------
  * Links de manipulação de registros
  * ----------------------------------------------------------------------------------------------------------------- */
@@ -204,3 +237,36 @@ a.email{
     /* Aparência */
     background-position: top -285px left -5px;
 }
+
+/* --------------------------------------------------------------------------------------------------------------------
+ * Formulário de filtro da lista de registros
+ * ----------------------------------------------------------------------------------------------------------------- */
+form[name="filtro"]{
+    /* Posicionamento */
+    float   : right;
+    position: relative;
+    
+    /* Tamanho */
+    width   : 55%;
+    height  : 30px;
+    
+    /* Aparência */
+    border              : 1px solid #EFEFEF;
+    box-shadow          : 2px 2px 8px #AAA;
+    background-image    : url('icones/sprite-lista.png');
+    background-repeat   : no-repeat;
+    background-position : left top -200px;
+    
+    /* Margens e espaçamentos */
+    padding         : 5px 0 5px 40px;
+    margin-bottom   : 3%;
+}
+
+.limpar-filtro{
+    /* Formatação do texto */
+    color: red;
+    
+    /* Margens e espaçamentos */
+    margin: 0 1%;
+}
+

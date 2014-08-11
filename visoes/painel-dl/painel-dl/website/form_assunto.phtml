@@ -1,0 +1,67 @@
+<?php
+
+/**
+ * @Autor	: Diego Lepera
+ * @E-mail	: d_lepera@hotmail.com
+ * @Projeto	: FrameworkDL
+ * @Data	: 18/06/2014 08:46:23
+ */
+
+$mod = $params['modelo'];
+
+# Verificar se o registro está sendo editado
+$editando = !is_null($mod->assunto_contato_id);
+
+# Definir qual título deve ser inserido na TAG H1
+$titulo_h1 = !$editando ? TXT_TITULO_FORMULARIO_NOVO_ASSUNTO_DE_CONTATO : TXT_TITULO_FORMULARIO_ALTERAR_ASSUNTO_DE_CONTATO;
+
+?>
+
+<div class="dl">
+    <h1><?= $titulo_h1; ?></h1>
+    
+    <?php include_once './visoes/painel-dl/_titulo-h2.phtml'; ?>
+    
+    <form name="assunto" method="post" action="<?= \DL::$dir_raiz; ?>">
+        <?php if( $editando ): ?>
+        <!-- ID do registro atual -->
+        <input type="hidden" name="id" value="<?= $mod->assunto_contato_id; ?>" />
+        <?php endif; ?>
+
+        <label for="descr"><?= TXT_LABEL_DESCRICAO; ?>:</label><br />
+        <input type="text" name="descr" id="descr" value="<?= $mod->assunto_contato_descr; ?>" title="<?= TXT_LABEL_DESCRICAO; ?>" />
+        <br /><br />
+        
+        <label for="email"><?= TXT_LABEL_EMAIL; ?>:</label><br />
+        <input type="text" name="email" id="email" value="<?= $mod->assunto_contato_email; ?>" title="<?= TXT_LABEL_EMAIL; ?>" />
+        <br /><br />
+
+        <label><?= TXT_LABEL_PUBLICAR; ?></label>
+        <input type="checkbox" name="publicar" id="publicar" value="1" class="s-ou-n"<?= $mod->assunto_contato_publicar == 1 || !$editando ? ' CHECKED' : ''; ?> />
+        <label for="publicar"></label>
+        <br /><br />
+        
+        <button type="submit"><?= TXT_BOTAO_SUBMIT_SALVAR; ?></button>
+        <button type="reset"><?= TXT_BOTAO_RESET_CANCELAR; ?></button>
+    </form>
+</div>
+
+<script>
+    //<![CDATA[
+    window.onload = function(){
+        $("form[name='assunto']")._dlformulario({
+            <?php if( !$editando ): ?>
+            depois: function(){
+                window.location = "<?= \DL::$dir_raiz; ?>/painel-dl/web-site/assuntos-de-contatos/lista";
+            },
+            <?php endif; ?>
+            controle: "assuntocontato/salvar",
+            campos  : {
+                "descr": { obr: true },
+                "email": { obr: true, validacao: EXPR_EMAIL },
+            },
+            aparencia: { tema: "<?= \DL::$plugin_formulario_tema; ?>", estilo: "formulario" }
+        });
+    };
+    //]]>
+</script>

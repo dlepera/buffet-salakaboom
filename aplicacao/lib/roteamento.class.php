@@ -31,10 +31,10 @@ class Roteamento{
 		
 		# Vetor que receberá as configurações da rota
 		$params = array();
-        
+		
 		foreach( $this->rotas as $rota => $conf ):
 			if( preg_match("#{$rota}#", $this->uri) ):
-				if( is_string($conf) || isset($conf['params']) ): 
+				if( is_string($conf) || isset($conf['params']) ):
 					$params_rota	= trim(is_string($conf) ? $conf : $conf['params'], '/');
 					$url_explode 	= explode('/', $this->uri);
 					$conf_explode 	= explode('/', $params_rota);

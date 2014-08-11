@@ -11,7 +11,7 @@ namespace Controle;
 
 class PermissoesGrupo extends PrincipalSistema{
     public function __construct(){
-        parent::__construct('gerenc');
+        parent::__construct('painel-dl');
         
         # Configurar esse Controle
         $this->obj_m    = new \Modelo\PermissoesGrupo();
@@ -28,6 +28,6 @@ class PermissoesGrupo extends PrincipalSistema{
         # Tratar a informação enviada pelo form
         $grupo = filter_input(INPUT_POST, 'grupo', FILTER_SANITIZE_NUMBER_INT);
         
-        echo json_encode($this->obj_m->_listar("P.permissao_grupo = {$grupo}"));
+        echo json_encode($this->obj_m->_listar("P.permissao_grupo = {$grupo}", null, 'P.*'));
     } // Fim do método _filtrarporgrupo
 } // Fim do controle PermissoesGrupo

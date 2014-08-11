@@ -1,0 +1,99 @@
+<?php
+
+/**
+ * @Autor	: Diego Lepera
+ * @E-mail	: d_lepera@hotmail.com
+ * @Projeto	: FrameworkDL
+ * @Data	: 24/06/2014 16:49:27
+ */
+
+$perm = $params['perm'];
+
+?>
+
+<div class="dl">
+    <h1><?= TXT_TITULO_GRUPOS_DE_USUARIOS; ?></h1>
+    
+    <div class="mais-opcoes">
+        <?php if( $perm['ver'] ): ?>
+        <a href="<?= \DL::$dir_raiz; ?>/painel-dl/admin/grupos-de-usuarios/novo" class="inserir">
+            <?= TXT_LINK_NOVO_GRUPO_DE_USUARIO; ?>
+        </a>
+        <?php endif; ?>
+        
+        <?php include_once './visoes/painel-dl/_form_filtro.phtml'; ?>
+    </div>
+    
+    <form name="editar-lista" method="post" action="<?= \DL::$dir_raiz; ?>">
+        <table class="lista">
+            <tr>
+                <th id="id" class="td-id"><input type="checkbox" /></th>
+                <th id="grupo"><?= TXT_TABELA_TITULO_GRUPO; ?></th>
+                <th id="publicado"><?= TXT_TABELA_TITULO_PUBLICADO; ?></th>
+                <th id="opcoes" class="td-opcoes"><?= TXT_TABELA_TITULO_OPCOES; ?></th>
+            </tr>
+
+            <?php 
+            if( !count($params['lista']) )
+                echo '<tr><td colspan="4">', MSG_PADRAO_NENHUM_REGISTRO_ENCONTRADO, '</td></tr>';
+            
+            foreach( $params['lista'] as $l ): ?>
+            <tr>
+                <td headers="id" class="td-id">
+                    <input type="checkbox" name="id[]" value="<?= $l['grupo_usuario_id']; ?>" />
+                </td>
+                <td headers="grupo"><?= $l['grupo_usuario_descr']; ?></td>
+                <td headers="publicado"><?= $l['PUBLICADO']; ?></td>
+                <td headers="opcoes" class="td-opcoes">
+                    <?php if( $perm['editar'] ): ?>
+                    <a href="<?= \DL::$dir_raiz; ?>/painel-dl/admin/grupos-de-usuarios/alterar/<?= $l['grupo_usuario_id']; ?>" class="lista editar" title="<?= TXT_LINK_TITLE_EDITAR_REGISTRO; ?>">
+                        <?= TXT_LINK_EDITAR; ?>
+                    </a>
+                    <?php endif;
+                
+                    if( $perm['remover'] ): ?>
+                    <a href="javascript:;" class="lista remover" title="<?= TXT_LINK_TITLE_REMOVER_REGISTRO; ?>" onclick="if( SelecionarLinha(this) ) RemoverRegistro('<?= MSG_PADRAO_DESEJA_REALMENTE_REMOVER_ESSE_REGISTRO; ?>');">
+                        <?= TXT_LINK_REMOVER; ?>
+                    </a>
+                    <?php endif; ?>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+            
+            <tr class="com-marcados">
+                <td colspan="4">
+                    <?php if( $perm['remover'] ): ?>
+                    <a href="javascript:;" class="remover" title="<?= TXT_LINK_TITLE_REMOVER_REGISTROS_SELECIONADOS; ?>" onclick="RemoverRegistro('<?= MSG_PADRAO_DESEJA_REALMENTE_REMOVER_REGISTROS_SELECIONADOS; ?>');">
+                        <?= TXT_LINK_REMOVER; ?>
+                    </a>
+                    <?php endif; ?>
+                </td>
+            </tr>
+        </table>
+        
+        <div id="paginacao"></div>
+    </form>
+</div>
+
+<script>
+    //<![CDATA[
+    window.onload = function(){
+        <?php if( $perm['remover'] ): ?>
+        $editar_lista = $("form[name='editar-lista']")._dlformulario({
+            controle    : "grupousuario/remover",
+            depois      : function(){
+                $(".lista :checkbox:checked").parents("tr").remove();
+            },
+            cktodos     : [true, "tr:first-child :checkbox:first-child", ":checkbox[name='id[]']"],
+            aparencia   : { tema: "<?= \DL::$plugin_formulario_tema; ?>", estilo: "formulario" }
+        });
+        <?php endif; ?>
+        
+        $("#paginacao")._dlpaginacao({
+            pgtotal     : <?= $params['qtde_pg']; ?>,
+            mostrar     : 5,
+            aparencia   : { tema: "<?= \FrameworkDL::$plugin_paginacao_tema; ?>", estilo: "paginacao" }
+        });
+    };
+    //]]>
+</script>

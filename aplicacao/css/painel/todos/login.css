@@ -6,85 +6,147 @@
  */
 
 /* --------------------------------------------------------------------------------------------------------------------
- * Formulário de login e alteração de senha
+ * Fontes personalizadas
  * ----------------------------------------------------------------------------------------------------------------- */
-form[name="login"]{
-    /* posicionamento */
-    position: absolute;
-    left    : 32.4%;
-    top     : 20%;
+@import url(http://fonts.googleapis.com/css?family=Ubuntu);
+
+/* --------------------------------------------------------------------------------------------------------------------
+ * Formatação de TAGs
+ * ----------------------------------------------------------------------------------------------------------------- */
+body{
+    /* Aparência */
+    background          : #424244 url('imagens/back-login.png') no-repeat;
+    background-size     : contain;
+    background-position : left 10% top;
     
+    /* Formatação do texto */
+    color       : #FFF;
+    font-family : 'Ubuntu', sans-serif;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------
+ * Cabeçalho
+ * ----------------------------------------------------------------------------------------------------------------- */
+header.dl,
+#form-login{
     /* Tamanho */
-    width: 30%;
+    box-sizing  : border-box;
+    width       : 35%;
     
     /* Aparência */
-    background-color: #FFF;
-    border          : 1px solid #AAA;
-    box-shadow      : 2px 2px 8px #AAA;
+    background-color: rgba(255,255,255,.25);
+    border-radius   : 8px;
     
     /* Margens e espaçamentos */
-    padding: 2.5%;
-}
-
-form[name="login"] .campos{
+    margin: auto;
+    
     /* Posicionamento */
     position: relative;
-    left    : 20%;
-    clear   : both;
-    
-    /* Tamanho */
-    width: 60%;
-    
+}
+
+header.dl{
     /* Margens e espaçamentos */
-    margin-bottom: 5%;
+    margin-top  : 7.5%;
+    padding     : 0 2.5%;
+    
+    /* Posicionamento */
+    left: 0;
 }
 
-form[name="login"] .campos input{
+header.dl > .logotipo{
+    /* Aparência */
+    background-position: center;
+    
     /* Tamanho */
-    width: 85%;
+    height: 100%;
 }
 
-form[name="login"] .com-imagem{
+header.dl > .slogan{
+    /* Formatação do texto */
+    text-align  : left;
+    font-size   : 150%;
+    font-weight : 500;
+    font-style  : normal;
+    line-height : 100%;
+    color       : #FFF;
+    
+    /* Tamanho */
+    width: 70%;
+    
     /* Posicionamento */
     float: left;
     
-    /* Tamanho */
-    width   : 30px;
-    height  : 30px;
-    
+    /* Margens e espaçamentos */
+    margin-top: 7%;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------
+ * Formulário de login e alteração de senha
+ * ----------------------------------------------------------------------------------------------------------------- */
+#form-login{
+    /* Margens e espaçamentos */
+    padding: 2.5%;
+    margin : 1% auto;
+}
+
+#form-login > fieldset{
+    /* Formatação do texto */
+    text-align: center;
+}
+
+#form-login label{
     /* Aparência */
-    background-image    : url('icones/sprite-login.png');
-    background-repeat   : no-repeat;
+    display: none;
+}
+
+#form-login input{
+    /* Tamanho */
+    width   : 60%;
+    height  : 40px;
     
     /* Formatação do texto */
-    color: transparent;
-}
-
-form[name="login"] .com-imagem.login{
-    /* Aparência */
-    background-position: top -5px left -5px;
-}
-
-form[name="login"] .com-imagem.senha{
-    /* Aparência */
-    background-position: top -45px left -5px;
-}
-
-form[name="login"] .com-imagem.senha-nova{
-    /* Aparência */
-    background-position: top -85px left -5px;
-}
-
-form[name="login"] .com-imagem.senha-nova-conf{
-    /* Aparência */
-    background-position: top -125px left -5px;
-}
-
-form[name="login"] .recuado{
-    /* Margens e espaçamentos */
-    margin-left : -30px;
-    padding-left: 30px;
+    text-indent: 30px;
     
     /* Aparência */
-    background-color: transparent;
+    background      : #FFF url('icones/sprite-login.png') no-repeat;
+    border-radius   : 8px;
+    border          : none;
+}
+
+#form-login #login{
+    /* Aparência */
+    background-position: left -5px top 0;
+}
+
+#form-login #senha{
+    /* Aparência */
+    background-position: left -5px top -40px;
+}
+
+#form-login > .form-botoes{
+    /* Margens e espaçamentos */
+    margin: 5% auto 0 auto;
+    
+    /* Formatação do texto */
+    text-align: center;
+}
+
+#form-login a{
+    /* Formatação do texto */
+    color           : yellow;
+    text-decoration : none;
+}
+
+#form-login a:hover{
+    /* Formatação do texto */
+    text-decoration: underline;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------
+ * Rodapé
+ * ----------------------------------------------------------------------------------------------------------------- */
+footer.dl{
+    /* Formatação do texto */
+    text-align: center;
+    text-shadow: 0 0 15px rgba(255,255,255,.8);
 }

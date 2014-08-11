@@ -18,11 +18,11 @@ abstract class PrincipalSistema extends Principal{
     # Status da sessão
     protected $sessao_status;
     
-    public function __construct($raiz, $sessao_prefixo = 'dl'){
+    public function __construct($raiz){
         parent::__construct($raiz);
         
         # Iniciar classe de acesso restrito
-        $this->obj_ar        = new \AcessoRestrito('painel-dl/login/form_login', $sessao_prefixo);
+        $this->obj_ar        = new \AcessoRestrito('painel-dl/login/form_login');
         $this->sessao_status = $this->obj_ar->_verificarlogin(false);
     } // Fim do método mágico __construct
     
@@ -33,8 +33,8 @@ abstract class PrincipalSistema extends Principal{
     /**
      * Escolher o tamplate e juntá-lo com os templates padrão (_topo e _rodape)
      * 
-     * @param string $tpl - nome do template a ser carregado
-     * @param string $perm - vetor contendo as permissões que são necessárias
+     * @param string $tpl: nome do template a ser carregado
+     * @param string $perm: vetor contendo as permissões que são necessárias
      * realizar a verificação
      */
     public function _escolhertpl($tpl, array $perm = array()){

@@ -24,9 +24,9 @@ class AssuntoContato extends Principal{
     /**
      * Obter ou editar o valor da propriedade $assunto_contato_descr
      * 
-     * @param string $valor - string contendo o valor a ser atribuído à $this->assunto_contato_descr
+     * @param string $valor : string contendo o valor a ser atribuído à $this->assunto_contato_descr
      * 
-     * @return string - valor da propriedade $assunto_contato_descr
+     * @return string: valor da propriedade $assunto_contato_descr
      */
     public function _assunto_contato_descr($valor=null){
         return is_null($valor) ?

@@ -173,7 +173,7 @@ function TratarResposta(r){
         
         // Aplicar a validação dos campos
         for( var a in opcoes.campos )
-            $this.find("[name='"+ a +"']")._dlcampos(opcoes.campos[a], opcoes.aparencia.tema);
+            $this.find("[name='"+ a +"']")._dlcampos(opcoes.campos[a]);
         
         /**
          * Alterar o submit do formulário para utilizar o
@@ -188,7 +188,7 @@ function TratarResposta(r){
              * Passar campo a campo para validar
              */
             for( var a in opcoes.campos )
-                if( !$this.find("[name='"+ a +"']")._dlvalidacao(opcoes.campos[a], opcoes.aparencia.tema) ) return false;
+                if( !$this.find("[name='"+ a +"']")._dlvalidacao(opcoes.campos[a]) ) return false;
             
             var form_acao = $this.attr("action").indexOf("php/") < 0 ?
                 $this.attr("action") +"/"+ opcoes.controle 
@@ -327,9 +327,9 @@ function TratarResposta(r){
          * Criar a DIV de exibição da mensagem
          */
         var $div = $(document.createElement("div")).addClass("dl-formulario-mensagem "+ opcoes.aparencia.tema +" "+ opcoes.tipo.join(" ")).css({
-            "-webkit-animation-name"        : opcoes.animacao.mostrar,
-            "-webkit-animation-duration"    :  opcoes.animacao.tempo,
-            "-webkit-animation-fill-mode"   : "forwards"
+            "-webkit-animation-name": opcoes.animacao.mostrar,
+            "-webkit-animation-duration":  opcoes.animacao.tempo,
+            "-webkit-animation-fill-mode": "forwards"
         }).attr({
             id: $.inArray("campo", opcoes.tipo) > -1 ? "msg-"+ $this.attr("name") : id_unico
         });
@@ -356,9 +356,9 @@ function TratarResposta(r){
 
             // Remover essa mensagem
             $div.css({
-                "-webkit-animation-name"        : opcoes.animacao.ocultar,
-                "-webkit-animation-duration"    : opcoes.animacao.tempo,
-                "-webkit-animation-fill-mode"   : "forwards"
+                "-webkit-animation-name": opcoes.animacao.ocultar,
+                "-webkit-animation-duration": opcoes.animacao.tempo,
+                "-webkit-animation-fill-mode": "forwards"
             });
             
             // Remover a mensagem
@@ -388,7 +388,7 @@ function TratarResposta(r){
     /**
      * Validação e máscara de campos
      */
-    $.fn._dlcampos = function(opcoes, msg_tema){
+    $.fn._dlcampos = function(opcoes){
         var $this = $(this);
         
         // Opções padrão
@@ -426,16 +426,16 @@ function TratarResposta(r){
         } // Fim if( opcoes.mascara != null )
         
         // Configurações de campo obrigatório
-        if( opcoes.obr && opcoes.marcarobr ){
+        if (opcoes.obr && opcoes.marcarobr) {
             // Criar um SPAN e incluir um asterisco vermelho para indicar
             // obrigatoriedade de preenchimento
-            var $span = $(document.createElement("span")).css("color", "red").html("*");
+            $span = $(document.createElement("span")).css("color", "red").html("*");
 
             // Verificar se o campo está dentro de uma label ou se há
             // uma label específica para esse campo
-            var $label = $this.parents("label").length > 0 ? $this.parents("label") : $("label[for='" + $this.attr("name") + "']");
+            $label = $this.parents("label").length > 0 ? $this.parents("label") : $("label[for='" + $this.attr("name") + "']");
 
-            if( $label.length > 0 )
+            if ($label.length > 0)
                 $span.appendTo($label);
             else
                 $span.insertAfter($this);
@@ -468,7 +468,7 @@ function TratarResposta(r){
                 obr      : opcoes.obr,
                 validacao: opcoes.validacao,
                 mascara  : opcoes.mascara
-            }, msg_tema);
+            });
         });
         
         return $this;
@@ -477,7 +477,7 @@ function TratarResposta(r){
     /**
      * Validação de campos do formulário
      */
-    $.fn._dlvalidacao = function(opcoes, msg_tema){
+    $.fn._dlvalidacao = function(opcoes){
         var $this = $(this);
         
         // Opções padrão
@@ -513,7 +513,7 @@ function TratarResposta(r){
                 tipo        : ["campo", "erro"],
                 botao       : { texto: "x" },
                 animacao    : { mostrar: "fadein", ocultar: "fadeout", tempo: "1s" },
-                aparencia   : { tema: msg_tema, estilo: "mensagem" }
+                aparencia   : { tema: "colorido", estilo: "mensagem" }
             });
             
             return false;

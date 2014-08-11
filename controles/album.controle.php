@@ -51,7 +51,7 @@ class Album extends PrincipalSistema{
         # Configurar a lista padrão
         $this->_listapadrao(
             'A.album_nome', 
-            "A.album_id, A.album_nome,"
+            "A.album_id, A.album_nome, F.foto_album_imagem,"
             . " ( CASE A.album_publicar"
             . " WHEN 0 THEN 'Não'"
             . " WHEN 1 THEN 'Sim'"
@@ -59,11 +59,12 @@ class Album extends PrincipalSistema{
             . " END ) AS PUBLICADO",
             var_export((int)$_SESSION['usuario_pref_num_registros'], true)
         );
-                
+        
         # Incluir os parâmetros na visão
         $this->obj_v->_incluirparams('campos', array(
             array('nome' => 'album_nome', 'label' => TXT_LABEL_NOME)
         ));
+        $this->obj_v->_incluirparams('mod-fotoalbum', new \Modelo\FotoAlbum());
     } // Fim do método _lista
     
     /**
@@ -98,7 +99,7 @@ class Album extends PrincipalSistema{
         
         $id = $this->obj_m->_salvar();
         
-        if( !empty($_FILES['fotos']['tmp_name']) ):
+        if( !empty($_FILES['fotos']['tmp_name'][0]) ):
             # Salvar as fotos
             $con_f = new \Controle\FotoAlbum();
             $con_f->_upload($id);

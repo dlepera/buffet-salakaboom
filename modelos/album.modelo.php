@@ -17,18 +17,19 @@ class Album extends Principal{
         
         $this->bd_select = "SELECT %s"
             . " FROM %s AS A"
-            . " LEFT JOIN dl_site_albuns_fotos AS F ON( F.foto_album = A.album_id AND F.foto_album_capa = 1 )";
+            . " LEFT JOIN dl_site_albuns_fotos AS F ON( F.foto_album = A.album_id AND F.foto_album_capa = 1 )"
+            . " WHERE A.%sdelete = 0";
         
         if( !empty($id) )
-            $this->_selecionarID ($id);
+            $this->_selecionarID($id);
     } // Fim do método mágico de construção da classe
     
     /**
      * Obter ou editar o valor da propriedade $album_nome
      * 
-     * @param string $valor - string contendo o valor a ser atribuído à $this->album_nome
+     * @param string $valor : string contendo o valor a ser atribuído à $this->album_nome
      * 
-     * @return string - valor da propriedade $album_nome
+     * @return string: valor da propriedade $album_nome
      */
     public function _album_nome($valor=null){
         return is_null($valor) ?
@@ -69,4 +70,30 @@ class Album extends Principal{
         
         return $this->album_id;
     } // Fim do método _salvar
+    
+    /**
+     * Remover o registro
+     */
+    protected function _remover(){
+        # Primeiramente é necessário remover as fotos desse álbum
+        $mod_f = new \Modelo\FotoAlbum();
+        $lis_f = $mod_f->_listar("foto_album = {$this->album_id}", null, 'foto_album_id');
+        
+        foreach( $lis_f as $f ):
+            $mod_f->_selecionarID($f['foto_album_id']);
+            $mod_f->_remover();
+        endforeach;
+        
+        $rem = \DL::$bd_pdo->exec("DELETE FROM {$this->bd_tabela} WHERE {$this->modelo_id} = {$this->{$this->modelo_id}}");
+        
+        if( $rem === false && property_exists($this, $this->modelo_delete) )
+            $rem = \DL::$bd_pdo->exec("UPDATE {$this->bd_tabela} SET {$this->modelo_delete} = 1 WHERE {$this->modelo_id} = {$this->{$this->modelo_id}}");
+        
+        # Por fim, remover o diretório desse álbum
+        # PS.: Só funcionará se todas as fotos tiverem sido removidas
+        # corretamente
+        rmdir("./aplicacao/uploads/albuns/{$this->album_id}");
+        
+        return (int)$rem;
+    } // Fim do método _remover
 } // Fim do modelo Album

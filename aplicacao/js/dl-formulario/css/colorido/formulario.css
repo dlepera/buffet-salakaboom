@@ -10,8 +10,7 @@
  * ----------------------------------------------------------------------------------------------------------------- */
 input, select, textarea{
     /* Tamanho */
-    box-sizing  : border-box;
-    width       : 35%;
+    width: 35%;
     
     /* Formatação do texto */
     text-indent: 3px;
@@ -198,68 +197,4 @@ label{
     
     /* Conteúdo */
     content: "Sim";
-}
-
-/* --------------------------------------------------------------------------------------------------------------------
- * Formulário de filtro da lista de registros
- * ----------------------------------------------------------------------------------------------------------------- */
-form[name="filtro"]{
-    /* Posicionamento */
-    float   : right;
-    position: relative;
-    
-    /* Tamanho */
-    width   : 55%;
-    height  : 30px;
-    
-    /* Aparência */
-    border              : 1px solid #EFEFEF;
-    box-shadow          : 2px 2px 8px #AAA;
-    background-image    : url('icones/sprite-lista.png');
-    background-repeat   : no-repeat;
-    background-position : left top -200px;
-    
-    /* Margens e espaçamentos */
-    padding         : 5px 0 5px 40px;
-    margin-bottom   : 3%;
-}
-
-form[name="filtro"] [for="t"]{
-    /* Posicionamento */
-    position: relative;
-    float   : left;
-    
-    /* Formatação do texto */
-    color       : #AAA;
-    line-height : 30px;
-    
-    /* Tamanho */
-    width   : 37%;
-    height  : 30px;
-    
-    /* Margens e espaçamentos */
-    margin-left: 5px;
-}
-
-form[name="filtro"] [type="text"]{
-    /* Aparência */
-    background-color: transparent;
-    
-    /* Posicionamento */
-    position: absolute;
-    z-index : 1;
-    left    : 40px;
-}
-
-form[name="filtro"] [type="text"]:focus{
-    /* Aparência */
-    background-color: #FFF;
-}
-
-.limpar-filtro{
-    /* Formatação do texto */
-    color: red;
-    
-    /* Margens e espaçamentos */
-    margin: 0 1%;
 }

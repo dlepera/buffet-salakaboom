@@ -79,6 +79,8 @@ define('TXT_TABELA_TITULO_DIRETORIO', 'Diretório');
 define('TXT_TABELA_TITULO_PADRAO', 'Padrão?');
 define('TXT_TABELA_TITULO_ID', 'ID');
 define('TXT_TABELA_TITULO_REDE_SOCIAL', 'Rede Social?');
+define('TXT_TABELA_TITULO_ALBUM', 'Álbum');
+
 
 # Links
 define('TXT_LINK_EDITAR', 'Editar');
@@ -200,6 +202,7 @@ define('MSG_RESET_SENHA', 'Você deve alterar a sua senha agora!<br>Caso você não
 define('MSG_RESETAR_SENHA_VIA_EMAIL', '<b>Olá %s!</b><br>Por favor, digite a sua nova senha.');
 define('MSG_ATENCAO_AO_RESETAR_SENHA', '<span style="color:red;">Atenção! Se você não é %s, <em><u>NÃO</u></em> continue com o procedimento!</span>');
 define('MSG_CAPA', 'Capa');
+define('MSG_QTDE_FOTOS', '%d fotos.');
 
 /**
  * Álbum de fotos
