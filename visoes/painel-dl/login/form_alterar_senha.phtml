@@ -1,33 +1,26 @@
 <?php require_once '_topo.phtml'; ?>
     
-    <form id="login" name="login" method="post" action="<?= \DL::$dir_raiz; ?>">
-        <a href="<?= \DL::$dir_raiz; ?>" class="logotipo">
-            <?= \DL::$ap_nome; ?>
-        </a>
-        
-        <span class="slogan"><?= \DL::$ap_slogan; ?></span>
-        <br /><br />
-        
+    <form name="login" id="form-login" method="post" action="<?= \DL::$dir_raiz; ?>">
         <?php if( $_SESSION['usuario_conf_reset'] == '1' ): ?>
         <p>
             <?= MSG_RESET_SENHA; ?>
         </p>
         <?php endif; ?>
         
-        <div class="campos">
-            <label for="senha_atual" class="com-imagem senha"><?= TXT_LABEL_SENHA_ATUAL; ?>:</label>
-            <input type="password" name="senha_atual" id="senha_atual" title="<?= TXT_LABEL_SENHA_ATUAL; ?>" class="recuado" />
+        <fieldset>
+            <label for="senha"><?= TXT_LABEL_SENHA_ATUAL; ?>:</label>
+            <input type="password" name="senha_atual" id="senha" title="<?= TXT_LABEL_SENHA_ATUAL; ?>" placeholder="<?= TXT_LABEL_SENHA_ATUAL; ?>" />
             <br /><br />
 
-            <label for="senha_nova" class="com-imagem senha-nova"><?= TXT_LABEL_SENHA_NOVA; ?>:</label>
-            <input type="password" name="senha_nova" id="senha_nova" title="<?= TXT_LABEL_SENHA_NOVA; ?>" class="recuado" />
+            <label for="senha-nova"><?= TXT_LABEL_SENHA_NOVA; ?>:</label>
+            <input type="password" name="senha_nova" id="senha-nova" title="<?= TXT_LABEL_SENHA_NOVA; ?>" placeholder="<?= TXT_LABEL_SENHA_NOVA; ?>" />
             <br /><br />
 
-            <label for="senha_nova_conf" class="com-imagem senha-nova-conf"><?= TXT_LABEL_SENHA_NOVA_CONF; ?>:</label>
-            <input type="password" name="senha_nova_conf" id="senha_nova_conf" title="<?= TXT_LABEL_SENHA_NOVA_CONF; ?>" class="recuado" />
-        </div>
+            <label for="senha-nova-conf"><?= TXT_LABEL_SENHA_NOVA_CONF; ?>:</label>
+            <input type="password" name="senha_nova_conf" id="senha-nova-conf" title="<?= TXT_LABEL_SENHA_NOVA_CONF; ?>" placeholder="<?= TXT_LABEL_SENHA_NOVA_CONF; ?>" />
+        </fieldset>
         
-        <center>
+        <div class="form-botoes">
             <button type="submit"><?= TXT_BOTAO_SUBMIT_SALVAR; ?></button>
 
             <?php if( $_SESSION['usuario_conf_reset'] == '1' ): ?>
@@ -35,7 +28,7 @@
             <?php else: ?>
             <button type="reset"><?= TXT_BOTAO_RESET_CANCELAR; ?></button>
             <?php endif; ?>
-        </center>
+        </div>
     </form>
     
     <?php require_once '_rodape.phtml'; ?>

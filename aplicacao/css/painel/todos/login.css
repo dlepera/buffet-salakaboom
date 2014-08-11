@@ -123,6 +123,16 @@ header.dl > .slogan{
     background-position: left -5px top -40px;
 }
 
+#form-login #senha-nova{
+    /* Aparência */
+    background-position: left -5px top -80px;
+}
+
+#form-login #senha-nova-conf{
+    /* Aparência */
+    background-position: left -5px top -120px;
+}
+
 #form-login > .form-botoes{
     /* Margens e espaçamentos */
     margin: 5% auto 0 auto;
@@ -147,6 +157,6 @@ header.dl > .slogan{
  * ----------------------------------------------------------------------------------------------------------------- */
 footer.dl{
     /* Formatação do texto */
-    text-align: center;
-    text-shadow: 0 0 15px rgba(255,255,255,.8);
+    text-align  : center;
+    text-shadow : 0 0 15px rgba(255,255,255,.8);
 }
