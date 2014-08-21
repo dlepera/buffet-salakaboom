@@ -1,0 +1,140 @@
+<?php
+
+/**
+ * @Autor	: Diego Lepera
+ * @E-mail	: d_lepera@hotmail.com
+ * @Projeto	: FrameworkDL
+ * @Data	: 18/06/2014 08:46:23
+ */
+
+if( !isset($params) )
+    $params = $this->_obterparams();
+
+$mod    = $params['modelo'];
+$perms  = $params['lis_pg'];
+
+# Verificar se o registro está sendo editado
+$editando = !is_null($mod->grupo_usuario_id);
+
+# Definir qual título deve ser inserido na TAG H1
+$titulo_h1 = !$editando ? TXT_TITULO_FORMULARIO_NOVO_GRUPO_USUARIO : TXT_TITULO_FORMULARIO_ALTERAR_GRUPO_USUARIO;
+
+?>
+
+<div class="dl">
+    <h1><?= $titulo_h1; ?></h1>
+    
+    <?php include_once './visoes/painel-dl/_titulo-h2.phtml' ?>
+    
+    <form name="grupo" method="post" action="<?= \DL::$dir_raiz; ?>">
+        <?php if( $editando ): ?>
+        <!-- ID do registro atual -->
+        <input type="hidden" name="id" value="<?= $mod->grupo_usuario_id; ?>" />
+        <?php endif; ?>
+        
+        <fieldset>
+            <legend><?= TXT_LEGENDA_DADOS_GRUPO; ?></legend>
+            
+            <label for="descr"><?= TXT_LABEL_DESCRICAO; ?>:</label><br />
+            <input type="text" name="descr" id="descr" value="<?= $mod->grupo_usuario_descr; ?>" title="<?= TXT_LABEL_DESCRICAO; ?>" />
+            <br /><br />
+            
+            <label><?= TXT_LABEL_PUBLICAR; ?></label>
+            <label>
+                <input type="radio" name="publicar" value="1"<?= $mod->grupo_usuario_publicar == 1 || !$editando ? ' CHECKED' : ''; ?> />
+                <?= TXT_OPCAO_SIM; ?>
+            </label>
+            
+            <label>
+                <input type="radio" name="publicar" value="0"<?= $mod->grupo_usuario_publicar == 0 ? ' CHECKED' : ''; ?> />
+                <?= TXT_OPCAO_NAO; ?>
+            </label>
+        </fieldset>
+        
+        <fieldset>
+            <legend><?= TXT_LEGENDA_PERMISSIONAMENTO; ?></legend>
+            
+            <?php foreach( $params['modulos'] as $m ):
+                $subs = array();
+
+                foreach( $params['sub-modulos'] as $sm ):
+                    if( $sm['modulo_pai'] == $m['modulo_id'] )
+                        $subs[] = $sm;
+                endforeach;              
+                
+                ?>
+
+                <table class="lista">
+                    <tr>
+                        <th id="modulo_<?= $m['modulo_id']; ?>" style="width: 30%;"><?= $m['modulo_nome']; ?></th>
+                        <th id="ver_<?= $m['modulo_id']; ?>" style="width: 14%; text-align: center;"><?= TXT_TABELA_TITULO_VER; ?></th>
+                        <th id="inserir_<?= $m['modulo_id']; ?>" style="width: 14%; text-align: center;"><?= TXT_TABELA_TITULO_INSERIR; ?></th>
+                        <th id="editar_<?= $m['modulo_id']; ?>" style="width: 14%; text-align: center;"><?= TXT_TABELA_TITULO_EDITAR; ?></th>
+                        <th id="remover_<?= $m['modulo_id']; ?>" style="width: 14%; text-align: center;"><?= TXT_TABELA_TITULO_REMOVER; ?></th>
+                        <th id="total_<?= $m['modulo_id']; ?>" style="width: 14%; text-align: center;"><?= TXT_TABELA_TITULO_TOTAL; ?></th>
+                    </tr>
+                
+                <?php if( count($subs) > 0 ): 
+                    foreach( $subs as $sm ):
+                        # Verificar se esse módulo já está cadastrado
+                        $padrao = "~^{$sm['modulo_id']}$~";
+                        $modulo = array_filter($perms, function($v, $k) use($padrao){
+                            return preg_grep($padrao, $v);
+                        });
+                        
+                        # Obter a chave do registro
+                        $chave = end(array_keys($modulo));
+                        ?>
+                        
+                        <tr>
+                            <td headers="modulo_<?= $m['modulo_id']; ?>">
+                                <!-- ID do módulo -->
+                                <input type="hidden" name="modulo[]" value="<?= $sm['modulo_id']; ?>" />
+                                <?= $sm['modulo_nome']; ?>
+                            </td>
+                            <td headers="ver_<?= $m['modulo_id']; ?>" style="text-align: center;">
+                                <input type="checkbox" name="ver_<?= $sm['modulo_id']; ?>" value="1"<?= $modulo[$chave]['permissao_ver'] === '1' ? ' CHECKED': ''; ?> />
+                            </td>
+                            <td headers="inserir_<?= $m['modulo_id']; ?>" style="text-align: center;">
+                                <input type="checkbox" name="inserir_<?= $sm['modulo_id']; ?>" value="1"<?= $modulo[$chave]['permissao_inserir'] === '1' ? ' CHECKED': ''; ?> />
+                            </td>
+                            <td headers="editar_<?= $m['modulo_id']; ?>" style="text-align: center;">
+                                <input type="checkbox" name="editar_<?= $sm['modulo_id']; ?>" value="1"<?= $modulo[$chave]['permissao_editar'] === '1' ? ' CHECKED': ''; ?> />
+                            </td>
+                            <td headers="remover_<?= $m['modulo_id']; ?>" style="text-align: center;">
+                                <input type="checkbox" name="remover_<?= $sm['modulo_id']; ?>" value="1"<?= $modulo[$chave]['permissao_remover'] === '1' ? ' CHECKED': ''; ?> />
+                            </td>
+                            <td headers="total_<?= $m['modulo_id']; ?>" style="text-align: center;">
+                                <input type="checkbox" name="total_<?= $sm['modulo_id']; ?>" value="1"<?= $modulo[$chave]['permissao_total'] === '1' ? ' CHECKED': ''; ?> />
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </table>
+        <?php endforeach; ?>
+        </fieldset>
+        
+        <button type="submit"><?= TXT_BOTAO_SUBMIT_SALVAR; ?></button>
+        <button type="reset"><?= TXT_BOTAO_RESET_CANCELAR; ?></button>
+    </form>
+</div>
+
+<script>
+    //<![CDATA[
+    window.onload = function(){
+        $("form[name='grupo']")._dlformulario({
+            <?php if( !$editando ): ?>
+            depois: function(){
+                window.location = "<?= \DL::$dir_raiz; ?>/painel-dl/admin/grupos-de-usuarios/lista";
+            },
+            <?php endif; ?>
+            controle: "grupousuario/salvar",
+            campos  : {
+                "descr"     : { obr: true },
+                "publicar"  : { obr: true, marcarobr: false, validacao: /^[0-1]{1}$/ }
+            },
+            aparencia: { tema: "<?= \DL::$plugin_formulario_tema; ?>", estilo: "formulario" }
+        });
+    };
+    //]]>
+</script>

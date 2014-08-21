@@ -17,6 +17,7 @@ self::$ap_slogan    = 'Oi! Meu nome é Salakaboom. Seja bem-vindo a um mundo de m
 self::$conf_separador_titulo = ' :|: ';
 
 # Configurações do banco de dados
+$this->bd_host      = '127.0.0.1';
 $this->bd_usuario   = 'salakaboom';
 $this->bd_senha     = '$@l4K';
 $this->bd_base      = 'salakaboom';

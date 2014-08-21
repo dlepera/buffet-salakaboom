@@ -173,7 +173,7 @@ class Parceiro extends Principal{
         return $this->parceiro_id;
     } // Fim do método _salvar
 	
-	/**
+    /**
      * Remover o registro
      */
     protected function _remover(){

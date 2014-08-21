@@ -1,0 +1,140 @@
+<?php
+
+/**
+ * @Autor	: Diego Lepera
+ * @E-mail	: d_lepera@hotmail.com
+ * @Projeto	: FrameworkDL
+ * @Data	: 28/05/2014 16:44:53
+ */
+
+$mod = $params['modelo'];
+
+# Verificar se o registro está sendo editado
+$editando = !is_null($mod->config_email_id);
+
+# Definir qual título deve ser inserido na TAG H1
+$titulo_h1 = !$editando ? TXT_TITULO_FORMULARIO_NOVA_CONFIGURACAO_DE_EMAIL : TXT_TITULO_FORMULARIO_ALTERAR_CONFIGURACAO_DE_EMAIL;
+
+?>
+
+<div class="dl">
+    <h1><?= $titulo_h1; ?></h1>
+    
+    <?php include_once './visoes/painel-dl/_titulo-h2.phtml'; ?>
+    
+    <form name="email" method="post" action="<?= \DL::$dir_raiz; ?>">
+        <?php if( $editando ): ?>
+        <!-- ID do registro atual -->
+        <input type="hidden" name="id" value="<?= $mod->config_email_id; ?>" />
+        <?php endif; ?>
+        
+        <fieldset>
+            <legend><?= TXT_LEGENDA_DADOS_DO_SERVIDOR; ?></legend>
+            
+            <label for="titulo"><?= TXT_LABEL_TITULO; ?>:</label><br />
+            <input type="text" name="titulo" id="titulo" value="<?= $mod->config_email_titulo; ?>" title="<?= TXT_LABEL_TITULO; ?>" />
+            <br /><br />
+
+            <label for="host"><?= TXT_LABEL_HOST; ?>:</label><br />
+            <input type="text" name="host" id="host" value="<?= $mod->config_email_host; ?>" title="<?= TXT_LABEL_HOST; ?>" />:
+            <input type="text" name="porta" id="porta" value="<?= $mod->config_email_porta; ?>" title="<?= TXT_LABEL_PORTA; ?>" style="width: 5%;" />
+            <br /><br />
+
+            <label><?= TXT_LABEL_REQUER_AUTENTICACAO; ?></label><br />
+            <label>
+                <input type="radio" name="autent" value="0" title="<?= TXT_LABEL_REQUER_AUTENTICACAO; ?>"<?= $mod->config_email_autent == 0 ? ' CHECKED' : ''; ?> />
+                <?= TXT_OPCAO_NAO; ?>
+            </label>
+
+            <label>
+                <input type="radio" name="autent" value="1" title="<?= TXT_LABEL_REQUER_AUTENTICACAO; ?>"<?= $mod->config_email_autent == 1 || $editando ? ' CHECKED' : ''; ?> />
+                <?= TXT_OPCAO_SIM; ?>
+            </label>
+            <br /><br />
+
+            <label for="cripto"><?= TXT_LABEL_TIPO_DE_CRIPTOGRAFIA; ?>:</label><br />
+            <select name="cripto" id="cripto" title="<?= TXT_LABEL_TIPO_DE_CRIPTOGRAFIA; ?>">
+                <option value=""<?= empty($mod->config_email_cripto) ? ' SELECTED' : ''; ?>><?= TXT_OPCAO_NENHUM; ?></option>
+                <option value="tls"<?= $mod->config_email_cripto == 'tls' ? ' SELECTED' : ''; ?>><?= TXT_OPCAO_TLS; ?></option>
+                <option value="ssl"<?= $mod->config_email_cripto == 'ssl' ? ' SELECTED' : ''; ?>><?= TXT_OPCAO_SSL; ?></option>
+            </select>
+        </fieldset>
+        
+        <fieldset>
+            <legend><?= TXT_LEGENDA_DADOS_DA_CONTA; ?></legend>
+            
+            <label for="conta"><?= TXT_LABEL_CONTA; ?>:</label><br />
+            <input type="text" name="conta" id="conta" value="<?= $mod->config_email_conta; ?>" title="<?= TXT_LABEL_CONTA; ?>" />
+            <br /><br />
+
+            <label for="senha"><?= TXT_LABEL_SENHA; ?>:</label><br />
+            <input type="text" name="senha" id="senha" value="<?= $mod->config_email_senha; ?>" title="<?= TXT_LABEL_SENHA; ?>" />
+        </fieldset>
+        
+        <fieldset>
+            <legend><?= TXT_LEGENDA_CONFIGURACOES_DO_ENVIO_DE_EMAILS; ?></legend>
+            
+            <label for="de_email"><?= TXT_LABEL_DE_EMAIL; ?>:</label><br />
+            <input type="text" name="de_email" id="de_email" value="<?= $mod->config_email_de_email; ?>" title="<?= TXT_LABEL_DE_EMAIL; ?>" />
+            <br /><br />
+
+            <label for="de_nome"><?= TXT_LABEL_DE_NOME; ?>:</label><br />
+            <input type="text" name="de_nome" id="de_email" value="<?= $mod->config_email_de_nome; ?>" title="<?= TXT_LABEL_DE_NOME; ?>" />
+            <br /><br />
+
+            <label for="responder_para"><?= TXT_LABEL_RESPONDER_PARA; ?>:</label><br />
+            <input type="text" name="responder_para" id="responder_para" value="<?= $mod->config_email_responder_para; ?>" title="<?= TXT_LABEL_RESPONDER_PARA; ?>" />
+            <br /><br />
+
+            <label><?= TXT_LABEL_FORMATO_HTML; ?></label><br />
+            <label>
+                <input type="radio" name="html" value="0" title="<?= TXT_LABEL_FORMATO_HTML; ?>"<?= $mod->config_email_autent == 0 ? ' CHECKED' : ''; ?> />
+                <?= TXT_OPCAO_NAO; ?>
+            </label>
+
+            <label>
+                <input type="radio" name="html" value="1" title="<?= TXT_LABEL_FORMATO_HTML; ?>"<?= $mod->config_email_autent == 1 || !$editando ? ' CHECKED' : ''; ?> />
+                <?= TXT_OPCAO_SIM; ?>
+            </label>
+        </fieldset>
+        
+        <label><?= TXT_LABEL_ENVIAR_DESSA_CONTA_POR_PADRAO; ?></label><br />
+        <label>
+            <input type="radio" name="principal" value="0" title="<?= TXT_LABEL_ENVIAR_DESSA_CONTA_POR_PADRAO; ?>"<?= $mod->config_email_principal == 0 ? ' CHECKED' : ''; ?> />
+            <?= TXT_OPCAO_NAO; ?>
+        </label>
+        
+        <label>
+            <input type="radio" name="principal" value="1" title="<?= TXT_LABEL_ENVIAR_DESSA_CONTA_POR_PADRAO; ?>"<?= $mod->config_email_principal == 1 || !$editando ? ' CHECKED' : ''; ?> />
+            <?= TXT_OPCAO_SIM; ?>
+        </label>
+        <br /><br />
+        
+        <button type="submit"><?= TXT_BOTAO_SUBMIT_SALVAR; ?></button>
+        <button type="reset"><?= TXT_BOTAO_RESET_CANCELAR; ?></button>
+    </form>
+</div>
+
+<script>
+    //<![CDATA[
+    window.onload = function(){
+        $("form[name='email']")._dlformulario({
+            <?php if( !$editando ): ?>
+            depois: function(){
+                window.location = "<?= \DL::$dir_raiz; ?>/painel-dl/admin/emails/lista";
+            },
+            <?php endif; ?>
+            controle: "configemail/salvar",
+            campos  : {
+                "titulo"    : { obr: true },
+                "host"      : { obr: true },
+                "porta"     : { obr: true, validacao: /^\d+$/, marcarobr: false},
+                "autent"    : { obr: true, marcarobr: false },
+                "html"      : { obr: true, marcarobr: false },
+                "principal" : { obr: true, marcarobr: false }
+            },
+            aparencia       : { tema: "<?= \DL::$plugin_formulario_tema; ?>", estilo: "formulario" }
+        });
+    };
+    //]]>
+</script>

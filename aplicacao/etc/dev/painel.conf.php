@@ -17,6 +17,7 @@ self::$ap_slogan    = 'Gerenciador de conteúdo';
 self::$conf_versao  = '<span class="dl-versao">1.1 BETA</span>';
 
 # Configurações do banco de dados
+$this->bd_host      = '127.0.0.1';
 $this->bd_usuario   = 'salakaboom';
 $this->bd_senha     = '$@l4K';
 $this->bd_base      = 'salakaboom';

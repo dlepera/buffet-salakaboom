@@ -1,0 +1,190 @@
+/**
+ * @Autor	: Diego Lepera
+ * @E-mail	: d_lepera@hotmail.com
+ * @Projeto	: FrameworkDL
+ * @Data	: 28/06/2014 20:11:30
+ */
+
+/* --------------------------------------------------------------------------------------------------------------------
+ * Elementos do FORM
+ * ----------------------------------------------------------------------------------------------------------------- */
+input, select, textarea{
+    /* Tamanho */
+    width: 35%;
+    
+    /* Formatação do texto */
+    text-indent: 3px;
+    
+    /* Aparência */
+    border          : 1px solid #CCC;
+    background-color: #FFF;
+}
+
+input{
+    /* Tamanho */
+    height: 25px;
+    
+    /* Formatação do texto */
+    line-height: 25px;
+}
+
+select{
+    /* Tamanho */
+    height: 29px;
+    
+    /* Formatação do texto 
+    line-height: 29px; */
+}
+
+textarea{
+    /* Tamanho */
+    height: 140px;
+}
+
+[type="radio"], [type="checkbox"]{
+    /* Tamanho */
+    width: auto;
+    
+    /* Formatação do texto */
+    vertical-align: middle;
+    
+    /* Margens e espaçamentos */
+    padding : 0;
+    margin  : 0;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------
+ * Fieldset e Legendas
+ * ----------------------------------------------------------------------------------------------------------------- */
+fieldset{
+    /* Aparência */
+    border: none;
+    
+    /* Margens e espaçamentos */
+    padding: 0;
+    margin : 2% 0;
+}
+
+legend{
+    /* Aparência */
+    background-color: #FAFAFA;
+    border-top      : 1px solid #CCC;
+    border-bottom   : 1px solid #CCC;
+    
+    /* Tamanho */
+    width: 100%;
+    
+    /* Formatação do texto */
+    line-height : 30px;
+    text-indent : 5px;
+    color       : orange;
+    
+    /* Margens e espaçamentos */
+    margin: 1% 0;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------
+ * Labels
+ * ----------------------------------------------------------------------------------------------------------------- */
+label{
+    /* Formatação do texto */
+    line-height: 22px;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------
+ * Botões
+ * ----------------------------------------------------------------------------------------------------------------- */
+[type="submit"]{
+    /* Aparência */
+    border          : none;
+    border-radius   : 10px;
+    background-color: #2db844;
+    
+    /* Tamanho */
+    height: 25px;
+    
+    /* Margens e espaçamentos */
+    padding : 0 2%;
+    margin  : 0 2% 0 0;
+    
+    /* Formatação do texto */
+    color: #FFF;
+}
+
+[type="reset"]{
+    /* Aparência */
+    border      : none;
+    background  : #FFF;
+    
+    /* Formatação do texto */
+    color: #999;
+}
+
+[type="reset"]:hover{
+    /* Formatação do texto */
+    color: red;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------
+ * Formulário de filtro da lista de registros
+ * ----------------------------------------------------------------------------------------------------------------- */
+form[name="filtro"]{
+    /* Posicionamento */
+    float   : right;
+    position: relative;
+    
+    /* Tamanho */
+    width   : 55%;
+    height  : 30px;
+    
+    /* Aparência */
+    border              : 1px solid #EFEFEF;
+    box-shadow          : 2px 2px 8px #AAA;
+    background-image    : url('icones/sprite-lista.png');
+    background-repeat   : no-repeat;
+    background-position : left top -200px;
+    
+    /* Margens e espaçamentos */
+    padding         : 5px 0 5px 40px;
+    margin-bottom   : 3%;
+}
+
+form[name="filtro"] [for="t"]{
+    /* Posicionamento */
+    position: relative;
+    float   : left;
+    
+    /* Formatação do texto */
+    color       : #AAA;
+    line-height : 30px;
+    
+    /* Tamanho */
+    width   : 37%;
+    height  : 30px;
+    
+    /* Margens e espaçamentos */
+    margin-left: 5px;
+}
+
+form[name="filtro"] [type="text"]{
+    /* Aparência */
+    background-color: transparent;
+    
+    /* Posicionamento */
+    position: absolute;
+    z-index : 1;
+    left    : 40px;
+}
+
+form[name="filtro"] [type="text"]:focus{
+    /* Aparência */
+    background-color: #FFF;
+}
+
+.limpar-filtro{
+    /* Formatação do texto */
+    color: red;
+    
+    /* Margens e espaçamentos */
+    margin: 0 1%;
+}

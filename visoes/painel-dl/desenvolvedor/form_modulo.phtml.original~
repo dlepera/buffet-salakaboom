@@ -1,0 +1,152 @@
+<?php
+
+/**
+ * @Autor	: Diego Lepera
+ * @E-mail	: d_lepera@hotmail.com
+ * @Projeto	: FrameworkDL
+ * @Data	: 18/06/2014 08:46:23
+ */
+
+if( !isset($params) )
+    $params = $this->_obterparams();
+
+$mod    = $params['modelo'];
+$perms  = $params['lis_pg'];
+
+# Verificar se o registro está sendo editado
+$editando = !is_null($mod->modulo_id);
+
+# Indicar se o registro é um sub-módulo
+$submod = $editando && (int)$mod->modulo_pai !== 0;
+
+# Definir qual título deve ser inserido na TAG H1
+$titulo_h1 = !$editando ? TXT_TITULO_FORMULARIO_NOVO_MODULO : TXT_TITULO_FORMULARIO_ALTERAR_MODULO;
+
+?>
+
+<div class="dl">
+    <h1><?= $titulo_h1; ?></h1>
+    
+    <?php include_once './visoes/painel-dl/_titulo-h2.phtml'; ?>
+    
+    <form name="modulo" method="post" action="<?= \DL::$dir_raiz; ?>">
+        <?php if( $editando ): ?>
+        <!-- ID do registro atual -->
+        <input type="hidden" name="id" value="<?= $mod->modulo_id; ?>" />
+        <?php endif; ?>
+        
+        <fieldset>
+            <legend><?= TXT_LEGENDA_DADOS_MODULO; ?></legend>
+            
+            <label for="pai"><?= TXT_LABEL_MODULO_PAI; ?>:</label><br />
+            <select name="pai" id="pai" title="<?= TXT_LABEL_MODULO_PAI; ?>">
+                <option value=""><?= TXT_OPCAO_NENHUM; ?></option>
+                
+                <?php foreach( $params['modulos'] as $mp ): ?>
+                <option value="<?= $mp['modulo_id']; ?>"<?= $mp['modulo_id'] == $mod->modulo_pai ? ' SELECTED' : ''; ?>>
+                    <?= $mp['modulo_nome']; ?>
+                </option>
+                <?php endforeach; ?>
+            </select>
+            <br /><br />
+            
+            <label for="nome"><?= TXT_LABEL_NOME; ?>:</label><br />
+            <input type="text" name="nome" id="nome" value="<?= $mod->modulo_nome; ?>" title="<?= TXT_LABEL_NOME; ?>" />
+            <br /><br />
+            
+            <label for="link"><?= TXT_LABEL_LINK; ?>:</label><br />
+            <input type="text" name="link" id="link" value="<?= $mod->modulo_link; ?>" title="<?= TXT_LABEL_LINK; ?>" />
+            <br /><br />
+            
+            <label for="ordem"><?= TXT_LABEL_ORDEM; ?>:</label><br />
+            <input type="number" name="ordem" id="ordem" value="<?= $mod->modulo_ordem; ?>" title="<?= TXT_LABEL_ORDEM; ?>" />
+            <br /><br />
+            
+            <label for="descr"><?= TXT_LABEL_DESCRICAO; ?>:</label><br />
+            <textarea name="descr" id="descr" title="<?= TXT_LABEL_DESCRICAO; ?>"><?= $mod->modulo_descr; ?></textarea>
+            <br /><br />
+            
+            <label><?= TXT_LABEL_PUBLICAR; ?></label>
+            <label>
+                <input type="radio" name="publicar" value="1"<?= $mod->modulo_publicar == 1 || $editando ? ' CHECKED' : ''; ?> />
+                <?= TXT_OPCAO_SIM; ?>
+            </label>
+            
+            <label>
+                <input type="radio" name="publicar" value="0"<?= $mod->modulo_publicar == 0 ? ' CHECKED' : ''; ?> />
+                <?= TXT_OPCAO_NAO; ?>
+            </label>
+        </fieldset>
+        
+        <fieldset id="permissoes"<?= !$submod ? ' style="display: none;"' : ''; ?>>
+            <legend><?= TXT_LEGENDA_PERMISSIONAMENTO; ?></legend>
+
+            <table class="lista">
+                <tr>
+                    <th id="grupo" style="width: 30%;"><?= TXT_TABELA_TITULO_GRUPO; ?></th>
+                    <th id="ver" style="width: 14%; text-align: center;"><?= TXT_TABELA_TITULO_VER; ?></th>
+                    <th id="inserir" style="width: 14%; text-align: center;"><?= TXT_TABELA_TITULO_INSERIR; ?></th>
+                    <th id="editar" style="width: 14%; text-align: center;"><?= TXT_TABELA_TITULO_EDITAR; ?></th>
+                    <th id="remover" style="width: 14%; text-align: center;"><?= TXT_TABELA_TITULO_REMOVER; ?></th>
+                    <th id="total" style="width: 14%; text-align: center;"><?= TXT_TABELA_TITULO_TOTAL; ?></th>
+                </tr>
+
+                <?php foreach( $params['grupos'] as $gp ): ?>                        
+                <tr>
+                    <td headers="modulo_<?= $gp['permissao_grupo']; ?>">
+                        <!-- ID do módulo -->
+                        <input type="hidden" name="grupos[]" value="<?= $gp['permissao_grupo']; ?>" />
+                        <?= $gp['grupo_usuario_descr']; ?>
+                    </td>
+                    <td headers="ver_<?= $gp['permissao_grupo']; ?>" style="text-align: center;">
+                        <input type="checkbox" name="ver_<?= $gp['permissao_grupo']; ?>" value="1"<?= $gp['permissao_ver'] === '1' ? ' CHECKED': ''; ?> />
+                    </td>
+                    <td headers="inserir_<?= $gp['permissao_grupo']; ?>" style="text-align: center;">
+                        <input type="checkbox" name="inserir_<?= $gp['permissao_grupo']; ?>" value="1"<?= $gp['permissao_inserir'] === '1' ? ' CHECKED': ''; ?> />
+                    </td>
+                    <td headers="editar_<?= $gp['permissao_grupo']; ?>" style="text-align: center;">
+                        <input type="checkbox" name="editar_<?= $gp['permissao_grupo']; ?>" value="1"<?= $gp['permissao_editar'] === '1' ? ' CHECKED': ''; ?> />
+                    </td>
+                    <td headers="remover_<?= $gp['permissao_grupo']; ?>" style="text-align: center;">
+                        <input type="checkbox" name="remover_<?= $gp['permissao_grupo']; ?>" value="1"<?= $gp['permissao_remover'] === '1' ? ' CHECKED': ''; ?> />
+                    </td>
+                    <td headers="total_<?= $gp['permissao_grupo']; ?>" style="text-align: center;">
+                        <input type="checkbox" name="total_<?= $gp['permissao_grupo']; ?>" value="1"<?= $gp['permissao_total'] === '1' ? ' CHECKED': ''; ?> />
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+            </table>
+        </fieldset>
+        
+        <button type="submit"><?= TXT_BOTAO_SUBMIT_SALVAR; ?></button>
+        <button type="reset"><?= TXT_BOTAO_RESET_CANCELAR; ?></button>
+    </form>
+</div>
+
+<script>
+    //<![CDATA[
+    window.onload = function(){
+        $("form[name='modulo']")._dlformulario({
+            <?php if( !$editando ): ?>
+            depois: function(){
+                window.location = "<?= \DL::$dir_raiz; ?>/painel-dl/desenvolvedor/modulos/lista";
+            },
+            <?php endif; ?>
+            controle: "modulo/salvar",
+            campos  : {
+                "nome"      : { obr: true },
+                "link"      : { obr: true },
+                "publicar"  : { obr: true, marcarobr: false, validacao: /^[0-1]{1}$/ }
+            },
+            aparencia: { tema: "<?= \DL::$plugin_formulario_tema; ?>", estilo: "formulario" }
+        });
+        
+        $("#pai").bind("change", function(){
+            if( $(this).val() == "" )
+                $("#permissoes").fadeOut("fast");
+            else
+                $("#permissoes").fadeIn("fast");
+        });
+    };
+    //]]>
+</script>
