@@ -49,5 +49,12 @@ class WebSite extends Principal{
         # Preparar a visão
         $this->_escolhertpl('institucional');
         $this->obj_v->_titulo(TXT_TITULO_INSTITUCIONAL);
+        
+        # Selecionar 4 fotos aleatórios para exibir na página
+        $mod_f = new \Modelo\FotoAlbum();
+        $lis_f = $mod_f->_listar('foto_album_publicar = 1', 'RAND()', 'foto_album_imagem', 1, 4);
+        
+        # Incluir parâmetros na visão
+        $this->obj_v->_incluirparams('fotos', $lis_f);
     } // Fim do método _index
 } // Fim da classe WebSite
