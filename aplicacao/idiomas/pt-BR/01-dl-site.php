@@ -12,12 +12,12 @@ define('TXT_MODELO_CONTATOSITE', 'contato do site');
 
 # Títulos de páginas
 define('TXT_TITULO_PAGINA_INICIAL', 'Página inicial');
-define('TXT_TITULO_INSTITUCIONAL', 'Institucional');
+define('TXT_TITULO_INSTITUCIONAL', 'A história do Buffet Salakaboom');
 define('TXT_TITULO_ALBUNS_DE_FOTOS', 'Álbuns de fotos');
 define('TXT_TITULO_FALE_CONOSCO', 'Fale conosco');
 
 # Links
-define('TXT_LINK_INSTITUCIONAL', 'Institucional');
+define('TXT_LINK_INSTITUCIONAL', 'O Buffet');
 define('TXT_LINK_ALBUNS_DE_FOTOS', 'Álbuns de fotos');
 define('TXT_LINK_FALE_CONOSCO', 'Fale conosco');
 define('TXT_LINK_VISUALIZAR_EMAIL_COMO_HTML', 'Mostrar e-mail como HTML');
@@ -31,6 +31,7 @@ define('TXT_LABEL_MENSAGEM', 'Mensagem');
 
 # Mensagens de e-mails
 define('MSG_EMAIL_CASO_NAO_ESTEJA_CONSEGUINDO_VISUALIZAR', 'Caso não esteja conseguindo visualizar esse e-mail corretamente, por favor clique no link abaixo.');
+define('MSG_DESENVOLVIDOR_POR', 'Desenvolvido por Diego Lepera');
 
 /**
  * ContatoSite

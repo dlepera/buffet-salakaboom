@@ -25,6 +25,21 @@ class WebSite extends Principal{
         # Preparar a visão
         $this->_escolhertpl('home');
         $this->obj_v->_titulo(TXT_TITULO_PAGINA_INICIAL);
+        
+        # Selecionar os banners a serem exibidos na página inicial
+        $dir_banners    = './aplicacao/uploads/banners/';
+        $scan_banners   = array_map(
+            create_function('&$v', 'return $v = "'. $dir_banners .'{$v}";'),
+            preg_grep('~^[^\.]~', scandir($dir_banners))
+        );
+        
+        # Selecionar um depoimento aleatório
+        $mod_d = new \Modelo\Depoimento();
+        $lis_d = end($mod_d->_listar('depoimento_publicar = 1', 'RAND()', 'depoimento_nome, depoimento_texto, log_registro_data_criacao AS data', 1, 1));
+        
+        # Incluir os parâmetros na página
+        $this->obj_v->_incluirparams('depoimento', $lis_d);
+        $this->obj_v->_incluirparams('banners', $scan_banners);
     } // Fim do método _index
     
     /**

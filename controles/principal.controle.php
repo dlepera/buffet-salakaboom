@@ -38,10 +38,30 @@ abstract class Principal{
         
         # Selecionar os dados para contato
         $mod_dc = new \Modelo\DadoContato();
-        $lis_dc = $mod_dc->_listar('dado_contato_publicar = 1', 'tipo_dado_descr, dado_contato_descr', 'tipo_dado_descr, dado_contato_descr');
+        $lis_dc = $mod_dc->_listar(
+            'dado_contato_publicar = 1 AND tipo_dado_rede_social = 0', 
+            'tipo_dado_descr, dado_contato_descr', 
+            'tipo_dado_descr, dado_contato_descr'
+        );
+        
+        $lis_rs = $mod_dc->_listar(
+            'dado_contato_publicar = 1 AND tipo_dado_rede_social = 1', 
+            'tipo_dado_descr, dado_contato_descr', 
+            'tipo_dado_descr, dado_contato_descr, tipo_dado_icone'
+        );
+        
+        # Selecionar a lista de horários de atendimento
+        $mod_h  = new \Modelo\Horario();
+        $lis_h = $mod_h->_listar(
+            'H.horario_publicar = 1', 
+            'H.horario_abertura, H.horario_fechamento, DS.dia_semana_id', 
+            'DS.dia_semana_abrev, H.horario_abertura, H.horario_fechamento'
+        );
         
         # Incluir os parâmetros na visão
         $this->obj_v->_incluirparams('contatos', $lis_dc);
+        $this->obj_v->_incluirparams('redes-sociais', $lis_rs);
+        $this->obj_v->_incluirparams('horarios', $lis_h);
     } // Fim do método _escolhertpl
     
     /**
