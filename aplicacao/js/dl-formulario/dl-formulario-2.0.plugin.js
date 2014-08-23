@@ -211,7 +211,7 @@ function TratarResposta(r){
                         width       : 0,
                         height      : 0,
                         visibility  : "hidden"
-                    }).bind("load", function(){
+                    }).on("load", function(){
                         var r = eval("$(window."+ form_nome +".document).text();");
 
                         if( r !== "" ){
