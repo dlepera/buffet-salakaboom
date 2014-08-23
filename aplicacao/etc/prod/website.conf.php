@@ -20,7 +20,7 @@ self::$conf_separador_titulo = ' :|: ';
 $this->bd_host      = 'mysql.hostinger.com.br';
 $this->bd_usuario   = 'u260168511_s2014';
 $this->bd_senha     = '$@l4K@';
-$this->bd_base      = 'u260168511_s2014';
+$this->bd_base      = 'u260168511_b2014';
 
 # Configurações de data
 self::$dh_formato_hora = 'H:i';
