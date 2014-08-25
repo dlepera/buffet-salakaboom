@@ -173,39 +173,39 @@ class Produto extends Principal{
      * @param string $data - data a ser pesquisada
      * @return array - vetor contendo os resultados da consulta
      */
-	public function _filtrarfesta($data){        
-		if( !empty($data) && $data != '__/__/____'):
-			# Identificar o dia da semana refrente à data passada
-	        preg_match('#(\d{2})/(\d{2})/(\d{4})#', $data, $data);
-	        $diasemana = date('w', mktime(0, 0, 0, $data[2], $data[1], $data[3]))+1;
-			
-			$query = "SELECT"
-					. " P.produto_id, P.produto_nome"
-					. " FROM {$this->bd_tabela} AS P"
-					. " LEFT JOIN {$this->bd_tabela}_dispon AS D ON( D.dispon_produto = P.produto_id )"
-					. " LEFT JOIN salakaboom_dias_semana AS DS ON( DS.dia_semana_id = D.dispon_dia_semana )"
-					. " WHERE DS.dia_semana_id = {$diasemana}"
-					. " AND P.produto_publicar = 1"
-					. " AND P.produto_tipo = 1";
-		else:
-			$query = "SELECT"
-					. " produto_id, produto_nome"
-					. " FROM {$this->bd_tabela}"
-                    . " WHERE produto_publicar = 1"
-					. " AND produto_tipo = 1";
-		endif;
-		
-		$sql = \DL::$bd_pdo->query($query);
-		
-		$r = array();
-		
-		while( $rs = $sql->fetch(\PDO::FETCH_ASSOC) ):
-			\Funcoes::_converterencode($rs, 'UTF-8', \DL::$ap_encoding);
-			$r[] = $rs;
-		endwhile;
-			
-		return $r;
-	} // Fim do método _filtrarfesta 
+    public function _filtrarfesta($data){        
+        if( !empty($data) && $data != '__/__/____'):
+            # Identificar o dia da semana refrente à data passada
+            preg_match('#(\d{2})/(\d{2})/(\d{4})#', $data, $data);
+            $diasemana = date('w', mktime(0, 0, 0, $data[2], $data[1], $data[3]))+1;
+
+            $query = "SELECT"
+                . " P.produto_id, P.produto_nome"
+                . " FROM {$this->bd_tabela} AS P"
+                . " LEFT JOIN {$this->bd_tabela}_dispon AS D ON( D.dispon_produto = P.produto_id )"
+                . " LEFT JOIN salakaboom_dias_semana AS DS ON( DS.dia_semana_id = D.dispon_dia_semana )"
+                . " WHERE DS.dia_semana_id = {$diasemana}"
+                . " AND P.produto_publicar = 1"
+                . " AND P.produto_tipo = 1";
+        else:
+            $query = "SELECT"
+                . " produto_id, produto_nome"
+                . " FROM {$this->bd_tabela}"
+                . " WHERE produto_publicar = 1"
+                . " AND produto_tipo = 1";
+        endif;
+
+        $sql = \DL::$bd_pdo->query($query);
+
+        $r = array();
+
+        while( $rs = $sql->fetch(\PDO::FETCH_ASSOC) ):
+            \Funcoes::_converterencode($rs, 'UTF-8', \DL::$ap_encoding);
+            $r[] = $rs;
+        endwhile;
+
+        return $r;
+    } // Fim do método _filtrarfesta 
     
     
     /**

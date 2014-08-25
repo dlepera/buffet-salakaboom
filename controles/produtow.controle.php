@@ -27,8 +27,7 @@ class ProdutoW extends Principal{
      */
     public function _filtrardata(){
         $data = filter_input(INPUT_POST, 'data', FILTER_DEFAULT);
-        //$this->obj_m->_filtrarfesta($data);
-        echo json_encode($this->obj_m->_filtrarfesta($data));
+        echo json_encode($this->obj_m->_filtrarfesta(\Funcoes::_formatardatahora($data, \DL::$dh_formato_data)));
     } // Fim do método _filtrardata
     
     /**

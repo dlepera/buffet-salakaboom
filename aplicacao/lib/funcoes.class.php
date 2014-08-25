@@ -159,10 +159,10 @@ class Funcoes {
         return $string;
     } // Fim do mÈdoto _removeracentuacao
     
-    /*
+    /**
      * Obter o nome do dia da sema de uma determinada data
      * que deve ser passada no parametro data
-     * @param $data: data para verificar o dia da semana
+     * @param $data - data para verificar o dia da semana
      */
     public static function _diadasemana($data){
     	# Separar a data em dia/mÕs/ano utilizando uma express?o
@@ -173,7 +173,7 @@ class Funcoes {
     	# Obter a representa¡?o num»rica do dia da semana
     	# correspondente a data informada
     	$diasemana = date('w', mktime(0, 0, 0, $data['mes'], $data['dia'], $data['ano']));
-		
+	
         switch( $diasemana ):
             case 0:  return TXT_DIADASEMANA_DOMINGO;
             case 1:  return TXT_DIADASEMANA_SEGUNDA_FEIRA;
