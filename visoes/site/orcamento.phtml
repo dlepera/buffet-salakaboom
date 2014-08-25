@@ -10,33 +10,33 @@
 ?>
 
 <div class="dl orcamento">
-	<h1><?= TXT_TITULO_ORCAMENTO_ON_LINE; ?></h1>
-	
-	<form name="orcamento" method="post" action="<?= \DL::$dir_raiz; ?>">
+    <h1><?= TXT_TITULO_ORCAMENTO_ON_LINE; ?></h1>
+
+    <form name="orcamento" method="post" action="<?= \DL::$dir_raiz; ?>">
         <fieldset>
             <legend><?= TXT_LEGENDA_DADOS_PESSOAIS; ?></legend>
             
             <label for="info_nome"><?= TXT_LABEL_NOME_COMPLETO; ?>:</label><br />
-            <input type="text" name="info_nome" id="info_nome" title="<?= TXT_LABEL_NOME_COMPLETO; ?>" alt="<?= TXT_ALT_NOME_COMPLETO; ?>" />
+            <input type="text" name="info_nome" id="info_nome" title="<?= TXT_LABEL_NOME_COMPLETO; ?>" alt="<?= TXT_ALT_NOME_COMPLETO; ?>" required />
             <br /><br />
 
             <label for="info_email"><?= TXT_LABEL_EMAIL; ?>:</label><br />
-            <input type="text" name="info_email" id="info_email" title="<?= TXT_LABEL_EMAIL; ?>" />
+            <input type="email" name="info_email" id="info_email" title="<?= TXT_LABEL_EMAIL; ?>" required />
             <br /><br />
 
             <label for="info_telefone"><?= TXT_LABEL_TELEFONE; ?>:</label><br />
-            <input type="text" name="info_telefone" id="info_telefone" title="<?= TXT_LABEL_TELEFONE; ?>" />
+            <input type="tel" name="info_telefone" id="info_telefone" title="<?= TXT_LABEL_TELEFONE; ?>" />
         </fieldset>
         
         <fieldset>
             <legend><?= TXT_LEGENDA_DADOS_DA_FESTA; ?></legend>
             
             <label for="festa_data"><?= TXT_LABEL_DATA_PRETENDIDA; ?>:</label><br />
-            <input type="date" name="festa_data" id="festa_data" title="<?= TXT_LABEL_DATA_PRETENDIDA; ?>" />
+            <input type="date" name="festa_data" id="festa_data" title="<?= TXT_LABEL_DATA_PRETENDIDA; ?>" min="<?= date('Y-m-d'); ?>" />
             <br /><br />
             
             <label for="festa_pacote"><?= TXT_LABEL_PACOTE; ?>:</label><br />
-            <select name="festa_pacote" id="festa_pacote" title="<?= TXT_LABEL_PACOTE; ?>">
+            <select name="festa_pacote" id="festa_pacote" title="<?= TXT_LABEL_PACOTE; ?>" required>
                 <option value=""><?= TXT_OPCAO_SELECIONE_UMA_OPCAO; ?></option>
                 
                 <?php foreach( $params['festas'] as $f ): ?>
@@ -48,7 +48,7 @@
             <br /><br />
             
             <label for="festa_convidados"><?= TXT_LABEL_QTDE_CONVIDADOS; ?>:</label><br />
-            <input type="number" name="festa_convidados" id="festa_convidados" title="<?= TXT_LABEL_QTDE_CONVIDADOS; ?>" min="50" max="300" />
+            <input type="number" name="festa_convidados" id="festa_convidados" title="<?= TXT_LABEL_QTDE_CONVIDADOS; ?>" min="50" max="300" required />
         </fieldset>
         
         <fieldset>
@@ -71,8 +71,8 @@
             <?php endif; ?>
         </fieldset>
         
-		<button type="submit"><?= TXT_BOTAO_SUBMIT_ENVIAR; ?></button>
-		<button type="reset"><?= TXT_BOTAO_RESET_CANCELAR; ?></button>
+        <button type="submit"><?= TXT_BOTAO_SUBMIT_ENVIAR; ?></button>
+        <button type="reset"><?= TXT_BOTAO_RESET_CANCELAR; ?></button>
     </form>
 </div>
 
@@ -82,12 +82,7 @@
         $("form[name='orcamento']")._dlformulario({
             controle : "orcamentow/enviar",
             campos	 : {
-                "info_nome"         : { obr: true },
-                "info_email"		: { obr: true, validacao: EXPR_EMAIL },
-                "info_telefone"  	: { obr: false, mascara: MASK_CELULAR_9 },
-                "festa_data"        : { obr: false, mascara: MASK_DATA, validacao: EXPR_DATA },
-                "festa_pacote"      : { obr: true },
-                "festa_convidados"  : { obr: true, validacao: EXPR_APENAS_NUMEROS }
+                "info_telefone" : { obr: false, mascara: MASK_CELULAR_9 }
             },
             aparencia : { tema: "<?= \DL::$plugin_formulario_tema; ?>", estilo: "formulario" }
         });

@@ -169,7 +169,7 @@ class Orcamento extends Principal{
     protected function _salvar($salvar=true){
         # Obter o valor atual do produto
         $mod_p = new \Modelo\Produto($this->orcamento_festa_pacote);
-        $this->orcamento_festa_valor_pacote = $mod_p->produto_valor;
+        $this->_orcamento_festa_valor_pacote($mod_p->produto_valor);
         
         $query = "INSERT INTO {$this->bd_tabela} ("
                 . " orcamento_info_nome, orcamento_info_email, orcamento_info_telefone, orcamento_festa_data, orcamento_festa_pacote,"

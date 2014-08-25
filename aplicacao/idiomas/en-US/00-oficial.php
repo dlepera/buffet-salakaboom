@@ -7,6 +7,17 @@
  */
 
 /* --------------------------------------------------------------------------------------------------------------------
+ * Dias da semana
+ * ----------------------------------------------------------------------------------------------------------------- */
+define('TXT_DIADASEMANA_DOMINGO', 'Sunday');
+define('TXT_DIADASEMANA_SEGUNDA_FEIRA', 'Monday');
+define('TXT_DIADASEMANA_TERCA_FEIRA', 'Tuesday');
+define('TXT_DIADASEMANA_QUARTA_FEIRA', 'Wednesday');
+define('TXT_DIADASEMANA_QUINTA_FEIRA', 'Tursday');
+define('TXT_DIADASEMANA_SEXTA_FEIRA', 'Friday');
+define('TXT_DIADASEMANA_SABADO', 'Saturday');
+
+/* --------------------------------------------------------------------------------------------------------------------
  * Mensagens padrões
  * ----------------------------------------------------------------------------------------------------------------- */
 define('MSG_PADRAO_POR_FAVOR_TENTE_NOVAMENTE_MAIS_TARDE', 'Please, try again later.');

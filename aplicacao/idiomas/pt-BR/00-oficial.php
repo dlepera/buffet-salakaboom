@@ -7,6 +7,17 @@
  */
 
 /* --------------------------------------------------------------------------------------------------------------------
+ * Dias da semana
+ * ----------------------------------------------------------------------------------------------------------------- */
+define('TXT_DIADASEMANA_DOMINGO', 'Domingo');
+define('TXT_DIADASEMANA_SEGUNDA_FEIRA', 'Segunda-feira');
+define('TXT_DIADASEMANA_TERCA_FEIRA', 'Terça-feira');
+define('TXT_DIADASEMANA_QUARTA_FEIRA', 'Quarta-feira');
+define('TXT_DIADASEMANA_QUINTA_FEIRA', 'Quinta-feira');
+define('TXT_DIADASEMANA_SEXTA_FEIRA', 'Sexta-feira');
+define('TXT_DIADASEMANA_SABADO', 'Sábado');
+
+/* --------------------------------------------------------------------------------------------------------------------
  * Mensagens padrões
  * ----------------------------------------------------------------------------------------------------------------- */
 define('MSG_PADRAO_POR_FAVOR_TENTE_NOVAMENTE_MAIS_TARDE', 'Por favor, tente novamente mais tarde.');
@@ -71,3 +82,6 @@ define('TXT_BOTAO_RESET_CANCELAR', 'Cancelar');
 # Erro
 define('ERRO_ACESSORESTRITO_USUARIO_SENHA_INVALIDOS', 'Usuário e/ou senha inválidos!');
 define('ERRO_PADRAO_USUARIO_NAO_TEM_PERMISSAO', 'Erro! Você não tem permissão para executar essa ação');
+
+# Sucesso
+define('SUCESSO_ACESSORESTRITO_FAZERLOGOUT', 'O usuário saiu do sistema!');

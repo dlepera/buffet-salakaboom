@@ -60,9 +60,6 @@ class OrcamentoW extends Principal{
     } // Fim do metodo _formulario
     
     public function _enviar(){
-        # Obter as informações faltantes para salvar o registro no banco de dados
-        $mod_p = new \Modelo\Produto($this->orcamento_festa_produto);         
-        $this->obj_v->orcamento_valor_festa = $mod_p->produto_valor;
         $id = $this->obj_m->_salvar();
         
         # Enviar o e-mail

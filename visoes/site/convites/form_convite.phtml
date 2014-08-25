@@ -10,70 +10,71 @@
 ?>
 
 <div class="dl convites">
-	<h1><?= TXT_TITULO_CONVITES_VIRTUAIS; ?></h1>
+    <h1><?= TXT_TITULO_CONVITES_VIRTUAIS; ?></h1>
+    
     <a href="javascript:;" onclick="SairConvite();" style="color: red;"><?= TXT_LINK_SAIR_DO_SISTEMA; ?></a>
 	
-	<form name="convite" method="post" action="<?= \DL::$dir_raiz; ?>">
-		<!-- INFORMAÇÕES OCULTAS -->
-		<input type="hidden" name="modelo" id="modelo" title="<?= TXT_LABEL_MODELO_DO_CONVITE; ?>" />
+    <form name="convite" method="post" action="<?= \DL::$dir_raiz; ?>">
+        <!-- INFORMAÇÕES OCULTAS -->
+        <input type="hidden" name="modelo" id="modelo" title="<?= TXT_LABEL_MODELO_DO_CONVITE; ?>" required />
+
+        <fieldset>
+            <legend><?= TXT_LEGENDA_DADOS_DA_FESTA; ?></legend>
+
+            <label for="festa_aniversariante"><?= TXT_LABEL_ANIVERSARIANTE; ?>:</label><br />
+            <input type="text" name="festa_aniversariante" id="festa_aniversariante" title="<?= TXT_LABEL_ANIVERSARIANTE; ?>" required />
+            <br /><br />
+
+            <label for="festa_idade"><?= TXT_LABEL_IDADE; ?>:</label><br />
+            <input type="number" name="festa_idade" id="festa_idade" title="<?= TXT_LABEL_IDADE; ?>" min="1" max="199" required />
+            <br /><br />
+
+            <label for="festa_data"><?= TXT_LABEL_DATA_DA_FESTA; ?>:</label><br />
+            <input type="date" name="festa_data" id="festa_data" title="<?= TXT_LABEL_DATA_DA_FESTA; ?>" required />
+            <br /><br />
+
+            <label for="festa_inicio"><?= TXT_LABEL_HORARIO_INICIO; ?>:</label><br />
+            <input type="text" name="festa_inicio" id="festa_inicio" title="<?= TXT_LABEL_HORARIO_INICIO; ?>" required />
+            <br /><br />
+
+            <label for="festa_fim"><?= TXT_LABEL_HORARIO_FIM; ?>:</label><br />
+            <input type="text" name="festa_fim" id="festa_fim" title="<?= TXT_LABEL_HORARIO_FIM; ?>" required />
+        </fieldset>
 		
-		<fieldset>
-			<legend><?= TXT_LEGENDA_DADOS_DA_FESTA; ?></legend>
-			
-			<label for="festa_aniversariante"><?= TXT_LABEL_ANIVERSARIANTE; ?>:</label><br />
-			<input type="text" name="festa_aniversariante" id="festa_aniversariante" title="<?= TXT_LABEL_ANIVERSARIANTE; ?>" />
-			<br /><br />
-			
-			<label for="festa_idade"><?= TXT_LABEL_IDADE; ?>:</label><br />
-            <input type="number" name="festa_idade" id="festa_idade" title="<?= TXT_LABEL_IDADE; ?>" min="1" max="199" />
-			<br /><br />
-			
-			<label for="festa_data"><?= TXT_LABEL_DATA_DA_FESTA; ?>:</label><br />
-			<input type="date" name="festa_data" id="festa_data" title="<?= TXT_LABEL_DATA_DA_FESTA; ?>" />
-			<br /><br />
-			
-			<label for="festa_inicio"><?= TXT_LABEL_HORARIO_INICIO; ?>:</label><br />
-			<input type="text" name="festa_inicio" id="festa_inicio" title="<?= TXT_LABEL_HORARIO_INICIO; ?>" />
-			<br /><br />
-			
-			<label for="festa_fim"><?= TXT_LABEL_HORARIO_FIM; ?>:</label><br />
-			<input type="text" name="festa_fim" id="festa_fim" title="<?= TXT_LABEL_HORARIO_FIM; ?>" />
-		</fieldset>
+        <fieldset>
+            <legend><?= TXT_LEGENDA_MODELO_DO_CONVITE; ?></legend>
+
+            <div id="modelos-convites"></div>
+        </fieldset>
 		
-		<fieldset>
-			<legend><?= TXT_LEGENDA_MODELO_DO_CONVITE; ?></legend>
-			
-			<div id="modelos-convites"></div>
-		</fieldset>
+        <fieldset>
+            <legend><?= TXT_LEGENDA_LISTA_DE_CONVIDADOS; ?></legend>
+
+            <label for="convite_convidado_nome"><?= TXT_LABEL_CONVIDADO_NOME; ?>:</label><br />
+            <input type="text" name="convite_convidado_nome" id="convite_convidado_nome" title="<?= TXT_LABEL_CONVIDADO_NOME; ?>" />
+            <br /><br />
+
+            <label for="convite_convidado_email"><?= TXT_LABEL_CONVIDADO_EMAIL; ?>:</label><br />
+            <input type="email" name="convite_convidado_email" id="convite_convidado_email" title="<?= TXT_LABEL_CONVIDADO_EMAIL; ?>" />
+            <br /><br />
+
+            <button type="button" onclick="InserirConvidado();">
+                <?= TXT_BOTAO_SUBMIT_INSERIR; ?>
+            </button>
+
+            <table class="lista">
+                <tr>
+                    <th id="id"></th>
+                    <th id="nome"><?= TXT_TABELA_TITULO_NOME; ?></th>
+                    <th id="email"><?= TXT_TABELA_TITULO_EMAIL; ?></th>
+                    <th id="opcoes"><?= TXT_TABELA_TITULO_OPCOES; ?></th>
+                </tr>
+            </table>
+        </fieldset>
 		
-		<fieldset>
-			<legend><?= TXT_LEGENDA_LISTA_DE_CONVIDADOS; ?></legend>
-			
-			<label for="convite_convidado_nome"><?= TXT_LABEL_CONVIDADO_NOME; ?>:</label><br />
-			<input type="text" name="convite_convidado_nome" id="convite_convidado_nome" title="<?= TXT_LABEL_CONVIDADO_NOME; ?>" />
-			<br /><br />
-			
-			<label for="convite_convidado_email"><?= TXT_LABEL_CONVIDADO_EMAIL; ?>:</label><br />
-			<input type="text" name="convite_convidado_email" id="convite_convidado_email" title="<?= TXT_LABEL_CONVIDADO_EMAIL; ?>" />
-			<br /><br />
-			
-			<button type="button" onclick="InserirConvidado();">
-				<?= TXT_BOTAO_SUBMIT_INSERIR; ?>
-			</button>
-			
-			<table class="lista">
-				<tr>
-					<th id="id"></th>
-					<th id="nome"><?= TXT_TABELA_TITULO_NOME; ?></th>
-					<th id="email"><?= TXT_TABELA_TITULO_EMAIL; ?></th>
-					<th id="opcoes"><?= TXT_TABELA_TITULO_OPCOES; ?></th>
-				</tr>
-			</table>
-		</fieldset>
-		
-		<button type="submit"><?= TXT_BOTAO_SUBMIT_ENVIAR; ?></button>
-		<button type="reset"><?= TXT_BOTAO_RESET_CANCELAR; ?></button>
-	</form>
+        <button type="submit"><?= TXT_BOTAO_SUBMIT_ENVIAR; ?></button>
+        <button type="reset"><?= TXT_BOTAO_RESET_CANCELAR; ?></button>
+    </form>
 </div>
 
 <script>
@@ -99,13 +100,9 @@
                 return true;
             },
             campos	: {
-                "modelo"                : { obr: true, marcarobr: false },
-                "festa_aniversariante"  : { obr: true },
-                "festa_data"            : { obr: true, mascara: MASK_DATA/* , validacao: EXPR_DATA */},
                 "festa_inicio"          : { obr: true, mascara: MASK_HORA, validacao: EXPR_HORA },
                 "festa_fim"             : { obr: true, mascara: MASK_HORA, validacao: EXPR_HORA },
-                "festa_idade"           : { obr: true, validacao: EXPR_APENAS_NUMEROS },
-                "convite_convidado_email": { validacao: EXPR_EMAIL }
+                "festa_idade"           : { obr: true, validacao: EXPR_APENAS_NUMEROS }
             },
             aparencia: { tema: "<?= \DL::$plugin_formulario_tema; ?>", estilo: "formulario" }
         });
@@ -123,56 +120,58 @@
         });
     };
     
-	function InserirConvidado(){
-		var nome 	= $convite.find("#convite_convidado_nome").val();
-		var email	= $convite.find("#convite_convidado_email").val();
-		var $tabela	= $("table.lista");
-
-		// Criar a nova linha na tabela
-		var $tr = $(document.createElement("tr")).css({ display: "none" }).appendTo($tabela);
-		
-		// Incluir as informações na linha da tabela
-		var $td0 = $(document.createElement("td")).attr({ headers: "id" }).appendTo($tr);
-		var $td1 = $(document.createElement("td")).attr({ headers: "nome" }).text(nome).appendTo($tr);
-		var $td2 = $(document.createElement("td")).attr({ headers: "email" }).text(email).appendTo($tr);
-		var $tr3 = $(document.createElement("td")).attr({ headers: "opcoes" }).html(
-			"<a href='javascript:;' onclick='RemoverConvidado(this);'>Remover</a>"
-		).appendTo($tr);
-		
-		// Criar os campos com os dados que serão submetidos
-		var $campo1 = $(document.createElement("input")).attr({
-			type: "hidden",
-			name: "convidados_nomes[]"
-		}).val(nome).appendTo($convite);
-		
-		var $campo1 = $(document.createElement("input")).attr({
-			type: "hidden",
-			name: "convidados_emails[]"
-		}).val(email).appendTo($convite);
-		
-		// Remover as informações incluídas pelo cliente
-		$convite.find("#convite_convidado_nome").val("");
-		$convite.find("#convite_convidado_email").val("");
-		
-		// Mostrar a nova linha
-		$tr.show("slow");
-	} // Fim de function InserirConvidado()
-	
-	function RemoverConvidado(a){
-		var $tr		= $(a).parents("tr");
-		var nome 	= $tr.find("td:nth-child(2)").text();
-		var email 	= $tr.find("td:nth-child(3)").text();
+    function InserirConvidado(){
+        var nome 	= $convite.find("#convite_convidado_nome").val();
+        var email	= $convite.find("#convite_convidado_email").val();
+        var $tabela	= $("table.lista");
         
-		// Encontrar e remover os campos referentes
-		// a essa linha
-		$(":hidden[name='convidados_nomes[]'][value='"+ nome +"']").remove();
-		$(":hidden[name='convidados_emails[]'][value='"+ email +"']").remove();
-		
-		// Remover a linha da lista
-		$tr.hide("slow", function(){
-			$tr.remove();
-		});
-	} // Fim function RemoverConvidado()
+        if( nome == "" || email == "" ) return false;
+        
+        // Criar a nova linha na tabela
+        var $tr = $(document.createElement("tr")).css({ display: "none" }).appendTo($tabela);
+
+        // Incluir as informações na linha da tabela
+        var $td0 = $(document.createElement("td")).attr({ headers: "id" }).appendTo($tr);
+        var $td1 = $(document.createElement("td")).attr({ headers: "nome" }).text(nome).appendTo($tr);
+        var $td2 = $(document.createElement("td")).attr({ headers: "email" }).text(email).appendTo($tr);
+        var $tr3 = $(document.createElement("td")).attr({ headers: "opcoes" }).html(
+            "<a href='javascript:;' onclick='RemoverConvidado(this);'>Remover</a>"
+        ).appendTo($tr);
+
+        // Criar os campos com os dados que serão submetidos
+        var $campo1 = $(document.createElement("input")).attr({
+            type: "hidden",
+            name: "convidados_nomes[]"
+        }).val(nome).appendTo($convite);
+
+        var $campo1 = $(document.createElement("input")).attr({
+            type: "hidden",
+            name: "convidados_emails[]"
+        }).val(email).appendTo($convite);
+
+        // Remover as informações incluídas pelo cliente
+        $convite.find("#convite_convidado_nome").val("");
+        $convite.find("#convite_convidado_email").val("");
+
+        // Mostrar a nova linha
+        $tr.show("slow");
+    } // Fim de function InserirConvidado()
+
+    function RemoverConvidado(a){
+        var $tr		= $(a).parents("tr");
+        var nome 	= $tr.find("td:nth-child(2)").text();
+        var email 	= $tr.find("td:nth-child(3)").text();
+
+        // Encontrar e remover os campos referentes
+        // a essa linha
+        $(":hidden[name='convidados_nomes[]'][value='"+ nome +"']").remove();
+        $(":hidden[name='convidados_emails[]'][value='"+ email +"']").remove();
+
+        // Remover a linha da lista
+        $tr.hide("slow", function(){
+                $tr.remove();
+        });
+    } // Fim function RemoverConvidado()
     
     function SelecionarModelo(imagem, modelo){
         // Adicionar o valor do modelo
