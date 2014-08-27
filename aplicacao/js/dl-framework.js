@@ -98,7 +98,7 @@ function AbrirForm(form){
             var $form = $(document.createElement("div")).addClass("sobre-tela").html(html).appendTo($("body"));
             
             // Alterar algumas propriedades do formulário
-            $form.find("[type='reset']").bind("click", function(){
+            $form.find("[type='reset']").on("click", function(){
                 $form.fadeOut("fast", function(){
                     $(this).remove();
                 });

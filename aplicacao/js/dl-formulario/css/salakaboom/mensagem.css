@@ -50,6 +50,7 @@ div.dl-formulario-mensagem.salakaboom.alerta{
     position: fixed;
     top     : 0;
     left    : 0;
+    z-index : 11;
     
     /* Aparência */
     background          : rgba(0, 0, 0,.5) url('imagens/rosto-mago-salakaboom.png') no-repeat;
