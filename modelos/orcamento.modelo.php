@@ -205,6 +205,8 @@ class Orcamento extends Principal{
         
         if( count($this->orcamento_opcionais) > 0 ):            
             foreach( $this->orcamento_opcionais as $o ):
+                if( empty($o) ) continue;
+                    
                 $mod_p->_selecionarID($o);
                 \DL::$bd_pdo->exec(
                     "INSERT INTO {$this->bd_tabela}_opcionais"

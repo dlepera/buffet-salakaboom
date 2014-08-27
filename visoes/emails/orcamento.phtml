@@ -133,37 +133,37 @@ $http_host = filter_input(INPUT_SERVER, 'HTTP_HOST');
             <tr>
                 <th id="produto"><?= TXT_TABELA_TITULO_PRODUTO; ?></th>
                 <th id="qtde"><?= TXT_TABELA_TITULO_QTDE; ?></th>
-                <th id="valor_un"><?= TXT_TABELA_TITULO_VALOR_UNITARIO; ?></th>
-                <th id="valor_total"><?= TXT_TABELA_TITULO_VALOR_TOTAL; ?></th>
+                <th id="valor-un"><?= TXT_TABELA_TITULO_VALOR_UNITARIO; ?></th>
+                <th id="valor-total"><?= TXT_TABELA_TITULO_VALOR_TOTAL; ?></th>
             </tr>
 
             <?php
-                # Valor inicial da festa 
-                $vr_festa = $mod_p->produto_valor; ?>
-                
-                <!-- Produto: Festa -->
+            # Valor inicial da festa 
+            $vr_festa = $mod_p->produto_valor; ?>
+
+            <!-- Produto: Festa -->
+            <tr>
+                <td headers="produto"><?= $mod_p->produto_nome; ?></td>
+                <td headers="qtde">1</td>
+                <td headers="valor-un">R$ <?= $mod_p->produto_valor; ?></td>
+                <td headers="valor-total">R$ <?= $mod_p->produto_valor; ?></td>
+            </tr>
+
+            <!-- Produtos Opcionais -->
+            <?php foreach( $params['opcionais'] as $o ):
+                # Definir o valor total para esse produto
+                $vr_total = $o['opcional_orcamento_valor']*$o['opcional_orcamento_qtde'];
+
+                # Incrementar ao valor total da festa
+                $vr_festa += $vr_total;
+                ?>
+
                 <tr>
-                    <td headers="produto"><?= $mod_p->produto_nome; ?></td>
-                    <td headers="qtde">1</td>
-                    <td headers="valor_un">R$ <?= $mod_p->produto_valor; ?></td>
-                    <td headers="valor_total">R$ <?= $mod_p->produto_valor; ?></td>
+                    <td headers="produto"><?= $o['produto_nome']; ?></td>
+                    <td headers="qtde"><?= $o['opcional_orcamento_qtde']; ?></td>
+                    <td headers="valor-un">R$ <?= $o['opcional_orcamento_valor']; ?></td>
+                    <td headers="valor-total">R$ <?= number_format($vr_total, 2, ',', '.'); ?></td>
                 </tr>
-
-				<!-- Produtos Opcionais -->
-                <?php foreach( $params['opcionais'] as $o ):
-                    # Definir o valor total para esse produto
-                    $vr_total = $o['opcional_orcamento_valor']*$o['opcional_orcamento_qtde'];
-
-                    # Incrementar ao valor total da festa
-                    $vr_festa += $vr_total;
-                    ?>
-
-                    <tr>
-                        <td headers="produto"><?= $o['produto_nome']; ?></td>
-                        <td headers="qtde"><?= $o['opcional_orcamento_qtde']; ?></td>
-                        <td headers="valor_un">R$ <?= $o['opcional_orcamento_valor']; ?></td>
-                        <td headers="valor_total">R$ <?= number_format($vr_total, 2, ',', '.'); ?></td>
-                    </tr>
             <?php endforeach; ?>
         </table>
 
