@@ -57,4 +57,10 @@ class WebSite extends Principal{
         # Incluir parâmetros na visão
         $this->obj_v->_incluirparams('fotos', $lis_f);
     } // Fim do método _index
+    
+    public function _certificado(){
+        # Preparar a visão
+        $this->_escolhertpl('certificado');
+        $this->obj_v->_titulo(TXT_TITULO_CERTIFICACAO_DE_EXCELENCIA_NO_ATENDIMENTO);
+    } // Fim do método _certificado
 } // Fim da classe WebSite
