@@ -45,6 +45,7 @@ class ContatoSite extends Principal{
     public function _formulario(){
         # Preparar a visão
         $this->_escolhertpl('contato');
+        $this->obj_v->_titulo(TXT_TITULO_FALE_CONOSCO);
         
         # Selecionar a lista de assuntos de e-mails
         $mod_ac = new \Modelo\AssuntoContato();
