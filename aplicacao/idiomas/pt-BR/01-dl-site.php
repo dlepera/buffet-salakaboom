@@ -11,7 +11,7 @@
 define('TXT_MODELO_CONTATOSITE', 'contato do site');
 
 # Títulos de páginas
-define('TXT_TITULO_PAGINA_INICIAL', 'Página inicial');
+define('TXT_TITULO_PAGINA_INICIAL', 'Um mundo de magia e diversão');
 define('TXT_TITULO_INSTITUCIONAL', 'A história do Buffet Salakaboom');
 define('TXT_TITULO_ALBUNS_DE_FOTOS', 'Álbuns de fotos');
 define('TXT_TITULO_FALE_CONOSCO', 'Fale conosco');
