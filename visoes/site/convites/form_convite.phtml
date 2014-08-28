@@ -30,7 +30,7 @@
             <br /><br />
 
             <label for="festa_data"><?= TXT_LABEL_DATA_DA_FESTA; ?>:</label><br />
-            <input type="date" name="festa_data" id="festa_data" title="<?= TXT_LABEL_DATA_DA_FESTA; ?>" required />
+            <input type="date" name="festa_data" id="festa_data" title="<?= TXT_LABEL_DATA_DA_FESTA; ?>" min="<?= date('Y-m-d'); ?>" required />
             <br /><br />
 
             <label for="festa_inicio"><?= TXT_LABEL_HORARIO_INICIO; ?>:</label><br />
@@ -82,7 +82,7 @@
     window.onload = function(){
         $convite = $("form[name='convite']")._dlformulario({
             controle: "convitevirtual/enviar",
-            antes	: function(){
+            antes   : function(){
                 // Verificar se há e-mail incluídos na lista de convidados
                 var $emails = $(":hidden[name='convidados_emails[]']");
 
@@ -99,12 +99,11 @@
 
                 return true;
             },
-            campos	: {
-                "festa_inicio"          : { obr: true, mascara: MASK_HORA, validacao: EXPR_HORA },
-                "festa_fim"             : { obr: true, mascara: MASK_HORA, validacao: EXPR_HORA },
-                "festa_idade"           : { obr: true, validacao: EXPR_APENAS_NUMEROS }
+            campos      : {
+                "festa_inicio"  : { mascara: MASK_HORA },
+                "festa_fim"     : { mascara: MASK_HORA },
             },
-            aparencia: { tema: "<?= \DL::$plugin_formulario_tema; ?>", estilo: "formulario" }
+            aparencia   : { tema: "<?= \DL::$plugin_formulario_tema; ?>", estilo: "formulario" }
         });
 
         // Galeria de convites virtuais

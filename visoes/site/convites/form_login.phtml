@@ -15,15 +15,15 @@
 	<?= $params['pg_texto']; ?>
 	
 	<form name="convite" method="post" action="<?= \DL::$dir_raiz; ?>">
-		<label for="usuario"><?= TXT_LABEL_LOGIN; ?>:</label><br />
-		<input type="text" name="usuario" id="usuario" title="<?= TXT_LABEL_LOGIN; ?>" />
-		<br /><br />
-		
-		<label for="senha"><?= TXT_LABEL_SENHA; ?>:</label><br />
-		<input type="password" name="senha" id="senha" title="<?= TXT_LABEL_SENHA; ?>" />
-		<br /><br />
-		
-		<button type="submit"><?= TXT_BOTAO_SUBMIT_ENTRAR; ?></button>
+            <label for="usuario"><?= TXT_LABEL_LOGIN; ?>:</label><br />
+            <input type="text" name="usuario" id="usuario" title="<?= TXT_LABEL_LOGIN; ?>" required />
+            <br /><br />
+
+            <label for="senha"><?= TXT_LABEL_SENHA; ?>:</label><br />
+            <input type="password" name="senha" id="senha" title="<?= TXT_LABEL_SENHA; ?>" required />
+            <br /><br />
+
+            <button type="submit"><?= TXT_BOTAO_SUBMIT_ENTRAR; ?></button>
 	</form>
 </div>
 
@@ -32,10 +32,6 @@
     window.onload = function(){
         $("form[name='convite']")._dlformulario({
             controle: "convitevirtual/fazerlogincv",
-            campos	: {
-                "usuario"   : { obr: true, marcarobr: false },
-                "senha"     : { obr: true, marcarobr: false }
-            },
             depois	: function(){
                 window.location = "<?= \DL::$dir_raiz; ?>/convites-virtuais";
             },

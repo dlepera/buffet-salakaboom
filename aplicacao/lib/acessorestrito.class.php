@@ -7,9 +7,8 @@
  * @Data	: 15/12/2013
  */
 
-class AcessoRestrito {
+class AcessoRestrito{
     # Templates
-
     private $tpl_formlogin;
 
     # Configuração de sessão
@@ -17,14 +16,14 @@ class AcessoRestrito {
     private $sessao_nome;
 
     # Configuração do acesso root
-    private $root_usuario = 'root';
-    private $root_senha = /* MD5 x 1 = '5b7278fa6678dfac1f64b7dcd780aa2d' */'64eedda5e60fdb52fc29aa903ce9002a';
-    private $root_email = 'd_lepera@hotmail.com';
+    private $root_usuario   = 'root';
+    private $root_senha     = /* MD5 x 1 = '5b7278fa6678dfac1f64b7dcd780aa2d' */'64eedda5e60fdb52fc29aa903ce9002a';
+    private $root_email     = 'd_lepera@hotmail.com';
 
     public function __construct($tpl_formlogin, $sessao_prefixo = 'dl') {
-        $this->tpl_formlogin = $tpl_formlogin;
-        $this->sessao_prefixo = $sessao_prefixo;
-        $this->sessao_nome = "{$this->sessao_prefixo}-sessao";
+        $this->tpl_formlogin    = $tpl_formlogin;
+        $this->sessao_prefixo   = $sessao_prefixo;
+        $this->sessao_nome      = "{$this->sessao_prefixo}-sessao";
     } // Fim do método de construção da classe
 
     public function _sessao($param) {

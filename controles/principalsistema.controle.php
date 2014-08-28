@@ -18,11 +18,11 @@ abstract class PrincipalSistema extends Principal{
     # Status da sessão
     protected $sessao_status;
     
-    public function __construct($raiz){
+    public function __construct($raiz, $sessao){
         parent::__construct($raiz);
         
         # Iniciar classe de acesso restrito
-        $this->obj_ar        = new \AcessoRestrito('painel-dl/login/form_login');
+        $this->obj_ar        = new \AcessoRestrito('painel-dl/login/form_login', $sessao);
         $this->sessao_status = $this->obj_ar->_verificarlogin(false);
     } // Fim do método mágico __construct
     
