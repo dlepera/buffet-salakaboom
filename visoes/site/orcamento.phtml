@@ -12,12 +12,12 @@
 <div class="dl orcamento">
     <h1><?= TXT_TITULO_ORCAMENTO_ON_LINE; ?></h1>
 
-    <form name="orcamento" method="post" action="<?= \DL::$dir_raiz; ?>">
+    <form name="orcamento" method="post" action="<?= \DL::$dir_raiz; ?>/">
         <fieldset>
             <legend><?= TXT_LEGENDA_DADOS_PESSOAIS; ?></legend>
             
             <label for="info_nome"><?= TXT_LABEL_NOME_COMPLETO; ?>:</label><br />
-            <input type="text" name="info_nome" id="info_nome" title="<?= TXT_LABEL_NOME_COMPLETO; ?>" alt="<?= TXT_ALT_NOME_COMPLETO; ?>" required />
+            <input type="text" name="info_nome" id="info_nome" title="<?= TXT_LABEL_NOME_COMPLETO; ?>" required />
             <br /><br />
 
             <label for="info_email"><?= TXT_LABEL_EMAIL; ?>:</label><br />

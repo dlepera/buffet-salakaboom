@@ -24,11 +24,11 @@ $mod	= $params['modelo'];
                     <?php foreach( $lis_p as $p ): ?>
                     <li class="parceiro-cartao">
                         <img src="<?= \DL::$dir_raiz ."/{$p['parceiro_imagem']}"; ?>" title="<?= $p['parceiro_nome']; ?>" alt="Logotipo de empresa parceira: <?= $p['parceiro_nome']; ?>" />
+                        <h3><?= $p['parceiro_nome']; ?></h3>
+                        
                         <p class="parceiro-descr">
-                            <h3><?= $p['parceiro_nome']; ?></h3>
-
                             <?= TXT_LABEL_TELEFONE; ?>: <?= $p['parceiro_telefone']; ?><br />
-                            <?= TXT_LABEL_EMAIL; ?>: <?= !empty($p['parceiro_email']) ? "<a href=\"mailto: {$p['parceiro_email']};\">{$p['parceiro_email']}</a>" : "-"; ?><br />
+                            <?= TXT_LABEL_EMAIL; ?>: <?= !empty($p['parceiro_email']) ? "<a href=\"mailto:{$p['parceiro_email']};\">{$p['parceiro_email']}</a>" : "-"; ?><br />
                             <?= TXT_LABEL_SITE; ?>: <?= !empty($p['parceiro_site']) ? "<a href=\"http://{$p['parceiro_site']}\" target=\"_blank\" rel=\"nofollow\">{$p['parceiro_site']}</a>" : "-"; ?><br />
                             <?= TXT_LABEL_DESCRICAO; ?>: <?= nl2br($p['parceiro_descr']); ?>
                         </p>
