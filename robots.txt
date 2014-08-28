@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /painel-dl/
+Disallow: /aplicacao/etc/
+Disallow: sitemap.xml
