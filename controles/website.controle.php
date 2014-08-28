@@ -63,4 +63,10 @@ class WebSite extends Principal{
         $this->_escolhertpl('certificado');
         $this->obj_v->_titulo(TXT_TITULO_CERTIFICACAO_DE_EXCELENCIA_NO_ATENDIMENTO);
     } // Fim do método _certificado
+    
+    public function _mapa(){
+        # Preparar a visão
+        $this->obj_v->_template('mapa');
+        $this->obj_v->_titulo(TXT_TITULO_LOCALIZACAO);
+    } // Fim do método _certificado
 } // Fim da classe WebSite
