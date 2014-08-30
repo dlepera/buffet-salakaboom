@@ -59,7 +59,8 @@ table.lista th{
  * ----------------------------------------------------------------------------------------------------------------- */
 table.lista .com-marcados{
     /* Aparência */
-    background          : #FFF url('icones/sprite-lista.png') no-repeat !important;
+    background          : url('icones/sprite-lista.png') no-repeat;
+    background-color    : #FFF !important;
     background-position : left 0 top -169px; 
     border-top          : 1.5px solid #CCC;
         
