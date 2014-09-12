@@ -119,8 +119,9 @@ figure.editar-foto{
     float: left;
     
     /* Tamanho */
-    width   : 20%;
-    height  : 200px;
+    width       : 20%;
+    height      : 200px;
+    box-sizing  : border-box;
     
     /* Margens e espaçamentos */
     margin-left : 2.6%;
@@ -129,8 +130,8 @@ figure.editar-foto{
 }
 
 figure.editar-foto:hover{
-    /* Aparência */
-    box-shadow: 1px 1px 10px #CCC;
+    /* Aparência 
+    box-shadow: 0 0 10px rgba(0,0,0,.4); */
 }
 
 figure.editar-foto:nth-child(4n+1){
@@ -146,7 +147,7 @@ figure.editar-foto:nth-child(4n){
 figure.editar-foto > img{
     /* Tamanho */
     max-width   : 100%;
-    max-height  : 150px;
+    max-height  : 100%;
     
     /* Aparência */
     display: block;
