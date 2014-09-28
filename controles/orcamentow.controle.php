@@ -64,7 +64,7 @@ class OrcamentoW extends Principal{
         
         # Enviar o e-mail
         $obj_e = new \Email();
-        $obj_e->_enviar($this->obj_m->orcamento_info_email, '['. \DL::$ap_nome .'] Orcamento on-line', $this->_emailhtml($id));
+        $obj_e->_enviar("{$this->obj_m->orcamento_info_email};buffetsalakaboom@yahoo.com.br", '['. \DL::$ap_nome .'] Orcamento on-line', $this->_emailhtml($id));
         $obj_e->_gravarlog(__CLASS__, $this->obj_m->bd_tabela, $this->obj_m->orcamento_id);
         
         return \Funcoes::_retornar(SUCESSO_ORCAMENTO_ENVIAR, 'sucesso');
